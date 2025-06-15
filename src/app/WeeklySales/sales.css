@@ -1,0 +1,87 @@
+.weekly-wrapper {
+  padding: 2rem 10%;
+}
+
+.weekly-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.weekly-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.view-more {
+  color: #d71920;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .weekly-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .weekly-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.weekly-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.weekly-img-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.75rem;
+}
+
+.weekly-img {
+  object-fit: contain;
+}
+
+.weekly-name {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.weekly-price {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.weekly-original {
+  text-decoration: line-through;
+  color: #999;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+
+.weekly-sold {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.weekly-sold span {
+  color: #ef4444;
+  font-weight: 500;
+}

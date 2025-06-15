@@ -1,0 +1,26 @@
+.shop-header {
+  background-color: #f9f9f9;
+ padding: 2rem 10%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .shop-title {
+    font-size: 24px;
+  }
+
+  .shop-header {
+    padding: 30px 16px;
+  }
+}
