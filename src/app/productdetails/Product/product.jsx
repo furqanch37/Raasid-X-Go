@@ -30,8 +30,8 @@ export default function ProductPage() {
     src={mock.img}
     alt={mock.name}
     fill
-    sizes="(max-width: 768px)"
-    style={{ objectFit: 'cover' }}
+    sizes="(max-width: 768px) 80vw, 40vw"
+    style={{ objectFit: 'contain' }}
   />
 
 
