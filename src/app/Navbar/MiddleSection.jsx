@@ -5,9 +5,11 @@ import Link from 'next/link';
 const MiddleSection = () => {
   return (
     <div className="middle-section">
-      <div className="logo"> 
-        <img src="/RaasidLogo.svg" alt="Raasid" />
-      </div>
+    <Link href="/home">
+  <div className="logo">
+    <img src="/RaasidLogo.svg" alt="Raasid" />
+  </div>
+</Link>
       <div className="search-bar">
         <input type="text" placeholder="Search..." />
         <select>
