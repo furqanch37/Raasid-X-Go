@@ -6,9 +6,8 @@ import HomePage from "./home/page";
 export default function Home() {
   return (
     <div className={styles.page}>
-    <Navbar/>
+    
       <HomePage/>
-    <Footer/>
     </div>
   );
 }
