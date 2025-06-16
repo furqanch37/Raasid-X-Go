@@ -137,7 +137,8 @@ body {
   position: absolute;
   top: -8px;
   right: -8px;
-  background: #f2f2f2;
+  background: #047244;
+  color:#fff;
   border: 1px solid #ccc;
   border-radius: 50%;
   font-size: 12px;
@@ -219,7 +220,7 @@ details[open] summary {
 
 .return-link {
   font-size: 14px;
-  color: #333;
+  color: #047244;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -231,7 +232,7 @@ details[open] summary {
 }
 
 .place-order-btn {
-  background-color: #2e2e2e;
+  background-color: #047244;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -241,7 +242,7 @@ details[open] summary {
 }
 
 .place-order-btn:hover {
-  background-color: #1c1c1c;
+  background-color: #047244;
 }
 @media (max-width: 768px) {
   .checkout-content {
