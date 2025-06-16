@@ -6,7 +6,7 @@ const MiddleSection = () => {
   return (
     <div className="middle-section">
       <div className="logo"> 
-        <img src="/Raasidlogo.svg" alt="Raasid" />
+        <img src="/RaasidLogo.svg" alt="Raasid" />
       </div>
       <div className="search-bar">
         <input type="text" placeholder="Search..." />
