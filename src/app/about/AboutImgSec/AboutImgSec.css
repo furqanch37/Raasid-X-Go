@@ -2,6 +2,7 @@
   text-align: center;
   margin: 40px 0;
   margin-top: 0;
+  padding: 2rem 13.5%;
 }
 
 .image-container {
@@ -73,4 +74,77 @@
     font-family: "Inter", Sans-serif;
     font-size: 15px;
     font-weight: 500;
+}
+
+
+/* Large Screens (up to 1200px) */
+@media (max-width: 1200px) {
+  .stats-container {
+    padding: 25px 30px;
+  }
+
+  .stat-box h2 {
+    font-size: 45px;
+  }
+}
+
+/* Medium Screens (up to 992px) */
+@media (max-width: 992px) {
+  .stats-container {
+    flex-wrap: wrap;
+    padding: 25px 20px;
+  }
+
+  .stat-box {
+    flex: 0 0 50%;
+    margin-bottom: 20px;
+  }
+
+  .stat-box h2 {
+    font-size: 40px;
+  }
+
+  .play-button {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+  }
+}
+
+/* Small Screens (up to 768px) */
+@media (max-width: 768px) {
+  .image-container {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .background-image {
+    max-height: 60vh;
+    border-radius: 8px;
+  }
+
+  .play-button {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .stats-container {
+    flex-direction: column;
+    padding: 20px 16px;
+    margin-top: -40px;
+  }
+
+  .stat-box {
+    flex: 1 1 100%;
+    margin-bottom: 15px;
+  }
+
+  .stat-box h2 {
+    font-size: 32px;
+  }
+
+  .stat-box p {
+    font-size: 14px;
+  }
 }

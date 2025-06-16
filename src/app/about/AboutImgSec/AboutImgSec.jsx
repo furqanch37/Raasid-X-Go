@@ -7,7 +7,7 @@ const AboutImgSec = () => {
     <div className="about-img-wrapper">
       <div className="image-container">
         <img
-          src="/assets/about/desc.jpg"
+          src="/assets/home/desc.jpg"
           alt="Grocery Background"
           className="background-image"
         />
