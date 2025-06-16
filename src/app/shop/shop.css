@@ -16,7 +16,7 @@
       background-color: #F8F8F8;
     padding-top: 50px;
     padding-bottom: 50px;
-    padding: 2rem 10%;
+    padding: 2rem 13.5%;
     width: 100%;
 }
 
@@ -26,7 +26,7 @@
   justify-content: space-between;
   width: 100%;
   padding-top: 25px;
-  padding: 2rem 10%;
+padding: 2rem 13.5%;
 }
 
 .shop-filters select {
@@ -40,7 +40,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 30px;
-  padding: 2rem 10%;
+padding: 2rem 13.5%;
 }
 
 .product-card {

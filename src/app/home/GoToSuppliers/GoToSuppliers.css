@@ -1,0 +1,67 @@
+.suppliers-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 10%;
+  flex-wrap: wrap;
+}
+
+.supplier-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap:40px;
+  padding:0 30px;
+  padding-right: 40px;
+  border-radius: 16px;
+  width: 48%;
+  box-sizing: border-box;
+  color: #222;
+}
+
+.orange-card {
+  background-image: linear-gradient(90deg, #F6B53D 0%, #F5CA7A 75%);
+}
+
+.blue-card {
+  background-image: linear-gradient(90deg, #92C5DA 0%, #E6ECF3 75%);
+}
+
+.supplier-image {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.supplier-content {
+  max-width: 60%;
+}
+
+.supplier-content h3 {
+    color: #252525;
+    font-family: "Inter", Sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    line-height: 1.3em;
+}
+
+.sale-text {
+ color: #555555;
+    font-family: "Inter", Sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+        line-height: 1.6;
+    margin: 20px 0 20px;
+}
+
+.supplier-link {
+  background-color: #61CE7000;
+    font-family: "Inter", Sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    fill: #C61F31;
+    color: #C61F31;
+    padding: 0px 0px 0px 0px;
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@ body {
 
 .checkout-container h1 {
   font-weight: bold;
-      padding: 2rem 10%;
+      padding: 2rem 13.5%;
       background-color: #f8f8f8;
 }
 
@@ -15,7 +15,7 @@ body {
   gap: 30px;
   margin-top: 20px;
   padding-top: 80px;
-  padding: 2rem 10%;
+ padding: 2rem 13.5%;
     padding-bottom: 80px;
 }
 
