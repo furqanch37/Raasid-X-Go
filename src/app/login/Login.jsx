@@ -53,7 +53,7 @@ export default function LoginCard() {
           </button>
           
           {/* Lost password */}
-          <Link href="/forgot-password" className="forgot-link">
+          <Link href="/signup" className="forgot-link">
             SignUp
           </Link>
         </form>

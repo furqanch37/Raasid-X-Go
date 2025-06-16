@@ -39,7 +39,7 @@ export default function CheckoutForm() {
       </p>
 
       <div className="footer-actions">
-        <a href="#" className="return-link">
+        <a href="/cart" className="return-link">
           <FaArrowLeft className="arrow-icon" /> Return to Cart
         </a>
         <button className="place-order-btn">Place Order</button>

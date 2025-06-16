@@ -2,6 +2,7 @@
 import React from 'react';
 import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import './cartstyles.css';
+import Link from 'next/link';
 
 const Cart = () => {
   return (
@@ -54,7 +55,9 @@ const Cart = () => {
                 <strong>Total</strong>
                 <strong>40.00PKR</strong>
               </div>
-              <button className="checkout-btn">Proceed to Checkout</button>
+             <Link href="/checkout">
+  <button className="checkout-btn">Proceed to Checkout</button>
+</Link>
             </div>
           </div>
         </div>

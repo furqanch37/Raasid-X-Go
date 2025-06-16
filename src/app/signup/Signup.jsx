@@ -63,7 +63,7 @@ export default function SignUpCard() {
           </button>
 
           {/* Lost password */}
-          <Link href="/forgot-password" className="forgot-link">
+          <Link href="/login" className="forgot-link">
             Already have an account? Login
           </Link>
         </form>
