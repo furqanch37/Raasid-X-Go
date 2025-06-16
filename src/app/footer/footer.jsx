@@ -24,32 +24,32 @@ const Footer = () => {
         <div className="footer-column">
           <h3>EXPLORE</h3>
           <ul>
-            <li><Link href="#">Home</Link></li>
-            <li><Link href="#">About</Link></li>
-            <li><Link href="#">Shop</Link></li>
-            <li><Link href="#">Contact</Link></li>
+             <li><Link href="/home">Home</Link></li>
+  <li><Link href="/about">About</Link></li>
+  <li><Link href="/shop">Shop</Link></li>
+  <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
 
         {/* With Links */}
         <div className="footer-column">
-          <h3>EXPLORE</h3>
+          <h3>CETAGORY</h3>
           <ul>
-            <li><Link href="#">Our Story</Link></li>
-            <li><Link href="#">Job / Career</Link></li>
-            <li><Link href="#">Store Locator</Link></li>
-            <li><Link href="#">Contacts Us</Link></li>
+            <li><Link href="#">Spices</Link></li>
+            <li><Link href="#">Fruits Preserves</Link></li>
+            <li><Link href="#">One Day Meals</Link></li>
+            <li><Link href="#">Ready to Eat</Link></li>
+            <li><Link href="#">Gronola Bars</Link></li>
           </ul>
         </div>
 
         {/* Customer Services */}
         <div className="footer-column">
-          <h3>CUSTOMER SERVICES</h3>
+          <h3>CONTACT DETAILS</h3>
           <ul>
-            <li><Link href="#">My Account</Link></li>
-            <li><Link href="#">Terms Of Use</Link></li>
-            <li><Link href="#">Deliveries & Returns</Link></li>
-            <li><Link href="#">Gift Cards</Link></li>
+            <li><Link href="#">Rawat Technology Park, Islamabad Pakistan</Link></li>
+            <li><Link href="#">+92 370 2333125</Link></li>
+            <li><Link href="#">info@raasid.com</Link></li>
           </ul>
         </div>
       </div>
