@@ -33,7 +33,7 @@ const Footer = () => {
 
         {/* With Links */}
         <div className="footer-column">
-          <h3>CETAGORY</h3>
+          <h3>CETAGORIES</h3>
           <ul>
             <li><Link href="#">Spices</Link></li>
             <li><Link href="#">Fruits Preserves</Link></li>
