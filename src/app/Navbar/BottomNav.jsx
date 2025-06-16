@@ -15,7 +15,9 @@ const BottomNav = () => {
   <li><Link href="/shop">SHOP</Link></li>
   <li><Link href="/contact">CONTACT</Link></li>
       </ul>
-      <button className="shop-now-btn">SHOP NOW</button>
+      <Link href="/shop">
+  <button className="shop-now-btn">SHOP NOW</button>
+</Link>
     </nav>
   );
 };
