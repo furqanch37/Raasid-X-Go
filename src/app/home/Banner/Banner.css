@@ -16,7 +16,7 @@
 }
 
 .discount-text {
- color: #C61F31;
+ color: #047244;
     font-family: "Inter", Sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -48,7 +48,7 @@
   transition: background-color 0.3s ease;
   border: none;
   outline: none;
-  background-color: #C61F31;
+  background-color: #047244;
     font-family: "Inter", Sans-serif;
     font-size: 11px;
     font-weight: 600;
@@ -59,7 +59,7 @@
 }
 
 .shop-btn:hover {
-  background-color: #a81f1f;
+  background-color: #047244;
 }
 
 .banner-image img {

@@ -5,7 +5,7 @@
 /* Top Banner */
 .top-banner {
   background-color: #f7f7f7;
- color: #c61f31;
+ color: #047244;
   text-align: center;
  font-size: 12px;
     font-weight: 500;
@@ -103,7 +103,7 @@
   position: absolute;
   top: -10px;
   right: 41px;
-  background: red;
+  background: #047244;
   color: white;
   border-radius: 50%;
   font-size: 12px;
@@ -127,7 +127,7 @@
 }
 
 .categories-btn {
-  background: #b91c1c;
+  background: #047244;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -155,7 +155,7 @@
 }
 
 .shop-now-btn {
-  background: #b91c1c;
+  background: #047244;
   color: white;
   padding: 10px 20px;
   border: none;

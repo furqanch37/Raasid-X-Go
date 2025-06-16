@@ -38,7 +38,7 @@ padding: 2rem 13.5%;
 
 .social-icons svg {
   font-size: 25px;
-  background: #c6182c;
+  background: #047244;
   color: white;
   padding: 10px;
   border-radius: 50%;
@@ -78,7 +78,7 @@ padding: 2rem 13.5%;
 }
 
 .contact-form button {
-  background-color: #c6182c;
+  background-color: #047244;
   color: white;
   border: none;
   padding: 12px 30px;
@@ -89,7 +89,7 @@ padding: 2rem 13.5%;
 }
 
 .contact-form button:hover {
-  background-color: #a31425;
+  background-color: #047244;
 }
 
 /* Responsive */

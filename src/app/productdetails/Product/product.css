@@ -60,7 +60,7 @@ justify-content: center;
 
 .product__btn {
   padding: 0.65rem 1.25rem;
-  background: #bf1f2e;       /* same deep red as screenshot */
+  background: #047244;       /* same deep red as screenshot */
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -69,7 +69,7 @@ justify-content: center;
   cursor: pointer;
 }
 
-.product__btn:hover { background: #a81b27; }
+.product__btn:hover { background: #047244; }
 
 .product__actions {
   display: flex;
