@@ -12,7 +12,7 @@ justify-content: center;
 .product__imgBlock { flex: 0 0 300px; position: relative;  margin: auto;}
 .image-wrapper {
   position: relative;
-  width: 50%;
+  width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;  /* or whatever ratio your image should have */
   margin: 0 auto;       /* centers the container */
