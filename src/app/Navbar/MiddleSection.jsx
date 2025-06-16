@@ -26,7 +26,7 @@ const MiddleSection = () => {
           <FiPhone size={22} className='icon-one' />
           <div>
             <small>CALL US NOW</small>
-            <strong>+9758-254-753</strong>
+            <strong>+92 370 2333125</strong>
           </div>
         </div>
       <div className="contact-icons">
