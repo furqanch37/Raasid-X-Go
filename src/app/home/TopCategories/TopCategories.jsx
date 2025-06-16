@@ -41,7 +41,7 @@ const TopCategories = () => {
     <section className="categories-section">
       <div className="categories-header">
         <h2>Top Categories</h2>
-        <Link href="#" className="more-link">
+        <Link href="/shop" className="more-link">
           MORE CATEGORIES →
         </Link>
       </div>

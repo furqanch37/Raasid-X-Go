@@ -21,12 +21,14 @@
 }
 
 .product-card {
-  min-width: 160px;
   flex: 0 0 auto;
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
   background: white;
   overflow: hidden;
+  width: 250px;
+    height: 250px;
+   
 }
 
 /* Keep your existing styles below */
@@ -67,6 +69,7 @@ padding: 2rem 13.5%;
 .product-content {
   padding: 1rem;
   text-align: center;
+   margin: 0 0 1em;
 }
 
 .image-box {

@@ -65,7 +65,7 @@ export default function DailyStaples() {
     <section className="daily-wrapper">
       <div className="daily-header">
         <h2 className="daily-title">Daily Staples</h2>
-        <a href="#" className="more-link">MORE PRODUCTS →</a>
+        <a href="/shop" className="more-link">MORE PRODUCTS →</a>
       </div>
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">

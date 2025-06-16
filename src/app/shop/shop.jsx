@@ -42,7 +42,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 };
 
 const Shop = () => {
-  const itemsPerPage = 8;
+  const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);

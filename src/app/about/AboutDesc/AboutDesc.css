@@ -4,7 +4,6 @@
   align-items: flex-start;
  padding: 2rem 13.5%;
   gap: 40px;
-  font-family: 'Inter', sans-serif;
 }
 
 .about-title {
@@ -22,7 +21,6 @@
   flex: 1;
   font-size: 16px;
   color: #626262;
-    font-family: "Inter", Sans-serif;
     font-size: 14px;
   line-height: 1.6;
   margin-top: 20px;

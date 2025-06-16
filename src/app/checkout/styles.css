@@ -1,7 +1,4 @@
-body {
-  font-family: 'Inter', sans-serif;
 
-}
 
 .checkout-container h1 {
   font-weight: bold;
@@ -47,7 +44,6 @@ body {
     border-radius: 4px;
     box-sizing: border-box;
     color: #2b2d2f;
-    font-family: inherit;
     font-size: 1em;
     height: 3.125em;
     line-height: 1em;

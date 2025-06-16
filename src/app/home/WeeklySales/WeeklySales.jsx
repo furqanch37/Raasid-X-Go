@@ -65,7 +65,7 @@ export default function WeeklySales() {
     <section className="weekly-wrapper">
       <div className="weekly-header">
         <h2 className="weekly-title">Weekly Best Sales</h2>
-        <a href="#" className="view-more">VIEW MORE →</a>
+        <a href="/shop" className="view-more">VIEW MORE →</a>
       </div>
       <div className="weekly-grid">
         {weeklySales.map((item, idx) => (

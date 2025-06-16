@@ -1,5 +1,6 @@
 import React from "react";
 import "./Banner.css";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -14,7 +15,9 @@ const Banner = () => {
         <p className="banner-subtext">
           Take Note 20% Off For All Grocery Products
         </p>
-        <button className="shop-btn">SHOP NOW →</button>
+       <Link href="/shop">
+  <button className="shop-btn">SHOP NOW →</button>
+</Link>
       </div>
       <div className="banner-image">
         <img src="/assets/home/banner/banner-img.png" alt="Person with basket" />

@@ -39,7 +39,6 @@ padding: 2rem 13.5%;
 
 .supplier-content h3 {
     color: #252525;
-    font-family: "Inter", Sans-serif;
     font-size: 16px;
     font-weight: 600;
     text-transform: capitalize;
@@ -48,7 +47,6 @@ padding: 2rem 13.5%;
 
 .sale-text {
  color: #555555;
-    font-family: "Inter", Sans-serif;
     font-size: 14px;
     font-weight: 500;
         line-height: 1.6;
@@ -57,7 +55,6 @@ padding: 2rem 13.5%;
 
 .supplier-link {
   background-color: #61CE7000;
-    font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-weight: 600;
     fill: #047244;
