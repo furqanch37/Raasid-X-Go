@@ -35,11 +35,15 @@ const Footer = () => {
         <div className="footer-column">
           <h3>CETAGORIES</h3>
           <ul>
+            <li><Link href="#">Berevlgies</Link></li>
             <li><Link href="#">Spices</Link></li>
             <li><Link href="#">Fruits Preserves</Link></li>
             <li><Link href="#">One Day Meals</Link></li>
             <li><Link href="#">Ready to Eat</Link></li>
-            <li><Link href="#">Gronola Bars</Link></li>
+            <li><Link href="#">Energy Bars</Link></li>
+            <li><Link href="#">MRE's</Link></li>
+            <li><Link href="#">Food</Link></li>
+            <li><Link href="#">Water</Link></li>
           </ul>
         </div>
 

@@ -1,4 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Cocon';
+  src: url('/fonts/Cocon-Regular.woff2') format('woff2'),
+       url('/fonts/Cocon-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cocon';
+  src: url('/fonts/Cocon-Bold.woff2') format('woff2'),
+       url('/fonts/Cocon-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

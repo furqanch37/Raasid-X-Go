@@ -19,6 +19,10 @@ const MiddleSection = () => {
           <option>One Day Meals</option>
           <option>Ready to Eat</option>
           <option>Gronola Bars</option>
+          <option>MRE's</option>
+          <option>Berevlgies</option>
+          <option>Food</option>
+          <option>Water</option>
         </select>
         <button className="search-btn"><FiSearch /></button>
       </div>
