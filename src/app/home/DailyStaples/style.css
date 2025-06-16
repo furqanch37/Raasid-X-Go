@@ -4,6 +4,7 @@
   padding-bottom: 1rem;
   overflow: auto hidden;
   scrollbar-width: none; /* Firefox */
+  
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -30,7 +31,7 @@
 
 /* Keep your existing styles below */
 .daily-wrapper {
-  padding: 20px 10%;
+padding: 2rem 13.5%;
 }
 
 .daily-header {

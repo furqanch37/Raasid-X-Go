@@ -66,3 +66,69 @@
   max-width: 100%;
   height: auto;
 }
+/* Large Screens (up to 1200px) */
+@media (max-width: 1200px) {
+  .banner {
+    padding: 50px 8%;
+    padding-left: 12%;
+  }
+
+  .banner-heading {
+    font-size: 45px;
+  }
+}
+
+/* Medium Screens (up to 992px) */
+@media (max-width: 992px) {
+  .banner {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 50px 5%;
+    height: auto;
+  }
+
+  .banner-content {
+    max-width: 100%;
+    margin-top: 30px;
+  }
+
+  .banner-heading {
+    font-size: 40px;
+  }
+
+  .banner-subtext {
+    font-size: 15px;
+  }
+}
+
+/* Small Screens (up to 768px) */
+@media (max-width: 768px) {
+  .banner {
+    padding: 40px 4%;
+    padding-left: 4%;
+  }
+
+  .banner-heading {
+    font-size: 30px;
+  }
+
+  .banner-subtext {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .discount-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .shop-btn {
+    font-size: 10px;
+    padding: 10px 16px;
+  }
+
+  .banner-image img {
+    width: 100%;
+    height: auto;
+  }
+}
