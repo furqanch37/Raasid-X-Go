@@ -46,3 +46,14 @@ a {
     color-scheme: dark;
   }
 }
+
+.admin-main {
+  margin-left: 260px;
+  margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+  .admin-main {
+    margin-left: 0;
+  }
+}

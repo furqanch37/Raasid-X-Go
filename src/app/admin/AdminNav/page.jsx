@@ -47,7 +47,7 @@ const AdminNav = () => {
               </li>
             
               <li>
-                <Link href="/admin/buyerdata">
+                <Link href="/admin/manage-categories">
                   <FaGlobe className="icon-three" /> <span>Cetagories</span>
                 </Link>
               </li>
