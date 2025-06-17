@@ -6,7 +6,7 @@ const MiddleSection = () => {
   return (
     <div className="middle-section">
     <Link href="/home">
-  <div className="logo">
+  <div className="logo-1">
     <img src="/RaasidLogo.svg" alt="Raasid" />
   </div>
 </Link>

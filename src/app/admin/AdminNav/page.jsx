@@ -28,7 +28,7 @@ const AdminNav = () => {
         <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        <img src="/RaasidLogo.svg" alt="Logo" className="mobile-logo" />
+        <img src="/RaasidLogo.svg" className="mobile-logo" />
       </div>
 
       <aside className={`admin-sidebar ${menuOpen ? 'open' : ''}`}>
