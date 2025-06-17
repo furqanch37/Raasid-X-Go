@@ -9,7 +9,7 @@ import WeeklyStats from './Stats/WeeklyStats';
 const Page = () => {
   return (
 <>
-
+<div className='main-div'>
   <AdminHomeCards />
   <div className="chartsdiv">
   <RevenueUpdates />
@@ -18,6 +18,7 @@ const Page = () => {
   <div className="statschart">
   <WeeklyStats/>
   <TopPerformers/>
+  </div>
   </div>
 </>   
    );
