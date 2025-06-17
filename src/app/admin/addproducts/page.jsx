@@ -10,6 +10,7 @@ const initialProducts = [
     category: 'Spices',
     price: '200',
     description: 'Tangy and spicy masala mix for snacks',
+    image: null,
   },
   {
     _id: '2',
@@ -17,6 +18,7 @@ const initialProducts = [
     category: 'Food',
     price: '250',
     description: 'Perfect blend of spices for biryani lovers',
+    image: null,
   },
 ];
 
@@ -35,12 +37,18 @@ const AddProducts = () => {
       return;
     }
 
+    let imageUrl = null;
+    if (image) {
+      imageUrl = URL.createObjectURL(image); // Preview image
+    }
+
     const newProduct = {
       _id: editingId || Date.now().toString(),
       name,
       category,
       price,
       description,
+      image: imageUrl,
     };
 
     if (editingId) {
@@ -59,6 +67,7 @@ const AddProducts = () => {
     setCategory(prod.category);
     setPrice(prod.price);
     setDescription(prod.description);
+    setImage(null); // Optional: reset image on edit
     setEditingId(prod._id);
   };
 
@@ -132,6 +141,7 @@ const AddProducts = () => {
             <thead>
               <tr>
                 <th>Sr #</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price (Rs)</th>
@@ -143,7 +153,7 @@ const AddProducts = () => {
             <tbody>
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan="7" style={{ textAlign: 'center', padding: '1rem', color: 'gray' }}>
+                  <td colSpan="8" style={{ textAlign: 'center', padding: '1rem', color: 'gray' }}>
                     No products found.
                   </td>
                 </tr>
@@ -151,6 +161,19 @@ const AddProducts = () => {
                 products.map((prod, idx) => (
                   <tr key={prod._id}>
                     <td>{idx + 1}</td>
+                    <td>
+                      {prod.image ? (
+                        <img
+                          src={prod.image}
+                          alt="Product"
+                          width="50"
+                          height="50"
+                          style={{ objectFit: 'cover', borderRadius: 4 }}
+                        />
+                      ) : (
+                        'No Image'
+                      )}
+                    </td>
                     <td>{prod.name}</td>
                     <td>{prod.category}</td>
                     <td>{prod.price}</td>

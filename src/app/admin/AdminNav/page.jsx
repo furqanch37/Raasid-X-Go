@@ -61,9 +61,14 @@ const AdminNav = () => {
                   <FaUserShield className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
+               <li>
+                <Link href="/admin/sales">
+                  <FaEnvelope className="icon-three" /> <span>Manage Sales</span>
+                </Link>
+              </li>
               <li>
                 <Link href="/admin/emails">
-                  <FaEnvelope className="icon-three" /> <span>Messages</span>
+                  <FaEnvelope className="icon-three" /> <span>Contact Messages</span>
                 </Link>
               </li>
               
