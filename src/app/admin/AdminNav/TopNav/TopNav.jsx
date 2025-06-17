@@ -15,11 +15,7 @@ const TopNav = () => {
 
       <div className="topnav-left">
         <FaSearch className="icon-three" />
-        <div className="topnav-link"><Link className='topnav-link-main' href="/admin">Home</Link></div>
-        <div className="topnav-link"><Link className='topnav-link-main' href="/admin">Cetagories</Link></div>
-        <div className="topnav-link"><Link className='topnav-link-main' href="/admin/resolution-center">Products</Link></div>
-        <div className="topnav-link"><Link className='topnav-link-main' href="/admin/AddAdmin">Add Products</Link></div>
-        <div className="topnav-link"><Link className='topnav-link-main' href="/admin/emails">Messages</Link></div>
+    
       </div>
 
       <div className="topnav-right">

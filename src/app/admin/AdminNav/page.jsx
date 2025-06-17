@@ -51,14 +51,10 @@ const AdminNav = () => {
                   <FaGlobe className="icon-three" /> <span>Cetagories</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/admin">
-                  <FaShoppingCart className="icon-three" /> <span>Products</span>
-                </Link>
-              </li>
+              
               <li>
                 <Link href="/admin/addproducts">
-                  <FaUserShield className="icon-three" /> <span>Add Products</span>
+                  <FaShoppingCart className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
                <li>
@@ -67,11 +63,15 @@ const AdminNav = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/admin/emails">
+                <Link href="/admin/adminmessages">
                   <FaEnvelope className="icon-three" /> <span>Contact Messages</span>
                 </Link>
               </li>
-              
+               <li>
+                <Link href="/admin/notifications">
+                  <FaEnvelope className="icon-three" /> <span>Notifications</span>
+                </Link>
+              </li>
                
     
             </ul>
