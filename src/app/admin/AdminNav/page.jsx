@@ -52,12 +52,12 @@ const AdminNav = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/admin/sellerdata">
+                <Link href="/admin">
                   <FaShoppingCart className="icon-three" /> <span>Products</span>
                 </Link>
               </li>
               <li>
-                <Link href="/admin/SeeAllAdmin">
+                <Link href="/admin/addproducts">
                   <FaUserShield className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
