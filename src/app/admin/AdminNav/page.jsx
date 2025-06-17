@@ -1,12 +1,10 @@
-'use client';
+"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { MdCategory } from 'react-icons/md';
-
 import {
   FaBars,
   FaTimes,
-  FaGlobe,
   FaShoppingCart,
   FaUserShield,
   FaEnvelope,
@@ -15,7 +13,8 @@ import {
   FaExchangeAlt,
   FaBalanceScale,
   FaHome,
-  FaPowerOff
+  FaPowerOff,
+  FaBell
 } from 'react-icons/fa';
 import './adminNav.css';
 
@@ -28,7 +27,7 @@ const AdminNav = () => {
         <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
-        <img src="/RaasidLogo.svg" className="mobile-logo" />
+        <img src="/RaasidLogo.svg" className="mobile-logo" alt="Raasid Logo" />
       </div>
 
       <aside className={`admin-sidebar ${menuOpen ? 'open' : ''}`}>
@@ -45,21 +44,19 @@ const AdminNav = () => {
                   <FaHome className="icon-three" /> <span>Home</span>
                 </Link>
               </li>
-            
               <li>
                 <Link href="/admin/manage-categories">
-                  <FaGlobe className="icon-three" /> <span>Cetagories</span>
+                  <MdCategory className="icon-three" /> <span>Categories</span>
                 </Link>
               </li>
-              
               <li>
                 <Link href="/admin/addproducts">
                   <FaShoppingCart className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
-               <li>
+              <li>
                 <Link href="/admin/sales">
-                  <FaEnvelope className="icon-three" /> <span>Manage Sales</span>
+                  <FaExchangeAlt className="icon-three" /> <span>Manage Sales</span>
                 </Link>
               </li>
               <li>
@@ -67,17 +64,14 @@ const AdminNav = () => {
                   <FaEnvelope className="icon-three" /> <span>Contact Messages</span>
                 </Link>
               </li>
-               <li>
+              <li>
                 <Link href="/admin/notifications">
-                  <FaEnvelope className="icon-three" /> <span>Notifications</span>
+                  <FaBell className="icon-three" /> <span>Notifications</span>
                 </Link>
               </li>
-               
-    
             </ul>
           </div>
         </nav>
-
       </aside>
     </>
   );
