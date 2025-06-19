@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link'; // ✅ Import Link
 import './shop.css';
-import { baseUrl } from '@/app/const'; // Make sure path is correct
+import { baseUrl } from '@/app/const';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = [...Array(totalPages)].map((_, i) => i + 1);
@@ -77,15 +78,18 @@ const Shop = () => {
 
         <div className="product-grid">
           {currentProducts.map((product, index) => (
-            <div key={product._id || index} className="product-card">
+            <Link
+              key={product._id || index}
+              href={`/productdetails?productId=${product._id}`}
+              className="product-card" // ✅ Apply class directly to Link
+            >
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <div className="product-price">
-                {/* You can use oldPrice logic if your real data includes it */}
                 <span>{product.price} PKR</span>
               </div>
               <button className="add-to-cart">ADD TO CART</button>
-            </div>
+            </Link>
           ))}
         </div>
 

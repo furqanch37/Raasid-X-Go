@@ -1,8 +1,9 @@
 'use client';
 import Image from "next/image";
+import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import "./style.css";
-import { baseUrl } from "@/app/const"; // Make sure the path is correct
+import { baseUrl } from "@/app/const";
 
 export default function DailyStaples() {
   const scrollRef = useRef(null);
@@ -77,7 +78,12 @@ export default function DailyStaples() {
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
-            <div key={product._id || idx} className="product-card">
+           <Link
+  key={product._id || idx}
+  href={`/productdetails?productId=${product._id}`}
+  className="product-card"
+>
+
               <div className="product-content">
                 <div className="image-box">
                   <Image
@@ -93,7 +99,7 @@ export default function DailyStaples() {
                 </div>
                 <button className="add-cart">ADD TO CART</button>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

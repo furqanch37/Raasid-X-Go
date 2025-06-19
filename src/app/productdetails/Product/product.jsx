@@ -2,45 +2,30 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { FiSearch } from 'react-icons/fi';
-import './product.css';           // plain global CSS (see next section)
+import './product.css';
 
-/**
- * Dumb data so the page renders in isolation.
- * In a real store you’d fetch this via getServerSideProps / fetch().
- */
-const mock = {
-  name: 'Almonds',
-  price: 20,
-  img: '/assets/chaat_masala.png',           // drop the file into /public
-  category: 'Snacks',
-};
-
-export default function ProductPage() {
+export default function ProductPage({ product }) {
   const [qty, setQty] = useState(1);
 
   return (
     <main className="product">
       <section className="product__imgBlock">
-        
-          <div className="image-wrapper">
-  <Image
-    src={mock.img}
-    alt={mock.name}
-    fill
-    sizes="(max-width: 768px) 80vw, 40vw"
-    style={{ objectFit: 'contain' }}
-  />
-
-
+        <div className="image-wrapper">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 80vw, 40vw"
+            style={{ objectFit: 'contain' }}
+          />
           <FiSearch className="product__zoomIcon" />
         </div>
       </section>
 
       <section className="product__details">
-        <h3 className="product__title">{mock.name}</h3>
-        <p className="product__price">${mock.price.toFixed(2)}</p>
+        <h3 className="product__title">{product.name}</h3>
+        <p className="product__price">{product.price.toFixed(2)} PKR</p>
 
-        {/* ---- Qty + Add‑to‑Cart ---- */}
         <div className="product__buyRow">
           <input
             type="number"
@@ -52,14 +37,9 @@ export default function ProductPage() {
           <button className="product__btn">Add to Cart</button>
         </div>
 
-    
-        {/* ---- Meta ---- */}
         <p className="product__meta">
-          <span>Category:</span> {mock.category}
+          <span>Category:</span> {product.category}
         </p>
-      
-
-      
       </section>
     </main>
   );

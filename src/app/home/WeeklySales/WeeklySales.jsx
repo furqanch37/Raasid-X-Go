@@ -1,8 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
+import Link from "next/link"; // ✅ Import Link
 import "./sales.css";
-import { baseUrl } from '@/app/const'; // Adjust if path differs
+import { baseUrl } from '@/app/const';
 
 export default function WeeklySales() {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,11 @@ export default function WeeklySales() {
       </div>
       <div className="weekly-grid">
         {products.map((item, idx) => (
-          <div className="weekly-card" key={item._id || idx}>
+          <Link
+            key={item._id || idx}
+            href={`/productdetails?productId=${item._id}`}
+            className="weekly-card" // ✅ Apply styling class directly to Link
+          >
             <div className="weekly-img-box">
               <Image
                 src={item.image}
@@ -42,7 +47,7 @@ export default function WeeklySales() {
             </div>
             <h3 className="weekly-name">{item.name}</h3>
             <p className="weekly-price">{item.price} PKR</p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
