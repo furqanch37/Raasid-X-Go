@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 10%;
+  padding: 0 10%;
   padding-left: 15%;
   background: url('/assets/home/banner/background.jpg') no-repeat center center;
   background-size: cover;
@@ -58,14 +58,18 @@
   background-color: #047244;
 }
 
-.banner-image img {
-  max-width: 100%;
-  height: auto;
+.banner-image  {
+ overflow:hidden;
+ height: 100%;
+}
+
+.banner-image  img{
+ height: 100%;
 }
 /* Large Screens (up to 1200px) */
 @media (max-width: 1200px) {
   .banner {
-    padding: 50px 8%;
+    padding: 0 8%;
     padding-left: 12%;
   }
 
@@ -79,7 +83,7 @@
   .banner {
     flex-direction: column-reverse;
     text-align: center;
-    padding: 50px 5%;
+    padding: 0 5%;
     height: auto;
   }
 
