@@ -48,12 +48,26 @@ const AddProducts = () => {
     if (image) formData.append('image', image);
 
     try {
-      const nutritionParts = nutritions.split(',').reduce((acc, part) => {
-        if (!part.includes(':')) return acc;
-        const [key, val] = part.split(':').map(str => str.trim());
-        if (key && val) acc[key.toLowerCase()] = val;
-        return acc;
-      }, {});
+      // nutrition format: calories:mg=0, sugar:g=15
+     const nutritionParts = nutritions.split(',').reduce((acc, part) => {
+  const trimmed = part.trim();
+  const [keyWithUOM, result] = trimmed.split('=');
+
+  if (!keyWithUOM || !result) return acc;
+
+  const colonIndex = keyWithUOM.indexOf(':');
+  if (colonIndex === -1) return acc;
+
+  const key = keyWithUOM.slice(0, colonIndex).trim();
+  const uom = keyWithUOM.slice(colonIndex + 1).trim();
+
+  if (key && uom && result) {
+    acc[key.toLowerCase()] = { UOM: uom, Results: result };
+  }
+
+  return acc;
+}, {});
+
       formData.append('nutritions', JSON.stringify(nutritionParts));
 
       let url = `${baseUrl}/products/create`;
@@ -105,7 +119,9 @@ const AddProducts = () => {
     setDescription(prod.description);
     setNutritions(
       prod.nutritions
-        ? Object.entries(prod.nutritions).map(([k, v]) => `${k}: ${v}`).join(', ')
+        ? Object.entries(prod.nutritions)
+            .map(([k, v]) => `${k}:${v.UOM}=${v.Results}`)
+            .join(', ')
         : ''
     );
     setServing(prod.serving || '');
@@ -149,7 +165,6 @@ const AddProducts = () => {
     <div className="mp-container">
       <h2 className="mp-title">Products</h2>
       <div className="mp-wrapper">
-        {/* Form */}
         <div className="mp-form">
           <label>Product Name:</label>
           <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Enter product name" />
@@ -160,7 +175,12 @@ const AddProducts = () => {
           <label>Description:</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={2} />
           <label>Nutritions:</label>
-          <input value={nutritions} onChange={(e) => setNutritions(e.target.value)} placeholder="e.g. calories: 0, caffeine: 25mg" />
+          <input
+            value={nutritions}
+            onChange={(e) => setNutritions(e.target.value)}
+            placeholder="e.g. calories:mg=0, sugar:g=15"
+          />
+          <small>Format: <i>name:unit=value</i> — e.g. calories:mg=0</small>
           <label>Serving Size:</label>
           <input value={serving} onChange={(e) => setServing(e.target.value)} placeholder="e.g. 1 tsp" />
           <label>Packaging:</label>
@@ -212,7 +232,9 @@ const AddProducts = () => {
                     <td>{prod.description}</td>
                     <td>
                       {prod.nutritions
-                        ? Object.entries(prod.nutritions).map(([k, v]) => `${k}: ${v}`).join(', ')
+                        ? Object.entries(prod.nutritions)
+                            .map(([k, v]) => `${k} (${v.UOM}): ${v.Results}`)
+                            .join(', ')
                         : ''}
                     </td>
                     <td>{prod.serving}</td>

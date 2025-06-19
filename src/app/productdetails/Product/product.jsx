@@ -13,9 +13,6 @@ const mock = {
   price: 20,
   img: '/assets/chaat_masala.png',           // drop the file into /public
   category: 'Snacks',
-  tags: ['Dry Food', 'Snacks'],
-  description: `Eiusmod exercitation! Adipiscing laboriosam aliquip cras conubia
-    incididunt, urna primis, habitant! Quos, mattis ultricies…`,
 };
 
 export default function ProductPage() {
@@ -60,12 +57,9 @@ export default function ProductPage() {
         <p className="product__meta">
           <span>Category:</span> {mock.category}
         </p>
-        <p className="product__meta">
-          <span>Tags:</span> {mock.tags.join(', ')}
-        </p>
+      
 
-        {/* ---- Description ---- */}
-        <p className="product__desc">{mock.description}</p>
+      
       </section>
     </main>
   );
