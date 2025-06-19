@@ -1,54 +1,11 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import ShopHeader from '../productdetails/ShopHeader/ShopHeader';
-import ProductPage from '../productdetails/Product/product';
-import ProductTabs from '../productdetails/ProductTabs/ProductTabs';
-import NutritionDetails from '../productdetails/NutritionFacts/NutritionDetails';
-import { baseUrl } from '@/app/const';
+// app/productdetails/page.jsx
+import { Suspense } from 'react';
+import ProductDetails from './details'; // your client component
 
-export default function ProductDetails() {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('productId');
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`${baseUrl}/products/${productId}`);
-        const data = await res.json();
-        if (data.success && data.product) {
-          setProduct(data.product);
-        } else {
-          setError('Product not found');
-        }
-      } catch (err) {
-        console.error('Error fetching product:', err);
-        setError('Failed to load product');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (productId) {
-      fetchProduct();
-    } else {
-      setLoading(false);
-      setError('No product ID provided');
-    }
-  }, [productId]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-
+export default function ProductDetailsPage() {
   return (
-    <>
-      <ShopHeader />
-      <ProductPage product={product} />
-      <ProductTabs description={product.description} />
-      <NutritionDetails product={product} />
-    </>
+    <Suspense fallback={<p>Loading product...</p>}>
+      <ProductDetails />
+    </Suspense>
   );
 }
