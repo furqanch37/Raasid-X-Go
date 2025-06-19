@@ -7,7 +7,7 @@ import ProductTabs from '../productdetails/ProductTabs/ProductTabs';
 import NutritionDetails from '../productdetails/NutritionFacts/NutritionDetails';
 import { baseUrl } from '@/app/const';
 
-export default function ProductDetailsPage() {
+export default function ProductDetails() {
   const searchParams = useSearchParams();
   const productId = searchParams.get('productId');
   const [product, setProduct] = useState(null);
