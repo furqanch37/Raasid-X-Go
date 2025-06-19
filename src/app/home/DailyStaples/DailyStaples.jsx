@@ -1,21 +1,28 @@
-"use client";
+'use client';
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import "./style.css";
-
-const products = [
-  { name: "Tamrind", price: 300, image: "/assets/tamrind.png", onSale: false },
-  { name: "Bombay Biryani", price: 250, image: "/assets/bombay_biryani_masala.png", onSale: false },
-  { name: "Chaat Masala", price: 300, image: "/assets/chaat_masala.png", onSale: false },
-  { name: "Cloves Powder", price: 300, image: "/assets/cloves_powder.png", onSale: false },
-  { name: "Bombay Biryani", price: 250, image: "/assets/bombay_biryani_masala.png", onSale: false },
-  { name: "Zarda", price: 450, image: "/assets/zarda.png", onSale: false },
-  { name: "Nihari", price: 100, image: "/assets/nihari.png", onSale: false },
-  { name: "Bombay Biryani", price: 250, image: "/assets/bombay_biryani_masala.png", onSale: false },
-];
+import { baseUrl } from "@/app/const"; // Make sure the path is correct
 
 export default function DailyStaples() {
   const scrollRef = useRef(null);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/products/all`);
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     const slider = scrollRef.current;
@@ -70,8 +77,7 @@ export default function DailyStaples() {
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
-            <div key={idx} className="product-card">
-              {product.onSale && <span className="sale-badge">Sale!</span>}
+            <div key={product._id || idx} className="product-card">
               <div className="product-content">
                 <div className="image-box">
                   <Image
@@ -83,12 +89,7 @@ export default function DailyStaples() {
                 </div>
                 <p className="product-name">{product.name}</p>
                 <div className="product-pricing">
-                  {product.originalPrice && (
-                    <span className="original-price">
-                      ${product.originalPrice.toFixed(2)}
-                    </span>
-                  )}
-                  <span className="final-price">{product.price}PKR</span>
+                  <span className="final-price">{product.price} PKR</span>
                 </div>
                 <button className="add-cart">ADD TO CART</button>
               </div>

@@ -1,4 +1,3 @@
-/* styles/TopCategories.css */
 .categories-section {
   padding: 2rem 13.5%;
   background: #fff;
@@ -25,23 +24,40 @@
   font-size: 14px;
 }
 
-.categories-grid {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+/* ✅ Scroll container (grab-to-scroll) */
+.scroll-container {
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  overflow: auto hidden;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
 }
 
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scroll-container.active {
+  cursor: grabbing;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ✅ Card styles */
 .category-card {
+  flex: 0 0 auto;
+  width: 240px;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  width: 240px;
   text-align: center;
   padding-bottom: 20px;
   transition: transform 0.3s ease;
 }
-
 
 .category-image {
   padding: 20px;
@@ -57,22 +73,23 @@
 
 .category-card h4 {
   color: #252525;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: capitalize;
-    line-height: 1.3em;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 1.3em;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.shop-link{
-    font-size: 12px;
-    font-weight: 600;
-    color: #047244;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.shop-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #047244;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
+/* ✅ Mobile responsive */
 @media (max-width: 768px) {
   .categories-header {
     flex-direction: column;
@@ -80,12 +97,12 @@
     gap: 10px;
   }
 
-  .categories-grid {
-    flex-direction: column;
-    align-items: center;
+  .scroll-content {
+    flex-direction: row;
   }
 
   .category-card {
-    width: 90%;
+    flex: 0 0 auto;
+    width: 240px;
   }
 }

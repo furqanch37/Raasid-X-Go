@@ -1,19 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import './shop.css';
-
-const products = [
-  { name: "Chaat Masala", price: "22.00", image: "/assets/chaat_masala.png", oldPrice: "", sale: false },
-  { name: "Cloves Powder", price: "30.00", image: "/assets/cloves_powder.png", oldPrice: "", sale: false },
-  { name: "Zarda", price: "12.00", oldPrice: "$15.00", image: "/assets/zarda.png", sale: true },
-  { name: "Nihari", price: "8.88", image: "/assets/nihari.png", oldPrice: "", sale: false },
-  { name: "Bombay Biryani", price: "10.00", image: "/assets/bombay_biryani_masala.png", oldPrice: "", sale: false },
-  { name: "Nihari", price: "8.88", image: "/assets/nihari.png", oldPrice: "", sale: false },
-  { name: "Cloves Powder", price: "30.00", image: "/assets/cloves_powder.png", oldPrice: "", sale: false },
-  { name: "Chaat Masala", price: "22.00", image: "/assets/chaat_masala.png", oldPrice: "", sale: false },
-  { name: "Nihari", price: "8.88", image: "/assets/nihari.png", oldPrice: "", sale: false },
-];
+import { baseUrl } from '@/app/const'; // Make sure path is correct
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pages = [...Array(totalPages)].map((_, i) => i + 1);
@@ -43,7 +32,24 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
 const Shop = () => {
   const itemsPerPage = 12;
+  const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/products/all`);
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -60,7 +66,7 @@ const Shop = () => {
         <div className="shop-header">
           <h2>Shop</h2>
           <div className="shop-filters">
-            <select>
+            <select disabled>
               <option>SHOWING {startIndex + 1}–{startIndex + currentProducts.length} OF {products.length} RESULTS</option>
             </select>
             <select>
@@ -71,13 +77,12 @@ const Shop = () => {
 
         <div className="product-grid">
           {currentProducts.map((product, index) => (
-            <div key={index} className="product-card">
-              
+            <div key={product._id || index} className="product-card">
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <div className="product-price">
-                {product.oldPrice && <span className="old-price">{product.oldPrice}</span>}
-                <span>{product.price}PKR</span>
+                {/* You can use oldPrice logic if your real data includes it */}
+                <span>{product.price} PKR</span>
               </div>
               <button className="add-to-cart">ADD TO CART</button>
             </div>
