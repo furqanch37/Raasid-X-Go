@@ -1,6 +1,6 @@
 
 
-.shop-container {
+.shop-container-one {
   margin: 0 auto;
 }
 
@@ -90,7 +90,7 @@ padding: 2rem 13.5%;
   margin-right: 10px;
 }
 
-.add-to-cart {
+.add-to-cart-one {
   background-color: #047244;
   color: #fff;
   padding: 10px 15px;

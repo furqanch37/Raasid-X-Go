@@ -47,7 +47,7 @@ const Shop = () => {
         <link rel="stylesheet" href="/css/shop.css" />
       </Head>
 
-      <div className="shop-container">
+      <div className="shop-container-one">
         {/* ... */}
         <div className="product-grid">
           {currentProducts.map((product, index) => (
@@ -59,7 +59,7 @@ const Shop = () => {
                   <span>{product.price} PKR</span>
                 </div>
               </Link>
-              <button className="add-to-cart" onClick={() => handleAddToCart(product)}>
+              <button className="add-to-cart-one" onClick={() => handleAddToCart(product)}>
                 ADD TO CART
               </button>
             </div>
