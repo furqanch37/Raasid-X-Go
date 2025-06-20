@@ -36,11 +36,7 @@ export default function CheckoutForm() {
       </section>
 
       <div className="order-footer">
-        <p className="terms-text">
-          By proceeding with your purchase you agree to our{" "}
-          <a href="#">Terms and Conditions</a> and{" "}
-          <a href="#">Privacy Policy</a>.
-        </p>
+  
 
         <div className="footer-actions">
           {/* ✅ Use Link for client-side navigation */}
