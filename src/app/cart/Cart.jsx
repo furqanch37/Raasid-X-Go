@@ -1,66 +1,101 @@
-// File: components/Cart.js
+'use client';
 import React from 'react';
-import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
-import './cartstyles.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
+import './cartstyles.css';
+import {
+  updateQuantity,
+  removeFromCart,
+} from '@/app/redux/features/cartSlice'; // ✅ Adjust path if needed
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.cart.items); // ✅ Get cart items from store
+
+  const handleIncrement = (id, currentQty) => {
+    dispatch(updateQuantity({ id, quantity: currentQty + 1 }));
+  };
+
+  const handleDecrement = (id, currentQty) => {
+    if (currentQty > 1) {
+      dispatch(updateQuantity({ id, quantity: currentQty - 1 }));
+    }
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const getTotalPrice = () => {
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  };
+
   return (
     <section className="cart-section">
       <div className="container">
         <h1 className="cart-title">Cart</h1>
-        <div className="cart-wrapper">
-          <div className="cart-left">
-            <table className="cart-table">
-              <thead>
-               <tr className="tr-row" style={{ borderBottom: "1px solid hsla(0, 0%, 7%, 0.11)" }}>
 
-                  <th>Product</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="product-info">
-                    <img src="/assets/chaat_masala.png" alt="Roast Potato" className="product-img" />
-                    <div className="product-details">
-                      <h3>Chaat Masala</h3>
-                      <p className="new-price">40.00PKR</p>
-                      <p className="product-desc">
-                        Nulla repudiandae? Purus. Lectus ultrices minus, natoque laudantium! Vehicula occaecat ea hendrerit sequi incididunt turpis...
-                      </p>
-                      <div className="quantity-control">
-                        <button><FaMinus /></button>
-                        <input type="text" value="1" readOnly />
-                        <button><FaPlus /></button>
-                      </div>
-                      <button className="remove-btn">Remove item</button>
-                    </div>
-                  </td>
-                  <td className="product-total">40.00PKR</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        {items.length === 0 ? (
+          <p style={{ padding: '2rem 0' }}>Your cart is empty.</p>
+        ) : (
+          <div className="cart-wrapper">
+            <div className="cart-left">
+              <table className="cart-table">
+                <thead>
+                  <tr className="tr-row" style={{ borderBottom: "1px solid hsla(0, 0%, 7%, 0.11)" }}>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item) => (
+                    <tr key={item._id}>
+                      <td className="product-info">
+                        <img src={item.image} alt={item.name} className="product-img" />
+                        <div className="product-details">
+                          <h3>{item.name}</h3>
+                          <p className="new-price">{item.price}PKR</p>
+                          <p className="product-desc">{item.description.slice(0, 100)}...</p>
+                          <div className="quantity-control">
+                            <button onClick={() => handleDecrement(item._id, item.quantity)}>
+                              <FaMinus />
+                            </button>
+                            <input type="text" value={item.quantity} readOnly />
+                            <button onClick={() => handleIncrement(item._id, item.quantity)}>
+                              <FaPlus />
+                            </button>
+                          </div>
+                          <button className="remove-btn" onClick={() => handleRemove(item._id)}>
+                            Remove item
+                          </button>
+                        </div>
+                      </td>
+                      <td className="product-total">{(item.price * item.quantity).toFixed(2)}PKR</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-          <div className="cart-right">
-            <div className="cart-totals">
-              <h3>Cart Totals</h3>
-            
-              <div className="subtotal">
-                <span>Subtotal</span>
-                <span>40.00PKR</span>
+            <div className="cart-right">
+              <div className="cart-totals">
+                <h3>Cart Totals</h3>
+                <div className="subtotal">
+                  <span>Subtotal</span>
+                  <span>{getTotalPrice()}PKR</span>
+                </div>
+                <div className="total">
+                  <strong>Total</strong>
+                  <strong>{getTotalPrice()}PKR</strong>
+                </div>
+                <Link href="/checkout">
+                  <button className="checkout-btn">Proceed to Checkout</button>
+                </Link>
               </div>
-              <div className="total">
-                <strong>Total</strong>
-                <strong>40.00PKR</strong>
-              </div>
-             <Link href="/checkout">
-  <button className="checkout-btn">Proceed to Checkout</button>
-</Link>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

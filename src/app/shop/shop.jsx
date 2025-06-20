@@ -1,37 +1,16 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link'; // ✅ Import Link
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '@/app/redux/features/cartSlice'; // Adjust this path
 import './shop.css';
 import { baseUrl } from '@/app/const';
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const pages = [...Array(totalPages)].map((_, i) => i + 1);
-
-  return (
-    <div className="pagination">
-      {pages.map((page) => (
-        <button
-          key={page}
-          className={`page-btn ${currentPage === page ? 'active' : ''}`}
-          onClick={() => onPageChange(page)}
-        >
-          {page}
-        </button>
-      ))}
-      {currentPage < totalPages && (
-        <button
-          className="page-btn arrow-btn"
-          onClick={() => onPageChange(currentPage + 1)}
-        >
-          →
-        </button>
-      )}
-    </div>
-  );
-};
-
 const Shop = () => {
+  const router = useRouter();
+  const dispatch = useDispatch(); // ✅ redux
   const itemsPerPage = 12;
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,6 +31,11 @@ const Shop = () => {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product)); // ✅ Add to redux store
+    router.push('/cart');         // ✅ Navigate to cart
+  };
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProducts = products.slice(startIndex, startIndex + itemsPerPage);
@@ -64,40 +48,24 @@ const Shop = () => {
       </Head>
 
       <div className="shop-container">
-        <div className="shop-header">
-          <h2>Shop</h2>
-          <div className="shop-filters">
-            <select disabled>
-              <option>SHOWING {startIndex + 1}–{startIndex + currentProducts.length} OF {products.length} RESULTS</option>
-            </select>
-            <select>
-              <option>DEFAULT SORTING</option>
-            </select>
-          </div>
-        </div>
-
+        {/* ... */}
         <div className="product-grid">
           {currentProducts.map((product, index) => (
-            <Link
-              key={product._id || index}
-              href={`/productdetails?productId=${product._id}`}
-              className="product-card" // ✅ Apply class directly to Link
-            >
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <div className="product-price">
-                <span>{product.price} PKR</span>
-              </div>
-              <button className="add-to-cart">ADD TO CART</button>
-            </Link>
+            <div key={product._id || index} className="product-card">
+              <Link href={`/productdetails?productId=${product._id}`}>
+                <img src={product.image} alt={product.name} />
+                <h3>{product.name}</h3>
+                <div className="product-price">
+                  <span>{product.price} PKR</span>
+                </div>
+              </Link>
+              <button className="add-to-cart" onClick={() => handleAddToCart(product)}>
+                ADD TO CART
+              </button>
+            </div>
           ))}
         </div>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+        {/* ... */}
       </div>
     </>
   );

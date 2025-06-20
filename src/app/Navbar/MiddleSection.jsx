@@ -3,10 +3,18 @@ import React, { useEffect, useState } from 'react';
 import { FaUser, FaShoppingBag } from 'react-icons/fa';
 import { FiSearch, FiPhone } from "react-icons/fi";
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { baseUrl } from '@/app/const'; 
 
 const MiddleSection = () => {
   const [categories, setCategories] = useState([]);
+
+  // Get cart items from Redux store
+  const items = useSelector((state) => state.cart.items);
+  const cartCount = items.length; // unique products in cart
+  const cartTotalPrice = items
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -59,8 +67,8 @@ const MiddleSection = () => {
           <Link href="/cart">
             <FaShoppingBag className="icon-one" />
           </Link>
-          <span className="cart-count">0</span>
-          <span className="cart-price">0.00PKR</span>
+          <span className="cart-count">{cartCount}</span>
+          <span className="cart-price">{cartTotalPrice}PKR</span>
         </div>
       </div>
     </div>
