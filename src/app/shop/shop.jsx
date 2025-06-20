@@ -51,7 +51,7 @@ const Shop = () => {
         {/* ... */}
         <div className="product-grid">
           {currentProducts.map((product, index) => (
-            <div key={product._id || index} className="product-card">
+            <div key={product._id || index} className="product-card-3">
               <Link href={`/productdetails?productId=${product._id}`}>
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
