@@ -2,44 +2,43 @@
 
 import "./styles.css";
 import { FaArrowLeft } from "react-icons/fa";
-import Link from "next/link"; // ✅ Import Link from Next.js
+import Link from "next/link";
 
 export default function CheckoutForm() {
   return (
     <form className="checkout-form">
       <section>
-        <h2>Contact information</h2>
+        <h2>Contact Information</h2>
         <input type="email" placeholder="Email address" required />
       </section>
 
       <section>
-        <h2>Billing address</h2>
-        <select required>
-          <option>United States (US)</option>
-        </select>
-        <div className="input-row">
-          <input type="text" placeholder="First name" required />
-          <input type="text" placeholder="Last name" required />
-        </div>
+        <h2>Shipping Details</h2>
+        <input type="text" placeholder="Full Name" required />
         <input type="text" placeholder="Address" required />
-        <input type="text" placeholder="Apartment, suite, etc." />
-        <div className="input-row">
-          <input type="text" placeholder="City" required />
-          <select>
-            <option>California</option>
-          </select>
-        </div>
-        <div className="input-row">
-          <input type="text" placeholder="ZIP Code" required />
-          <input type="tel" placeholder="Phone (optional)" />
-        </div>
+        <input type="text" placeholder="City" required />
+        <input type="tel" placeholder="Phone Number" required />
+      </section>
+
+      <section>
+        <h2>Shipping Method</h2>
+        <select required>
+          <option value="">Select a shipping method</option>
+          <option value="standard">TCS</option>
+        </select>
+      </section>
+
+      <section>
+        <h2>Payment Method</h2>
+        <select required>
+          <option value="">Select a payment method</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="card">Card Payment</option>
+        </select>
       </section>
 
       <div className="order-footer">
-  
-
         <div className="footer-actions">
-          {/* ✅ Use Link for client-side navigation */}
           <Link href="/cart" className="return-link">
             <FaArrowLeft className="arrow-icon" /> Return to Cart
           </Link>
