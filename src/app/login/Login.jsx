@@ -1,32 +1,69 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';   // ← NEW
+import { useDispatch } from 'react-redux';
+import { login } from '@/app/redux/features/userSlice';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { baseUrl } from '@/app/const';
 import './Login.css';
 
 export default function LoginCard() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPwd, setShowPwd] = useState(false);
+  const [error, setError] = useState('');
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${baseUrl}/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch(login(data.user)); // ✅ Save user in Redux
+        router.push('/checkout');   // ✅ Redirect after login
+      } else {
+        if (data.message?.includes('not registered')) {
+          router.push('/signup');
+        } else {
+          setError(data.message || 'Login failed');
+        }
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    }
+  };
 
   return (
     <main className="login-wrapper">
       <article className="login-card">
         <h2 className="login-title">Login</h2>
 
-        <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-          {/* Username / email */}
+        <form className="login-form" onSubmit={handleLogin}>
           <label htmlFor="username" className="login-label">
-            Username or email address <span>*</span>
+            Email Address <span>*</span>
           </label>
           <input
             id="username"
-            type="text"
+            type="email"
             className="login-input"
             placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-          {/* Password with eye‑toggle */}
           <label htmlFor="password" className="login-label">
             Password <span>*</span>
           </label>
@@ -35,26 +72,34 @@ export default function LoginCard() {
               id="password"
               type={showPwd ? 'text' : 'password'}
               className="login-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
-
+            <button
+              type="button"
+              className="eye-toggle"
+              onClick={() => setShowPwd((prev) => !prev)}
+              aria-label="Toggle password visibility"
+            >
+              {showPwd ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
 
-          {/* Remember me */}
           <div className="login-options">
             <label className="remember-me">
               <input type="checkbox" /> Remember me
             </label>
           </div>
 
-          {/* Submit */}
+          {error && <p className="login-error">{error}</p>}
+
           <button type="submit" className="login-btn">
             Log in
           </button>
-          
-          {/* Lost password */}
+
           <Link href="/signup" className="forgot-link">
-            SignUp
+            Don’t have an account? Sign Up
           </Link>
         </form>
       </article>

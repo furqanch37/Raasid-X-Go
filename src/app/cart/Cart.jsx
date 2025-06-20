@@ -1,17 +1,20 @@
 'use client';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation'; // ✅ for navigation
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import Link from 'next/link';
 import './cartstyles.css';
 import {
   updateQuantity,
   removeFromCart,
-} from '@/app/redux/features/cartSlice'; // ✅ Adjust path if needed
+} from '@/app/redux/features/cartSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.cart.items); // ✅ Get cart items from store
+  const router = useRouter();
+
+  const items = useSelector((state) => state.cart.items);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn); // ✅ auth state
 
   const handleIncrement = (id, currentQty) => {
     dispatch(updateQuantity({ id, quantity: currentQty + 1 }));
@@ -29,6 +32,14 @@ const Cart = () => {
 
   const getTotalPrice = () => {
     return items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2);
+  };
+
+  const handleCheckout = () => {
+    if (isLoggedIn) {
+      router.push('/checkout');
+    } else {
+      router.push('/login');
+    }
   };
 
   return (
@@ -89,9 +100,9 @@ const Cart = () => {
                   <strong>Total</strong>
                   <strong>{getTotalPrice()}PKR</strong>
                 </div>
-                <Link href="/checkout">
-                  <button className="checkout-btn">Proceed to Checkout</button>
-                </Link>
+                <button className="checkout-btn" onClick={handleCheckout}>
+                  Proceed to Checkout
+                </button>
               </div>
             </div>
           </div>

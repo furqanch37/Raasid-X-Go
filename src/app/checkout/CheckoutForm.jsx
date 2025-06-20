@@ -1,5 +1,9 @@
+'use client';
+
 import "./styles.css";
 import { FaArrowLeft } from "react-icons/fa";
+import Link from "next/link"; // ✅ Import Link from Next.js
+
 export default function CheckoutForm() {
   return (
     <form className="checkout-form">
@@ -32,21 +36,23 @@ export default function CheckoutForm() {
       </section>
 
       <div className="order-footer">
-      <p className="terms-text">
-        By proceeding with your purchase you agree to our{" "}
-        <a href="#">Terms and Conditions</a> and{" "}
-        <a href="#">Privacy Policy</a>
-      </p>
+        <p className="terms-text">
+          By proceeding with your purchase you agree to our{" "}
+          <a href="#">Terms and Conditions</a> and{" "}
+          <a href="#">Privacy Policy</a>.
+        </p>
 
-      <div className="footer-actions">
-        <a href="/cart" className="return-link">
-          <FaArrowLeft className="arrow-icon" /> Return to Cart
-        </a>
-        <button className="place-order-btn">Place Order</button>
+        <div className="footer-actions">
+          {/* ✅ Use Link for client-side navigation */}
+          <Link href="/cart" className="return-link">
+            <FaArrowLeft className="arrow-icon" /> Return to Cart
+          </Link>
+
+          <button type="submit" className="place-order-btn">
+            Place Order
+          </button>
+        </div>
       </div>
-    </div>
-
     </form>
-    
   );
 }
