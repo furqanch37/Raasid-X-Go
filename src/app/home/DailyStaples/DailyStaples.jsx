@@ -2,11 +2,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { addToCart } from "@/app/redux/features/cartSlice";
 import "./style.css";
 import { baseUrl } from "@/app/const";
 
 export default function DailyStaples() {
   const scrollRef = useRef(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -21,7 +26,6 @@ export default function DailyStaples() {
         console.error("Error fetching products:", error);
       }
     };
-
     fetchProducts();
   }, []);
 
@@ -69,6 +73,11 @@ export default function DailyStaples() {
     };
   }, []);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    router.push('/cart');
+  };
+
   return (
     <section className="daily-wrapper">
       <div className="daily-header">
@@ -78,28 +87,29 @@ export default function DailyStaples() {
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
-           <Link
-  key={product._id || idx}
-  href={`/productdetails?productId=${product._id}`}
-  className="product-card"
->
-
-              <div className="product-content">
-                <div className="image-box">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="product-image"
-                  />
+            <div key={product._id || idx} className="product-card">
+              <Link href={`/productdetails?productId=${product._id}`}>
+                <div className="product-content">
+                  <div className="image-box">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="product-image"
+                    />
+                  </div>
+                  <p className="product-name">{product.name}</p>
+                  <div className="product-pricing">
+                    <span className="final-price numbers">{product.price} PKR</span>
+                  </div>
                 </div>
-                <p className="product-name">{product.name}</p>
-                <div className="product-pricing">
-                  <span className="final-price">{product.price} PKR</span>
-                </div>
-                <button className="add-cart">ADD TO CART</button>
+              </Link>
+              <div className="cart-btn">
+              <button className="add-cart" onClick={() => handleAddToCart(product)}>
+                ADD TO CART
+              </button>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

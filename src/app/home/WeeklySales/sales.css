@@ -26,6 +26,16 @@ padding: 2rem 13.5%;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+.add-cart{
+ color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #047244;
+    border: none;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
 
 @media (min-width: 640px) {
   .weekly-grid {

@@ -105,10 +105,16 @@ padding: 2rem 13.5%;
 }
 
 .add-cart {
-  background: none;
-  border: none;
-  color: #047244;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
+color: #fff;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #047244;
+    border: none;
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.cart-btn{
+  display: flex;
+  justify-content: center;
 }

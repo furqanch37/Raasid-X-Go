@@ -1,12 +1,17 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
-import Link from "next/link"; // ✅ Import Link
+import Link from "next/link";
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { addToCart } from '@/app/redux/features/cartSlice';
 import "./sales.css";
 import { baseUrl } from '@/app/const';
 
 export default function WeeklySales() {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,6 +29,11 @@ export default function WeeklySales() {
     fetchProducts();
   }, []);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    router.push('/cart');
+  };
+
   return (
     <section className="weekly-wrapper">
       <div className="weekly-header">
@@ -32,22 +42,23 @@ export default function WeeklySales() {
       </div>
       <div className="weekly-grid">
         {products.map((item, idx) => (
-          <Link
-            key={item._id || idx}
-            href={`/productdetails?productId=${item._id}`}
-            className="weekly-card" // ✅ Apply styling class directly to Link
-          >
-            <div className="weekly-img-box">
-              <Image
-                src={item.image}
-                alt={item.name}
-                fill
-                className="weekly-img"
-              />
-            </div>
-            <h3 className="weekly-name">{item.name}</h3>
-            <p className="weekly-price">{item.price} PKR</p>
-          </Link>
+          <div key={item._id || idx} className="weekly-card">
+            <Link href={`/productdetails?productId=${item._id}`}>
+              <div className="weekly-img-box">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className="weekly-img"
+                />
+              </div>
+              <h3 className="weekly-name">{item.name}</h3>
+              <p className="weekly-price numbers">{item.price} PKR</p>
+            </Link>
+            <button className="add-cart" onClick={() => handleAddToCart(item)}>
+              ADD TO CART
+            </button>
+          </div>
         ))}
       </div>
     </section>

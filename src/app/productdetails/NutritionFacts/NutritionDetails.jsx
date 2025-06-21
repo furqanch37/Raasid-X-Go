@@ -15,17 +15,17 @@ export default function NutritionDetails({ product }) {
     <div className="product-details-container">
       <div className="product-info-left">
         <h3 className="product-section-title">INGREDIENTS:</h3>
-        <ol className="product-ingredient-list">
+        <ol className="product-ingredient-list numbers">
           {ingredients.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ol>
 
         <h3 className="product-section-title">PACKAGING:</h3>
-        <p className="product-packaging">{packaging}</p>
+        <p className="product-packaging numbers">{packaging}</p>
 
         <h3 className="product-section-title">SERVINGS:</h3>
-        <p className="product-serving">{serving}</p>
+        <p className="product-serving numbers">{serving}</p>
       </div>
 
       <div className="product-info-right">
@@ -41,9 +41,9 @@ export default function NutritionDetails({ product }) {
           <tbody>
             {nutritionData.map((item, idx) => (
               <tr key={idx}>
-                <td>{item.parameter}</td>
-                <td>{item.uom}</td>
-                <td>{item.result}</td>
+                <td >{item.parameter}</td>
+                <td className='numbers'>{item.uom}</td>
+                <td className='numbers'>{item.result}</td>
               </tr>
             ))}
           </tbody>
