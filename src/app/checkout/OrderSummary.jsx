@@ -32,12 +32,12 @@ export default function OrderSummary() {
         </div>
       ))}
 
-      <div className="price">
+      <div className="price numbers">
         <p>
-          Subtotal <strong className='numbers'>{getTotalPrice()}PKR</strong>
+          Subtotal <strong>{getTotalPrice()}PKR</strong>
         </p>
-        <p className="total-p">
-          Total <strong className='numbers'>{getTotalPrice()}PKR</strong>
+        <p className="total-p numbers">
+          Total <strong >{getTotalPrice()}PKR</strong>
         </p>
       </div>
     </aside>
