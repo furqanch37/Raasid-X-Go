@@ -68,6 +68,7 @@ const MiddleSection = () => {
             <FaShoppingBag className="icon-one" />
           </Link>
           <span className="cart-count">{cartCount}</span>
+          <span className="cart-price-numbers" >{cartTotalPrice}PKR</span>
         </div>
       </div>
     </div>

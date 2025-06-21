@@ -52,7 +52,7 @@ const Footer = () => {
           <h3>CONTACT DETAILS</h3>
           <ul>
             <li><Link href="#">Rawat Technology Park, Islamabad Pakistan</Link></li>
-            <li><Link href="#">+92 370 2333125</Link></li>
+            <li className="numbers"><Link href="#">+92 370 2333125</Link></li>
             <li><Link href="#">info@raasid.com</Link></li>
           </ul>
         </div>

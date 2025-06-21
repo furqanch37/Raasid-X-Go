@@ -43,6 +43,10 @@
   margin-bottom: 10px;
   font-size: 14px;
 }
+.numbers{
+   font-size: 14px;
+   font-weight: 600;
+}
 
 .footer-column ul li a {
   text-decoration: none;

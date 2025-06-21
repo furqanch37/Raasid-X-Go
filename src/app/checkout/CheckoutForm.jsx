@@ -17,7 +17,14 @@ export default function CheckoutForm() {
         <input type="text" placeholder="Full Name" required />
         <input type="text" placeholder="Address" required />
         <input type="text" placeholder="City" required />
-        <input type="tel" placeholder="Phone Number" required />
+      <input
+  className="numbers"
+  style={{ fontWeight: 100 }}
+  type="tel"
+  placeholder="Phone Number"
+  required
+/>
+
       </section>
 
       <section>
