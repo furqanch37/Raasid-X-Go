@@ -55,7 +55,7 @@ const MiddleSection = () => {
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong>+92 370 2333125</strong>
+          <strong className='numbers'>+92 370 2333125</strong>
         </div>
       </div>
 
@@ -68,7 +68,6 @@ const MiddleSection = () => {
             <FaShoppingBag className="icon-one" />
           </Link>
           <span className="cart-count">{cartCount}</span>
-          <span className="cart-price">{cartTotalPrice}PKR</span>
         </div>
       </div>
     </div>
