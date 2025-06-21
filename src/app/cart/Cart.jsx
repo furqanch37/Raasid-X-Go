@@ -82,7 +82,7 @@ const Cart = () => {
                           </button>
                         </div>
                       </td>
-                      <td className="product-total">{(item.price * item.quantity).toFixed(2)}PKR</td>
+                      <td className="product-total numbers">{(item.price * item.quantity).toFixed(2)}PKR</td>
                     </tr>
                   ))}
                 </tbody>
@@ -92,11 +92,11 @@ const Cart = () => {
             <div className="cart-right">
               <div className="cart-totals">
                 <h3>Cart Totals</h3>
-                <div className="subtotal">
+                <div className="subtotal numbers">
                   <span>Subtotal</span>
                   <span>{getTotalPrice()}PKR</span>
                 </div>
-                <div className="total">
+                <div className="total numbers">
                   <strong>Total</strong>
                   <strong>{getTotalPrice()}PKR</strong>
                 </div>
