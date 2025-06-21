@@ -19,15 +19,7 @@ body {
   overflow-x: hidden;
   font-family: 'Cocon', sans-serif  ;
 }
-.numbers,
-input[type="tel"],
-input[type="number"],
-[data-type="numeric"],
-span.numeric,
-.num,
-.number {
-  font-family: 'Poppins',  sans-serif!important;
-}
+
 body {
   color: var(--foreground);
   background: var(--background);
