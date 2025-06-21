@@ -66,9 +66,9 @@ const Cart = () => {
                         <img src={item.image} alt={item.name} className="product-img" />
                         <div className="product-details">
                           <h3>{item.name}</h3>
-                          <p className="new-price">{item.price}PKR</p>
+                          <p className="new-price numbers">{item.price}PKR</p>
                           <p className="product-desc">{item.description.slice(0, 100)}...</p>
-                          <div className="quantity-control">
+                          <div className="quantity-control numbers">
                             <button onClick={() => handleDecrement(item._id, item.quantity)}>
                               <FaMinus />
                             </button>
