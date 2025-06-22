@@ -38,7 +38,7 @@ const PopularProducts = ({ products }) => {
             <p className="dashboard-product-desc">Lorem ipsum dolor sit amet,</p>
             <div className="dashboard-price-add">
               <span className="dashboard-product-price numbers">
-                {prod.price.toFixed(2)}PKR<small>/pre kg</small>
+                {prod.price.toFixed(2)}PKR
               </span>
               <button className="dashboard-add-btn">+</button>
             </div>
