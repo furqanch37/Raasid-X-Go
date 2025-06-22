@@ -1,82 +1,61 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import "./orders.css";
-
-const initialOrders = [
-  {
-    invoice: "1",
-    time: "17 Jun, 2025 2:00 PM",
-    customer: "Mani pk",
-    method: "Cash",
-    amount: "187PKR",
-    status: "Pending",
-  },
-  {
-    invoice: "2",
-    time: "16 Jun, 2025 6:53 PM",
-    customer: "Taarak Mehta",
-    method: "Cash",
-    amount: "50.78PKR",
-    status: "Delivered",
-  },
-  {
-    invoice: "3",
-    time: "16 Jun, 2025 12:23 PM",
-    customer: "rammi rammi",
-    method: "Cash",
-    amount: "96PKR",
-    status: "Processing",
-  },
-  {
-    invoice: "4",
-    time: "16 Jun, 2025 12:03 PM",
-    customer: "Jobin Mohan",
-    method: "Cash",
-    amount: "90PKR",
-    status: "Cancel",
-  },
-  {
-    invoice: "5",
-    time: "16 Jun, 2025 9:43 AM",
-    customer: "RAMESH DEVALLA",
-    method: "Cash",
-    amount: "378PKR",
-    status: "Delivered",
-  },
-  {
-    invoice: "6",
-    time: "15 Jun, 2025 8:52 PM",
-    customer: "add sda",
-    method: "Cash",
-    amount: "2010PKR",
-    status: "Delivered",
-  },
-  {
-    invoice: "7",
-    time: "14 Jun, 2025 4:38 PM",
-    customer: "Damsol Damsol",
-    method: "Cash",
-    amount: "50.78PKR",
-    status: "Processing",
-  },
-  {
-    invoice: "8",
-    time: "14 Jun, 2025 1:59 PM",
-    customer: "Dhanapal Kumaravel",
-    method: "Cash",
-    amount: "498PKR",
-    status: "Delivered",
-  },
-];
+import { baseUrl } from '@/app/const';
 
 const Sales = () => {
-  const [orders, setOrders] = useState(initialOrders);
+  const [orders, setOrders] = useState([]);
 
-  const handleStatusChange = (index, newStatus) => {
+  // Fetch all orders
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/order`);
+        const data = await res.json();
+        if (data.success) {
+          const formatted = data.orders.map((order, idx) => ({
+            invoice: idx + 1,
+            id: order._id,
+            time: new Date(order.createdAt).toLocaleString('en-GB', { hour12: true }),
+            customer: order.fullName,
+            method: order.paymentMethod === 'cod' ? 'Cash' : 'Card',
+            amount: `${order.totalAmount} PKR`,
+            status: order.status,
+          }));
+          setOrders(formatted);
+        }
+      } catch (err) {
+        console.error("Error fetching orders:", err);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  const handleStatusChange = async (index, newStatus) => {
     const updatedOrders = [...orders];
-    updatedOrders[index].status = newStatus;
-    setOrders(updatedOrders);
+    const orderToUpdate = updatedOrders[index];
+
+    try {
+      const res = await fetch(`${baseUrl}/order/${orderToUpdate.id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        updatedOrders[index].status = newStatus;
+        setOrders(updatedOrders);
+      } else {
+        alert(data.message || "Failed to update status");
+      }
+    } catch (err) {
+      console.error("Error updating order status:", err);
+      alert("Error updating status.");
+    }
   };
 
   return (
@@ -119,7 +98,7 @@ const Sales = () => {
                     <option value="Delivered">Delivered</option>
                     <option value="Pending">Pending</option>
                     <option value="Processing">Processing</option>
-                    <option value="Cancel">Cancel</option>
+                    <option value="Cancelled">Cancel</option>
                   </select>
                 </td>
               </tr>
