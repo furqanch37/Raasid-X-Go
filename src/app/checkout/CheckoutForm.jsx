@@ -55,7 +55,7 @@ export default function CheckoutForm() {
 
       if (res.ok) {
         alert('Order placed successfully!');
-        router.push('/dashboard'); // or redirect to orders page
+        router.push('/dashboard');
       } else {
         alert(data.message || 'Failed to place order.');
       }
