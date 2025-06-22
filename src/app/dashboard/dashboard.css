@@ -1,11 +1,9 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 .dashboard-container {
   padding: 20px 14%;
   padding-top: 40px;
   padding-bottom: 70px;
   background: #f6f8fa;
-   font-family: 'Poppins', sans-serif !important;
 }
 
 /* Common */
@@ -20,7 +18,6 @@
 }
 .categories-wrapper {
   margin: 20px 0;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 .categories-header {
