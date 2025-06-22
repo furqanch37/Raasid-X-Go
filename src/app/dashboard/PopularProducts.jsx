@@ -35,7 +35,6 @@ const PopularProducts = ({ products }) => {
           <div key={i} className="dashboard-product-card">
             <img src={prod.img} alt={prod.name} className="dashboard-product-img" />
             <h4 className="dashboard-product-name">{prod.name}</h4>
-            <p className="dashboard-product-desc">Lorem ipsum dolor sit amet,</p>
             <div className="dashboard-price-add">
               <span className="dashboard-product-price numbers">
                 {prod.price.toFixed(2)}PKR
