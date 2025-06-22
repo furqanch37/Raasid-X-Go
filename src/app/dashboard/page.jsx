@@ -54,10 +54,10 @@ const Dashboard = () => {
           <h2 className="dashboard-title">Last Order</h2>
           <LastOrders orders={lastOrders} />
         </div>
-        <div className="dashboard-half dashboard-wishlist-section">
+        {/* <div className="dashboard-half dashboard-wishlist-section">
           <h2 className="dashboard-title">My Wishlisted Products</h2>
           <Wishlist items={wishlistedProducts} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

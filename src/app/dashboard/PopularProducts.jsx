@@ -41,7 +41,6 @@ const PopularProducts = ({ products }) => {
               </span>
               <button className="dashboard-add-btn">Add to cart</button>
             </div>
-            <button className="dashboard-wishlist-btn">🤍</button>
           </div>
         ))}
       </div>

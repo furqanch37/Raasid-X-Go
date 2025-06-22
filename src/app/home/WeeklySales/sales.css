@@ -36,7 +36,17 @@ padding: 2rem 13.5%;
     font-size: 13px;
     font-weight: bold;
 }
-
+.weekly-card {
+      text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    flex-shrink: 0;
+    width: 200px;
+    min-width: 180px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 0 6px #0000000d;
+}
 @media (min-width: 640px) {
   .weekly-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -49,13 +59,7 @@ padding: 2rem 13.5%;
   }
 }
 
-.weekly-card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-}
+
 
 .weekly-img-box {
   position: relative;
