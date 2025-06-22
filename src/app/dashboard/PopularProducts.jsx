@@ -39,7 +39,7 @@ const PopularProducts = ({ products }) => {
               <span className="dashboard-product-price numbers">
                 {prod.price.toFixed(2)}PKR
               </span>
-              <button className="dashboard-add-btn">+</button>
+              <button className="dashboard-add-btn">Add to cart</button>
             </div>
             <button className="dashboard-wishlist-btn">🤍</button>
           </div>
