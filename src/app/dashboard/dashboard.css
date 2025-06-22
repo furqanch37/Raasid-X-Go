@@ -38,7 +38,7 @@
 
 
 .scroll-btn {
-  background: #29ae5c;
+  background: #047244;
  color: #fff;
   border-radius: 50%;
   cursor: pointer;
@@ -106,7 +106,7 @@
 }
 
 .dashboard-view-more {
-  color: #00c46a;
+  color: #047244;
   text-decoration: none;
   font-weight: 500;
 }
@@ -156,7 +156,7 @@
 }
 
 .dashboard-product-price {
-  color: #00c46a;
+  color: #047244;
   font-weight: bold;
 }
 
@@ -167,7 +167,7 @@
 }
 
 .dashboard-add-btn {
-  background: #00c46a;
+  background: #047244;
   color: white;
   border: none;
   border-radius: 50%;
@@ -230,7 +230,7 @@
 
 .dashboard-order-price {
   font-weight: bold;
-  color: #00c46a;
+  color: #047244;
 }
 
 /* Wishlist */
