@@ -2,7 +2,6 @@
 import React, { useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-
 const Categories = ({ categories }) => {
   const scrollRef = useRef(null);
 
@@ -16,8 +15,8 @@ const Categories = ({ categories }) => {
   };
 
   return (
-    <>  
-    <div className="categories-header">
+    <>
+      <div className="categories-header">
         <h2 className="dashboard-title">Top Categories</h2>
         <div className="categories-controls">
           <button onClick={() => scroll('left')} className="scroll-btn">
@@ -28,20 +27,24 @@ const Categories = ({ categories }) => {
           </button>
         </div>
       </div>
-      
-    <div className="categories-wrapper">
-      
-      <div className="categories-scroll" ref={scrollRef}>
-        {categories.map((cat, i) => (
-          <div key={i} className="category-card">
-            <div className="category-icon">
-              <img src={cat.image} alt={cat.title} />
+
+      <div className="categories-wrapper">
+        <div className="categories-scroll" ref={scrollRef}>
+          {categories.map((cat, i) => (
+            <div
+              key={i}
+              className="category-card"
+              style={{ backgroundColor: cat.bg }}
+            >
+              <div className="category-icon">
+                <img src={cat.image} alt={cat.title} />
+              </div>
+              <p>{cat.title}</p>
             </div>
-            <p>{cat.title}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div> </>
+    </>
   );
 };
 

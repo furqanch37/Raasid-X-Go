@@ -1,68 +1,58 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import './dashboard.css';
 import Categories from './Categories';
 import PopularProducts from './PopularProducts';
 import LastOrders from './LastOrders';
 import { baseUrl } from '@/app/const';
 
-const categories = [
-  { title: 'Fruits', image: '/assets/aloo_bhujia.png' },
-  { title: 'Bread', image: '/assets/aloo_bhujia.png' },
-  { title: 'Vegetable', image: '/assets/aloo_bhujia.png' },
-  { title: 'Fish', image: '/assets/aloo_bhujia.png' },
-  { title: 'Meat', image: '/assets/aloo_bhujia.png' },
-  { title: 'Drinks', image: '/assets/aloo_bhujia.png' },
-  { title: 'Sea Food', image: '/assets/aloo_bhujia.png' },
-  { title: 'Ice cream', image: '/assets/aloo_bhujia.png' },
-  { title: 'Juice', image: '/assets/aloo_bhujia.png' },
-  { title: 'Jam', image: '/assets/aloo_bhujia.png' },
-];
-
-const products = [
-  { name: 'Strawberry', price: 20.10, img: '/assets/aloo_bhujia.png' },
-  { name: 'Strawberry', price: 20.10, img: '/assets/aloo_bhujia.png' },
-  { name: 'Cabbage', price: 15.10, img: '/assets/aloo_bhujia.png' },
-  { name: 'Brocoly', price: 25.10, img: '/assets/aloo_bhujia.png' },
-  { name: 'Orenge', price: 12.10, img: '/assets/aloo_bhujia.png' },
-  { name: 'Fresh Apple', price: 18.10, img: '/assets/aloo_bhujia.png' },
-];
-
 const Dashboard = () => {
-  const [lastOrders, setLastOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const user = useSelector((state) => state.user.userData);
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
 
+  const lastOrders = [
+    { name: 'Red Saffron', weight: '500 gm', quantity: 1, price: 150, img: '/assets/aloo_bhujia.png' },
+    { name: 'Fresh Apple', weight: '2 kg', quantity: 1, price: 120, img: '/assets/aloo_bhujia.png' },
+  ];
+
+  // Fetch categories
   useEffect(() => {
-    const fetchOrders = async () => {
-      if (!user?._id) {
-        setLoading(false);
-        return;
-      }
-
+    const fetchCategories = async () => {
       try {
-        const res = await fetch(`${baseUrl}/order/${user._id}`);
+        const res = await fetch(`${baseUrl}/category`);
         const data = await res.json();
-
         if (data.success) {
-          // Show only the last 5 orders (most recent first)
-          const recentOrders = data.orders
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .slice(0, 5);
-
-          setLastOrders(recentOrders);
+          setCategories(
+            data.categories.map((cat, i) => ({
+              title: cat.categoryName,
+              image: `/assets/image${(i % 6) + 3}.png`,
+              bg: ['#e6e9fb','#e1f1dc','#fff6db','#dbf8ef','#e1f1dc','#fbeaea'][i%6],
+            }))
+          );
         }
       } catch (err) {
-        console.error('❌ Failed to fetch user orders:', err);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching categories:', err);
       }
     };
+    fetchCategories();
+  }, []);
 
-    fetchOrders();
-  }, [user]);
+  // Fetch products
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${baseUrl}/products/all`);
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.products);
+        }
+      } catch (err) {
+        console.error('Error fetching products:', err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -76,16 +66,8 @@ const Dashboard = () => {
 
       <div className="dashboard-bottom-row">
         <div className="dashboard-half dashboard-last-orders">
-          <h2 className="dashboard-title">Last Orders</h2>
-          {loading ? (
-            <p style={{ padding: '1rem' }}>Loading orders...</p>
-          ) : lastOrders.length > 0 ? (
-            <LastOrders orders={lastOrders} />
-          ) : (
-            <p style={{ padding: '1rem' }}>
-              {user?._id ? 'No orders found yet.' : 'Please log in to view your orders.'}
-            </p>
-          )}
+          <h2 className="dashboard-title">Last Order</h2>
+          <LastOrders orders={lastOrders} />
         </div>
       </div>
     </div>
