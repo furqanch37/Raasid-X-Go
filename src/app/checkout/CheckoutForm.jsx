@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import "./styles.css";
 import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
-import { baseUrl } from '@/app/const'; // adjust as per your setup
+import "./styles.css";
+import { baseUrl } from '@/app/const'; // adjust this path if needed
+import { clearCart } from '@/app/redux/features/cartSlice'; // adjust path to your cart slice
 
 export default function CheckoutForm() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -20,6 +22,7 @@ export default function CheckoutForm() {
   const [phone, setPhone] = useState('');
   const [shippingMethod, setShippingMethod] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const getTotal = () =>
     cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -44,6 +47,7 @@ export default function CheckoutForm() {
       totalAmount: getTotal()
     };
 
+    setLoading(true);
     try {
       const res = await fetch(`${baseUrl}/order/create`, {
         method: 'POST',
@@ -54,14 +58,16 @@ export default function CheckoutForm() {
       const data = await res.json();
 
       if (res.ok) {
-        alert('Order placed successfully!');
-        router.push('/dashboard');
+        dispatch(clearCart()); // Clear cart after successful order
+        router.push('/dashboard'); // Redirect to dashboard
       } else {
         alert(data.message || 'Failed to place order.');
       }
     } catch (err) {
-      alert('Error placing order.');
       console.error(err);
+      alert('Error placing order.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -137,8 +143,8 @@ export default function CheckoutForm() {
             <FaArrowLeft className="arrow-icon" /> Return to Cart
           </Link>
 
-          <button type="submit" className="place-order-btn">
-            Place Order
+          <button type="submit" className="place-order-btn" disabled={loading}>
+            {loading ? 'Placing Order...' : 'Place Order'}
           </button>
         </div>
       </div>
