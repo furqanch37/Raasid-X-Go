@@ -167,8 +167,8 @@
   background: #047244;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 28px;
+  border-radius: 5%;
+  width: fit-content;
   height: 28px;
   font-size: 18px;
   cursor: pointer;
