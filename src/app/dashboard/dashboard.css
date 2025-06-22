@@ -169,6 +169,8 @@
   border: none;
   border-radius: 5%;
   width: fit-content;
+  padding-left: 8px;
+  padding-right: 8px;
   height: 28px;
   font-size: 18px;
   cursor: pointer;
