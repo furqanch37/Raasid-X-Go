@@ -10,10 +10,10 @@ const LastOrders = ({ orders }) => (
           <h4>{order.name}</h4>
           <p>Weight {order.weight}</p>
           <p className="dashboard-order-qty">
-            <FiShoppingCart className="dashboard-cart-icon" /> {order.quantity}
+            <FiShoppingCart className="dashboard-cart-icon numbers" /> {order.quantity}
           </p>
         </div>
-        <span className="dashboard-order-price">${order.price}</span>
+        <span className="dashboard-order-price numbers">{order.price}PKR</span>
       </div>
     ))}
   </>

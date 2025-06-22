@@ -7,7 +7,7 @@ const Wishlist = ({ items }) => (
         <img src={prod.img} alt={prod.name} className="dashboard-wishlist-img" />
         <div className="dashboard-wishlist-info">
           <h4>{prod.name}</h4>
-          <p className="dashboard-product-price">${prod.price.toFixed(2)}</p>
+          <p className="dashboard-product-price numbers">{prod.price.toFixed(2)}PKR</p>
         </div>
         <button className="dashboard-wishlist-remove">🗑</button>
       </div>
