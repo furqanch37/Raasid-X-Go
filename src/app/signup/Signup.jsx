@@ -101,7 +101,7 @@ export default function SignUpCard() {
             />
             <button
               type="button"
-              className="eye-toggle"
+              className="toggle-password"
               onClick={() => setShowPwd((prev) => !prev)}
               aria-label="Toggle password visibility"
             >
