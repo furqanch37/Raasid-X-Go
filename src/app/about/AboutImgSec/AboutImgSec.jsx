@@ -8,7 +8,7 @@ const AboutImgSec = () => {
       <div className="image-container">
         <img
           src="/assets/home/desc.jpg"
-          alt="Grocery Background"
+          alt="Raasid Food Background"
           className="background-image"
         />
         <div className="play-button">
@@ -18,20 +18,20 @@ const AboutImgSec = () => {
 
       <div className="stats-container">
         <div className="stat-box">
-          <h2>25+</h2>
-          <p>Years Experience</p>
+          <h2>70+</h2>
+          <p>Cities Covered Nationwide</p>
         </div>
         <div className="stat-box">
-          <h2>5k+</h2>
-          <p>Happy Customers</p>
+          <h2>35+</h2>
+          <p>Spice & Product Blends</p>
         </div>
         <div className="stat-box">
-          <h2>15+</h2>
-          <p>Award Achieved</p>
+          <h2>1.2M+</h2>
+          <p>Products Delivered Annually</p>
         </div>
         <div className="stat-box">
-          <h2>80+</h2>
-          <p>Product Varities</p>
+          <h2>6+</h2>
+          <p>International Certifications</p>
         </div>
       </div>
     </div>

@@ -77,7 +77,7 @@ const Footer = () => {
 <img
   src="/RaasidLogo.svg"
   alt="Shoppable Grocery Store"
-  style={{ width: "150px", height: "50px" }}
+  style={{ width: "150px", height: "auto" }}
 />
 
 </div>

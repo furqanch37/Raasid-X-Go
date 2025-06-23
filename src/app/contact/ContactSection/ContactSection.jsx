@@ -7,11 +7,10 @@ const ContactSection = () => {
   return (
     <section className="contact-section">
       <div className="contact-left">
-        <h2>Contact And Get In <br />Reach Us !</h2>
+      <h2>Contact & Connect <br />with Raasid</h2>
         <p>
-          Vivamus ex, pellentesque, ratione! Consequat dolor, nihil convallis ligula.
-          Cum maxime vivamus iaculis officia amet, inventore, possimus, illo, morbi
-          repellat nostrud sodales cras facilis, facilisi maxime vivam.
+          We’d love to hear from you! Whether you have questions, feedback, or partnership inquiries,
+          feel free to reach out. At Raasid, we’re committed to delivering excellence in every interaction.
         </p>
 
         <p className="social-label">Follow us on social media :</p>

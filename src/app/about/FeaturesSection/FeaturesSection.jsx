@@ -1,24 +1,26 @@
 // components/FeaturesSection.js
 import React from 'react';
-import { FaMoneyBillWave, FaLightbulb, FaChartBar } from 'react-icons/fa';
+import { FaUtensils, FaEye, FaHistory } from 'react-icons/fa';
 import './FeatureSection.css';
 
 const features = [
   {
-    title: 'What We Really Do?',
-    description: 'Vivamus accusamus, vel nam quisquam. Ipsa aliqua nostrum in cum ut fugiat penatibus cubilia cubilia.',
-    icon: <FaMoneyBillWave style={{ height: '30px', width: '30px'}}/>,
+    title: 'What We Really Do',
+    description:
+      'At Raasid, we deliver high-quality ready-to-eat meals, juices, spices, and nutritious products crafted with care at our state-of-the-art PANA Force facility.',
+    icon: <FaUtensils style={{ height: '30px', width: '30px' }} />,
   },
   {
-    title: 'Our Company Vision',
-    description: 'Vivamus accusamus, vel nam quisquam. Ipsa aliqua nostrum in cum ut fugiat penatibus cubilia cubilia.',
-    icon: <FaLightbulb style={{ height: '30px', width: '30px'}}/>,
+    title: 'Our Vision',
+    description:
+      'To become a household name in premium food by blending tradition with innovation, while ensuring quality, nutrition, and customer trust across Pakistan.',
+    icon: <FaEye style={{ height: '30px', width: '30px' }} />,
   },
   {
-    title: 'History Of Beginning',
-    description: 'Vivamus accusamus, vel nam quisquam. Ipsa aliqua nostrum in cum ut fugiat penatibus cubilia cubilia.',
-    icon: <FaChartBar style={{ height: '30px', width: '30px'}} />,
-
+    title: 'Our Journey',
+    description:
+      'Rooted in a deep appreciation for authentic Pakistani flavors, Raasid now distributes products in 70+ cities and continues to expand its reach and product line.',
+    icon: <FaHistory style={{ height: '30px', width: '30px' }} />,
   },
 ];
 

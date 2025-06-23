@@ -8,42 +8,40 @@ const ContactInfo = () => {
     <section className="contact-info-section">
       <div className="contact-info-card">
         <div className="info-1">
-        <div className="icon"><FaMapMarkerAlt /></div>
-        <h3>Address</h3>
+          <div className="icon"><FaMapMarkerAlt /></div>
+          <h3>Address</h3>
         </div>
-        <p className="subtitle">Visit us at :</p>
+        <p className="subtitle">Visit us at:</p>
         <p>Rawat Technology Park</p>
-        <p>G04, Ground Floor</p>
+        <p>Islamabad, Pakistan</p>
       </div>
 
       <div className="contact-info-card">
         <div className="info-1">
-        <div className="icon"><FaPhoneAlt /></div>
-        <h3>24/7 Service</h3>
+          <div className="icon"><FaPhoneAlt /></div>
+          <h3>Customer Support</h3>
         </div>
-        <p className="subtitle">Call us on :</p>
-        <p>Tel : +81-245-54896</p>
-        <p>Mob : +81-125-87965</p>
+        <p className="subtitle">Call us on:</p>
+        <p>+92 370 2333125</p>
       </div>
 
       <div className="contact-info-card">
-         <div className="info-1">
-        <div className="icon"><FaEnvelopeOpen /></div>
-        <h3>Drop A Line</h3>
+        <div className="info-1">
+          <div className="icon"><FaEnvelopeOpen /></div>
+          <h3>Email Us</h3>
         </div>
-        <p className="subtitle">Mail address :</p>
-        <p>info@domain.com</p>
-        <p>domain@company.com</p>
+        <p className="subtitle">Mail address:</p>
+        <p>info@raasid.com</p>
       </div>
 
       <div className="contact-info-card">
-         <div className="info-1">
-        <div className="icon"><FaRegClock /></div>
-        <h3>Office Hours</h3>
+        <div className="info-1">
+          <div className="icon"><FaRegClock /></div>
+          <h3>Office Hours</h3>
         </div>
-        <p className="subtitle">Opening Time :</p>
-        <p>Mon – Fri : 9am – 6pm</p>
-        <p>Sunday (Closed)</p>
+        <p className="subtitle">Opening Time:</p>
+        <p>Mon – Fri : 9:00 AM – 6:00 PM</p>
+        <p>Sunday: Closed</p>
       </div>
     </section>
   );

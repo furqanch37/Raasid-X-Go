@@ -78,12 +78,12 @@ const Sales = () => {
           </thead>
           <tbody>
             {orders.map((order, index) => (
-              <tr key={index}>
+              <tr className="numbers" key={index}>
                 <td>{order.invoice}</td>
-                <td>{order.time}</td>
+                <td className="numbers">{order.time}</td>
                 <td>{order.customer}</td>
                 <td><strong>{order.method}</strong></td>
-                <td>{order.amount}</td>
+                <td  className="numbers">{order.amount}</td>
                 <td>
                   <span className={`status ${order.status.toLowerCase()}`}>
                     {order.status}

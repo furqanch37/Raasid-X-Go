@@ -126,7 +126,7 @@ const ManageCategories = () => {
               ) : (
                 categories.map((cat, idx) => (
                   <tr key={cat._id}>
-                    <td>{idx + 1}</td>
+                    <td className="numbers">{idx + 1}</td>
                     <td className="clickable" onClick={() => setPopupData(cat)}>
                       {cat.categoryName}
                     </td>
