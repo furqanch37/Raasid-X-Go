@@ -73,11 +73,11 @@ const Footer = () => {
     <FaYoutube />
   </a>
 </div>
-        <div className="logo">
+        <div className="logo-3">
 <img
   src="/RaasidLogo.svg"
   alt="Shoppable Grocery Store"
-  style={{ width: "150px", height: "auto" }}
+  style={{ width: "50%", height: 'auto' }}
 />
 
 </div>

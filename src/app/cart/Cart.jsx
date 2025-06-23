@@ -48,7 +48,7 @@ const Cart = () => {
         <h1 className="cart-title">Cart</h1>
 
         {items.length === 0 ? (
-          <p style={{ padding: '2rem 0' }}>Your cart is empty.</p>
+          <p style={{ padding: '2rem 13.5%', display: 'flex', justifyContent: 'center' }}>Your cart is empty.</p>
         ) : (
           <div className="cart-wrapper">
             <div className="cart-left">

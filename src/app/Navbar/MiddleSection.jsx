@@ -1,16 +1,19 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaUser, FaShoppingBag } from 'react-icons/fa';
 import { FiSearch, FiPhone } from "react-icons/fi";
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { baseUrl } from '@/app/const'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '@/app/redux/features/userSlice';
+import { baseUrl } from '@/app/const';
 import './navbar.css';
 
 const MiddleSection = () => {
   const [categories, setCategories] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // ✅ Fix user access from Redux
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData);
   const items = useSelector((state) => state.cart.items);
   const cartCount = items.length;
@@ -33,6 +36,22 @@ const MiddleSection = () => {
 
     fetchCategories();
   }, []);
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setDropdownOpen(false);
+  };
 
   return (
     <div className="middle-section">
@@ -62,15 +81,25 @@ const MiddleSection = () => {
       </div>
 
       <div className="contact-icons">
-        <Link href="/login">
-          {user ? (
-            <div className="user-initial">
+        {user ? (
+          <div className="user-dropdown" ref={dropdownRef}>
+            <div className="user-initial" onClick={() => setDropdownOpen(!dropdownOpen)}>
               {user.firstName?.[0]?.toUpperCase() || 'U'}
             </div>
-          ) : (
+            {dropdownOpen && (
+              <div className="dropdown-menu">
+                <p className="dropdown-item">Hi, {user.firstName}</p>
+                <button className="dropdown-item logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link href="/login">
             <FaUser className="icon-one" />
-          )}
-        </Link>
+          </Link>
+        )}
 
         <div className="cart-1">
           <Link href="/cart">

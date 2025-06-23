@@ -1,12 +1,34 @@
 'use client';
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './TopNav.css';
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch, FaUser } from 'react-icons/fa';
 import { FiBell, FiMoreVertical } from "react-icons/fi";
 import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '@/app/redux/features/userSlice';
 
 const TopNav = () => {
+  const user = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    setDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <header className="topnav">
       <div className="topnav-more">
@@ -15,7 +37,6 @@ const TopNav = () => {
 
       <div className="topnav-left">
         <FaSearch className="icon-three" />
-    
       </div>
 
       <div className="topnav-right">
@@ -34,6 +55,29 @@ const TopNav = () => {
             </div>
           </Link>
 
+          {/* User Icon / Dropdown */}
+          <div className="user-dropdown-topnav" ref={dropdownRef}>
+            {user ? (
+              <div
+                className="user-initial-topnav"
+                onClick={() => setDropdownOpen((prev) => !prev)}
+              >
+                {user.firstName?.[0]?.toUpperCase() || 'U'}
+              </div>
+            ) : (
+              <Link href="/login">
+                <FaUser className="icon-topnav" />
+              </Link>
+            )}
+            {dropdownOpen && (
+              <div className="dropdown-menu-topnav">
+                <p className="dropdown-item">Hi, {user?.firstName}</p>
+                <button className="dropdown-item logout-btn" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>

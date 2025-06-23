@@ -8,6 +8,12 @@ const initialState = {
   items: savedCart ? JSON.parse(savedCart) : [],
 };
 
+const saveToLocalStorage = (items) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  }
+};
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -19,9 +25,11 @@ const cartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
       }
+      saveToLocalStorage(state.items);
     },
     removeFromCart: (state, action) => {
       state.items = state.items.filter(item => item._id !== action.payload);
+      saveToLocalStorage(state.items);
     },
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
@@ -29,9 +37,13 @@ const cartSlice = createSlice({
       if (item && quantity > 0) {
         item.quantity = quantity;
       }
+      saveToLocalStorage(state.items);
     },
     clearCart: (state) => {
       state.items = [];
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('cartItems');
+      }
     },
   },
 });
