@@ -19,10 +19,10 @@ const ContactInfo = () => {
       <div className="contact-info-card">
         <div className="info-1">
           <div className="icon"><FaPhoneAlt /></div>
-          <h3>Customer Support</h3>
+          <h3>Call Us </h3>
         </div>
         <p className="subtitle">Call us on:</p>
-        <p>+92 370 2333125</p>
+        <p className='numbers'>+92 370 2333125</p>
       </div>
 
       <div className="contact-info-card">

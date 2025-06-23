@@ -10,40 +10,41 @@ padding: 2rem 13.5%;
   background-color: #f9f9f9;
   border-radius: 12px;
   padding: 20px;
-  width: 260px;
+  width: 360px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   text-align: center;
   transition: transform 0.3s ease;
 }
 
 .contact-info-card .icon {
-  background-color: transparent;
-    border: 1px solid #69727d;
-    color: #69727d;
-    padding: 0.5em;
+     color: #047244;
+    background-color: #0000;
+    border: 2px solid #047244;
     border-radius: 50%;
-    width: fit-content;
-    align-items: center;
-    display: flex;
     justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: .5em;
+    display: flex
+;
 }
 .info-1{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    gap: 7%;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 20px;
     justify-content: center;
 }
 .contact-info-card h3 {
   font-size: 20px;
   margin: 0 0 5px;
-  font-weight: 600;
+  font-weight: 100;
+    color: #047244;
 }
 
 .contact-info-card .subtitle {
   font-size: 14px;
-  color: #555;
   margin-bottom: 10px;
 }
 
