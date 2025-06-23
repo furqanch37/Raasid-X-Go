@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '@/app/redux/features/userSlice';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { baseUrl } from '@/app/const';
@@ -17,6 +17,7 @@ export default function LoginCard() {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const cartItems = useSelector((state) => state.cart.items); // 👈 Access cart from Redux
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,8 +32,18 @@ export default function LoginCard() {
       const data = await res.json();
 
       if (res.ok) {
-        dispatch(login(data.user)); // ✅ Save user in Redux
-        router.push('/checkout');   // ✅ Redirect after login
+        const userRole = data.user.role?.[0] || 'user';
+        dispatch(login(data.user));
+
+        if (userRole === 'admin') {
+          router.push('/admin');
+        } else {
+          if (cartItems.length === 0) {
+            router.push('/home'); // 👈 User + empty cart
+          } else {
+            router.push('/checkout'); // 👈 User + cart items
+          }
+        }
       } else {
         if (data.message?.includes('not registered')) {
           router.push('/signup');

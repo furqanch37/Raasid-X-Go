@@ -5,13 +5,15 @@ import { FiSearch, FiPhone } from "react-icons/fi";
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '@/app/const'; 
+import './navbar.css';
 
 const MiddleSection = () => {
   const [categories, setCategories] = useState([]);
 
-  // Get cart items from Redux store
+  // ✅ Fix user access from Redux
+  const user = useSelector((state) => state.user.userData);
   const items = useSelector((state) => state.cart.items);
-  const cartCount = items.length; // unique products in cart
+  const cartCount = items.length;
   const cartTotalPrice = items
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
@@ -55,24 +57,30 @@ const MiddleSection = () => {
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong className='numbers'>+92 370 2333125</strong>
+          <strong className="numbers">+92 370 2333125</strong>
         </div>
       </div>
 
       <div className="contact-icons">
         <Link href="/login">
-          <FaUser className="icon-one" />
+          {user ? (
+            <div className="user-initial">
+              {user.firstName?.[0]?.toUpperCase() || 'U'}
+            </div>
+          ) : (
+            <FaUser className="icon-one" />
+          )}
         </Link>
-        <div className="cart-1">
-  <Link href="/cart">
-    <div className="cart-icon-wrapper">
-      <FaShoppingBag className="icon-one" />
-      <span className="cart-count numbers">{cartCount}</span>
-    </div>
-  </Link>
-  <span className="cart-price numbers">{cartTotalPrice} PKR</span>
-</div>
 
+        <div className="cart-1">
+          <Link href="/cart">
+            <div className="cart-icon-wrapper">
+              <FaShoppingBag className="icon-one" />
+              <span className="cart-count numbers">{cartCount}</span>
+            </div>
+          </Link>
+          <span className="cart-price numbers">{cartTotalPrice} PKR</span>
+        </div>
       </div>
     </div>
   );
