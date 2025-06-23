@@ -20,19 +20,19 @@ import { FaDollarSign } from "react-icons/fa";
 import "./EarningsCards.css";
 
 const yearlyData = [
-  { name: "2024", value: 80 },
-  { name: "2023", value: 20 },
+  { name: "2024", value: 0 },
+  { name: "2023", value: 0 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F"];
 
 const monthlyLineData = [
-  { month: "Jan", earnings: 3000 },
-  { month: "Feb", earnings: 2000 },
-  { month: "Mar", earnings: 4500 },
-  { month: "Apr", earnings: 3500 },
-  { month: "May", earnings: 5000 },
-  { month: "Jun", earnings: 4000 },
+  { month: "Jan", earnings: 0 },
+  { month: "Feb", earnings: 0 },
+  { month: "Mar", earnings: 0 },
+  { month: "Apr", earnings: 0 },
+  { month: "May", earnings: 0 },
+  { month: "Jun", earnings: 0 },
 ];
 
 const EarningsCards = () => {
@@ -65,10 +65,10 @@ const EarningsCards = () => {
 
         <div className="info">
           <div className="info-2">
-          <h2>$36,358</h2>
+          <h2>0</h2>
           <div className="growth positive">
             <FiArrowUpRight />
-            <span>+9% last year</span>
+            <span>+0% last year</span>
           </div>
           </div>
         </div>
@@ -94,10 +94,10 @@ const EarningsCards = () => {
 
         <div className="info">
           <div className="info-2">
-          <h2>$6,820</h2>
+          <h2>0</h2>
           <div className="growth negative">
             <FiArrowDownRight />
-            <span>-9% last year</span>
+            <span>0% last year</span>
             </div>
           </div>
         </div>

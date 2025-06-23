@@ -127,8 +127,7 @@
     padding: 10px 16px;
   }
 
-  .banner-image img {
-    width: 100%;
-    height: auto;
-  }
+  .banner-image  img{
+  display: none;
+}
 }

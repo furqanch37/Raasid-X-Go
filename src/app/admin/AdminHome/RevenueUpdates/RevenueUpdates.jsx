@@ -14,12 +14,12 @@ import {
 import "./RevenueUpdates.css";
 
 const data = [
-  { date: "16/08", earnings: 3, expenses: 2 }, // changed to positive for better visualization
-  { date: "17/08", earnings: 4, expenses: 2 },
-  { date: "18/08", earnings: 3, expenses: 3 },
-  { date: "19/08", earnings: 5, expenses: 2 },
-  { date: "20/08", earnings: 3, expenses: 1 },
-  { date: "21/08", earnings: 2.5, expenses: 2 },
+  { date: "16/08", earnings: 0, expenses: 0 }, // changed to positive for better visualization
+  { date: "17/08", earnings: 0, expenses: 0 },
+  { date: "18/08", earnings: 0, expenses: 0 },
+  { date: "19/08", earnings: 0, expenses: 0 },
+  { date: "20/08", earnings: 0, expenses: 0 },
+  { date: "21/08", earnings: 0, expenses: 0 },
 ];
 
 const RevenueUpdates = () => {
@@ -55,14 +55,14 @@ const RevenueUpdates = () => {
             March 2024 <FiChevronDown style={{ verticalAlign: "middle", marginLeft: "6px" }} />
         </div>
 
-        <h1 className="total">$63,489.50</h1>
+        <h1 className="total">0</h1>
         <p className="label">Total Earnings</p>
 
         <div className="summary">
           <span className="dot dot-earnings"></span>
           <div>
             <p>Earnings this month</p>
-            <strong>$48,820</strong>
+            <strong>0</strong>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ const RevenueUpdates = () => {
           <span className="dot dot-expenses"></span>
           <div>
             <p>Expense this month</p>
-            <strong>$26,498</strong>
+            <strong>0</strong>
           </div>
         </div>
 

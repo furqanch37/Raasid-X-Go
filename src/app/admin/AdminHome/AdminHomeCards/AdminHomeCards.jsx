@@ -10,7 +10,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-connect.svg' alt="icon" width={50} height={50} />
         </div>
         <h4>Reports</h4>
-        <p>59</p>
+        <p>0</p>
       </div>
 
       <div className="adminHomeCard payroll">
@@ -18,7 +18,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-speech-bubble.svg' alt="icon" width={50} height={50} />
         </div>
         <h4>Payroll</h4>
-        <p>$96k</p>
+        <p>0</p>
       </div>
 
       <div className="adminHomeCard events">
@@ -26,7 +26,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-favorites.svg' alt="icon" width={50} height={50} />
         </div>
         <h4>Events</h4>
-        <p>696</p>
+        <p>0</p>
       </div>
 
       <div className="adminHomeCard projects">
@@ -34,7 +34,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-mailbox.svg' alt="icon"  width={50} height={50} />
         </div>
         <h4>Projects</h4>
-        <p>356</p>
+        <p>0</p>
       </div>
 
       <div className="adminHomeCard clients">
@@ -42,7 +42,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-briefcase.svg' alt="icon" width={50} height={50} />
         </div>
         <h4>Clients</h4>
-        <p>3,650</p>
+        <p>0</p>
       </div>
 
       <div className="adminHomeCard employees">
@@ -50,7 +50,7 @@ const AdminHomeCards = () => {
         <Image src='/assets/admin/icon-user-male.svg' alt="icon" width={50} height={50} />
         </div>
         <h4>Employees</h4>
-        <p>96</p>
+        <p>0</p>
       </div>
     </div>
   );
