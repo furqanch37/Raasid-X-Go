@@ -100,7 +100,7 @@
 .cart-count {
   position: absolute;
   top: -10px;
-  right: 88px; /* ✅ Close to the icon itself */
+  right: 65px; /* ✅ Close to the icon itself */
   background: #047244;
   color: #fff;
   border-radius: 50%;
