@@ -70,7 +70,7 @@ const BottomNav = () => {
 
       {/* Shop Now Button */}
       <Link href="/shop">
-        <button className="shop-now-btn">SHOP NOW</button>
+        <button className="shop-now-btn-1">SHOP NOW</button>
       </Link>
     </nav>
   );
