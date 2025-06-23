@@ -64,13 +64,15 @@ const MiddleSection = () => {
           <FaUser className="icon-one" />
         </Link>
         <div className="cart-1">
-          <Link href="/cart">
-            <FaShoppingBag className="icon-one" />
-          </Link>
-          <span className="cart-count numbers">{cartCount}</span>
-<span className="cart-price numbers">{cartTotalPrice} PKR</span>
+  <Link href="/cart">
+    <div className="cart-icon-wrapper">
+      <FaShoppingBag className="icon-one" />
+      <span className="cart-count numbers">{cartCount}</span>
+    </div>
+  </Link>
+  <span className="cart-price numbers">{cartTotalPrice} PKR</span>
+</div>
 
-        </div>
       </div>
     </div>
   );

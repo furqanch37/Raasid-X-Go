@@ -62,7 +62,7 @@ body {
 
 .toggle-password {
   position: absolute;
-  top: 50%;
+  top: 40%;
   right: 0.75rem;
   transform: translateY(-50%);
   background: none;

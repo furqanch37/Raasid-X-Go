@@ -78,7 +78,7 @@ export default function LoginCard() {
             />
             <button
               type="button"
-              className="eye-toggle"
+              className="toggle-password"
               onClick={() => setShowPwd((prev) => !prev)}
               aria-label="Toggle password visibility"
             >

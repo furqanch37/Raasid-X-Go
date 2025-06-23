@@ -1,7 +1,7 @@
 .product-details-container {
   display: flex;
   flex-wrap: wrap;
- padding: 2rem 13.5%;
+  padding: 2rem 13.5%;
   background: #fffdfb;
   gap: 2rem;
 }
@@ -9,7 +9,7 @@
 .product-info-left,
 .product-info-right {
   flex: 1;
-  min-width: 300px;
+  max-width: 100%;
 }
 
 .product-section-title {
@@ -28,7 +28,7 @@
 .product-ingredient-list li {
   counter-increment: ingredient-counter;
   margin-bottom: 0.3rem;
-    margin-top: 0.3rem;
+  margin-top: 0.3rem;
   position: relative;
   padding-left: 1.8rem;
   line-height: 25px;
@@ -60,6 +60,8 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
+  overflow-x: auto;
+  display: block;
 }
 
 .product-nutrition-table th,
@@ -73,8 +75,46 @@
   color: #000;
 }
 
+/* Tablet and below */
 @media (max-width: 768px) {
   .product-details-container {
     flex-direction: column;
+    padding: 2rem 5%;
+  }
+
+  .product-section-title {
+    font-size: 20px;
+  }
+
+  .product-packaging,
+  .product-serving {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile-specific */
+@media (max-width: 480px) {
+  .product-section-title {
+    font-size: 18px;
+  }
+
+  .product-ingredient-list li {
+    padding-left: 1.5rem;
+    font-size: 14px;
+  }
+
+  .product-ingredient-list li::before {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 0.75rem;
+  }
+
+  .product-nutrition-table {
+    font-size: 12px;
+  }
+
+  .product-packaging,
+  .product-serving {
+    font-size: 0.9rem;
   }
 }

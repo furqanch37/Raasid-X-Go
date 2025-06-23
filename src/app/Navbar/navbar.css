@@ -99,13 +99,20 @@
 .cart-count {
   position: absolute;
   top: -10px;
-  right: 65px;
+  right: 88px; /* ✅ Close to the icon itself */
   background: #047244;
-  color: white;
+  color: #fff;
   border-radius: 50%;
-  font-size: 12px;
   padding: 2px 6px;
+  min-width: 20px;      /* ✅ Fixed width to prevent shifting */
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
 }
+
 
 .cart-price {
   margin-left: 20px;
@@ -376,9 +383,9 @@
     justify-content: center;
   }
 
-  .cart-count {
-    top: -8px;
-    right: 65px;
+ .cart-count {
+    top: -10px;
+    right: 88px;
   }
   
    .bottom-burger-icon {
