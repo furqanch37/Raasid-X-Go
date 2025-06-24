@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '@/app/redux/features/cartSlice';
 import './shop.css';
@@ -11,6 +11,8 @@ import { baseUrl } from '@/app/const';
 const Shop = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const category = searchParams?.get('category') || '';
 
   const itemsPerPage = 12;
   const [products, setProducts] = useState([]);
@@ -20,7 +22,11 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${baseUrl}/products/all`);
+ const query = category ? `?category=${encodeURIComponent(category)}` : '';
+const fullUrl = `${baseUrl}/products/all${query}`;
+console.log("Fetching products from:", fullUrl); // ✅ Log the full URL
+
+const res = await fetch(fullUrl);
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
@@ -30,8 +36,9 @@ const Shop = () => {
       }
     };
 
+    setCurrentPage(1); // ✅ Reset to first page when category changes
     fetchProducts();
-  }, []);
+  }, [category]);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -41,7 +48,6 @@ const Shop = () => {
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
 
-  // Sorting logic
   const sortedProducts = [...products];
   if (sortOption === 'price-low-high') {
     sortedProducts.sort((a, b) => a.price - b.price);
@@ -58,12 +64,11 @@ const Shop = () => {
   return (
     <>
       <Head>
-        <title>Shop</title>
+        <title>{category ? `${category} | Shop` : 'Shop'}</title>
         <link rel="stylesheet" href="/css/shop.css" />
       </Head>
 
       <div className="shop-container-one">
-        {/* Toolbar with result count and sort dropdown */}
         <div className="shop-toolbar">
           <div className="results-count">
             Showing {startIndex + 1}–{Math.min(startIndex + itemsPerPage, products.length)} of {products.length} results
@@ -80,7 +85,12 @@ const Shop = () => {
           </div>
         </div>
 
-        {/* Product Grid */}
+        {category && (
+          <h2 className="category-heading">
+            Showing results for: <strong>{category}</strong>
+          </h2>
+        )}
+
         <div className="product-grid">
           {currentProducts.map((product, index) => (
             <div key={product._id || index} className="product-card-3">

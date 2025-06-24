@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import Link from 'next/link';
-import { baseUrl } from '@/app/const'; // adjust if path is different
-import './navbar.css'; // custom styles
+import { baseUrl } from '@/app/const';
+import './navbar.css';
 
 const BottomNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,13 +14,16 @@ const BottomNav = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch(`${baseUrl}/category`);
+        const fullUrl = `${baseUrl}/category`;
+        console.log("📦 Fetching categories from:", fullUrl);
+
+        const res = await fetch(fullUrl);
         const data = await res.json();
         if (data.success) {
           setCategories(data.categories);
         }
       } catch (err) {
-        console.error("Error fetching categories:", err);
+        console.error("❌ Error fetching categories:", err);
       }
     };
     fetchCategories();
@@ -48,7 +51,12 @@ const BottomNav = () => {
           <ul className="dropdown-menu">
             {categories.map((cat) => (
               <li key={cat._id}>
-                <Link href={`/category/${cat._id}`}>{cat.categoryName}</Link>
+                <Link
+                  href={`/shop?category=${encodeURIComponent(cat.categoryName)}`}
+                  onClick={() => setDropdownOpen(false)} // optional: close dropdown on click
+                >
+                  {cat.categoryName}
+                </Link>
               </li>
             ))}
           </ul>

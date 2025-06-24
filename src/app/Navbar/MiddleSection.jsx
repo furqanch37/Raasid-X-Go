@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaUser, FaShoppingBag } from 'react-icons/fa';
 import { FiSearch, FiPhone } from "react-icons/fi";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '@/app/redux/features/userSlice';
 import { baseUrl } from '@/app/const';
@@ -10,10 +11,14 @@ import './navbar.css';
 
 const MiddleSection = () => {
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const user = useSelector((state) => state.user.userData);
   const items = useSelector((state) => state.cart.items);
   const cartCount = items.length;
@@ -37,7 +42,25 @@ const MiddleSection = () => {
     fetchCategories();
   }, []);
 
-  // Close dropdown if clicked outside
+  // 🔁 Handle category dropdown
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  // 🔍 Handle search button
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (selectedCategory) {
+      params.append('category', selectedCategory);
+    }
+    if (searchTerm) {
+      params.append('search', searchTerm);
+    }
+
+    router.push(`/shop?${params.toString()}`);
+  };
+
+  // ⛔ Close user dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -62,14 +85,23 @@ const MiddleSection = () => {
       </Link>
 
       <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <select>
-          <option>All Categories</option>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select value={selectedCategory} onChange={handleCategoryChange}>
+          <option value="">All Categories</option>
           {categories.map((cat) => (
-            <option key={cat._id}>{cat.categoryName}</option>
+            <option key={cat._id} value={cat.categoryName}>
+              {cat.categoryName}
+            </option>
           ))}
         </select>
-        <button className="search-btn"><FiSearch /></button>
+        <button className="search-btn" onClick={handleSearch}>
+          <FiSearch />
+        </button>
       </div>
 
       <div className="phone">
