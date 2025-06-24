@@ -129,6 +129,25 @@ padding: 2rem 13.5%;
 .page-btn.arrow-btn {
   font-size: 18px;
 }
+.shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+padding: 2rem 13.5%;
+}
+
+.results-count {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+}
+
+.sort-dropdown select {
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+}
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
