@@ -148,7 +148,13 @@ padding: 2rem 13.5%;
   padding: 6px 12px;
   border: 1px solid #ccc;
 }
-
+.category-heading{
+     padding: 2rem 13.5%;
+     font-weight: 300;
+}
+.category-heading strong{
+     font-weight: 300;
+}
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .shop-header {
