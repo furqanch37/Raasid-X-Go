@@ -396,10 +396,6 @@
     width: 100px;
   }
 
-  .middle-section {
-    padding: 15px 5%;
-  }
-
   .search-bar {
     flex-direction: column;
     align-items: stretch;
@@ -419,14 +415,16 @@
   }
 
   .contact-icons {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     width: 100%;
     align-items: flex-start;
   }
 
   .bottom-nav {
-    padding: 10px 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .nav-links {
