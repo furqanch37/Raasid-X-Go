@@ -122,7 +122,6 @@
   background: white;
   padding: 15px;
   border-radius: 12px;
-  width: 200px;
   min-width: 180px;
   box-shadow: 0 0 6px rgba(0,0,0,0.05);
   text-align: center;
@@ -150,6 +149,8 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  flex-direction: column;
+    gap: 10px;
 }
 
 .dashboard-product-price {

@@ -22,11 +22,9 @@ const Shop = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
- const query = category ? `?category=${encodeURIComponent(category)}` : '';
-const fullUrl = `${baseUrl}/products/all${query}`;
-console.log("Fetching products from:", fullUrl); // ✅ Log the full URL
-
-const res = await fetch(fullUrl);
+        const query = category ? `?category=${encodeURIComponent(category)}` : '';
+        const fullUrl = `${baseUrl}/products/all${query}`;
+        const res = await fetch(fullUrl);
         const data = await res.json();
         if (data.success) {
           setProducts(data.products);
@@ -36,7 +34,7 @@ const res = await fetch(fullUrl);
       }
     };
 
-    setCurrentPage(1); // ✅ Reset to first page when category changes
+    setCurrentPage(1); // Reset to first page on category change
     fetchProducts();
   }, [category]);
 
@@ -98,7 +96,7 @@ const res = await fetch(fullUrl);
                 <img src={product.image} alt={product.name} />
                 <h3>{product.name}</h3>
                 <div className="product-price">
-                  <span>{product.price} PKR</span>
+                  <span className='numbers'>{product.price} PKR</span>
                 </div>
               </Link>
               <button className="add-to-cart-one" onClick={() => handleAddToCart(product)}>
@@ -107,6 +105,38 @@ const res = await fetch(fullUrl);
             </div>
           ))}
         </div>
+
+      {/* ✅ Pagination Section */}
+{totalPages > 1 && (
+  <div className="pagination">
+    <button
+      className="page-btn arrow-btn"
+      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+      disabled={currentPage === 1}
+    >
+      ‹
+    </button>
+
+    {[...Array(totalPages)].map((_, index) => (
+      <button
+        key={index}
+        className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+        onClick={() => setCurrentPage(index + 1)}
+      >
+        {index + 1}
+      </button>
+    ))}
+
+    <button
+      className="page-btn arrow-btn"
+      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+      disabled={currentPage === totalPages}
+    >
+      ›
+    </button>
+  </div>
+)}
+
       </div>
     </>
   );

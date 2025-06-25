@@ -1,5 +1,5 @@
 .weekly-wrapper {
-padding: 2rem 13.5%;
+  padding: 2rem 13.5%;
 }
 
 .weekly-header {
@@ -16,50 +16,41 @@ padding: 2rem 13.5%;
 
 .view-more {
   color: #047244;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
 }
-
-.weekly-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.scroll-container {
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  overflow: auto hidden;
+  scrollbar-width: none; /* Firefox */
+}
+.scroll-container:active {
+  cursor: grabbing;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-content {
+  display: flex;
   gap: 1rem;
 }
-.add-cart{
- color: #fff;
-    cursor: pointer;
-    text-transform: uppercase;
-    background-color: #047244;
-    border: none;
-    padding: 10px 15px;
-    font-size: 13px;
-    font-weight: bold;
-}
+
+/* Product card inside horizontal scroll */
 .weekly-card {
-      text-align: center;
-    background: #fff;
-    border-radius: 12px;
-    flex-shrink: 0;
-    width: 200px;
-    min-width: 180px;
-    padding: 15px;
-    position: relative;
-    box-shadow: 0 0 6px #0000000d;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 200px;
+  min-width: 180px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 0 6px #0000000d;
+  scroll-snap-align: start;
 }
-@media (min-width: 640px) {
-  .weekly-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 768px) {
-  .weekly-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-
 
 .weekly-img-box {
   position: relative;
@@ -98,4 +89,22 @@ padding: 2rem 13.5%;
 .weekly-sold span {
   color: #047244;
   font-weight: 500;
+}
+
+.add-cart {
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #047244;
+  border: none;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* Responsive padding */
+@media (max-width: 768px) {
+  .weekly-wrapper {
+    padding: 2rem 1rem;
+  }
 }

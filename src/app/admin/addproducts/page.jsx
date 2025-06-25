@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './AddProducts.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { baseUrl } from '@/app/const';
@@ -18,12 +18,31 @@ const AddProducts = () => {
   const [editingId, setEditingId] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const formRef = useRef(null); // 🔁 Ref to scroll to form
+
   useEffect(() => {
     fetch(`${baseUrl}/products/all`)
       .then(res => res.json())
       .then(data => setProducts(data.products || []))
       .catch(err => console.error('❌ Failed to fetch products:', err));
   }, []);
+
+  const parseNutritions = (input) => {
+    if (!input.trim()) return null;
+    const lines = input.split(',');
+    const result = {};
+    for (let raw of lines) {
+      raw = raw.trim();
+      const match = raw.match(/^(.+?)\s*\((.+?)\)\s*:\s*(.+)$/);
+      if (!match) continue;
+      const [_, name, uom, value] = match;
+      result[name.trim().toLowerCase()] = {
+        UOM: uom.trim(),
+        Results: value.trim(),
+      };
+    }
+    return Object.keys(result).length ? result : null;
+  };
 
   const handleSubmit = async () => {
     if (!name || !price || !category || !description) {
@@ -47,37 +66,20 @@ const AddProducts = () => {
 
     if (image) formData.append('image', image);
 
+    const parsedNutritions = parseNutritions(nutritions);
+    if (parsedNutritions) {
+      formData.append('nutritions', JSON.stringify(parsedNutritions));
+    }
+
+    let url = `${baseUrl}/products/create`;
+    let method = 'POST';
+
+    if (editingId) {
+      url = `${baseUrl}/products/update/${editingId}`;
+      method = 'PUT';
+    }
+
     try {
-      // nutrition format: calories:mg=0, sugar:g=15
-     const nutritionParts = nutritions.split(',').reduce((acc, part) => {
-  const trimmed = part.trim();
-  const [keyWithUOM, result] = trimmed.split('=');
-
-  if (!keyWithUOM || !result) return acc;
-
-  const colonIndex = keyWithUOM.indexOf(':');
-  if (colonIndex === -1) return acc;
-
-  const key = keyWithUOM.slice(0, colonIndex).trim();
-  const uom = keyWithUOM.slice(colonIndex + 1).trim();
-
-  if (key && uom && result) {
-    acc[key.toLowerCase()] = { UOM: uom, Results: result };
-  }
-
-  return acc;
-}, {});
-
-      formData.append('nutritions', JSON.stringify(nutritionParts));
-
-      let url = `${baseUrl}/products/create`;
-      let method = 'POST';
-
-      if (editingId) {
-        url = `${baseUrl}/products/update/${editingId}`;
-        method = 'PUT';
-      }
-
       const res = await fetch(url, {
         method,
         body: formData,
@@ -90,7 +92,6 @@ const AddProducts = () => {
         data = await res.json();
       } else {
         const rawText = await res.text();
-        console.error('❌ Non-JSON response from server:', rawText);
         alert('Unexpected server response (not JSON).');
         setIsSubmitting(false);
         return;
@@ -101,29 +102,31 @@ const AddProducts = () => {
         setProducts(refreshed.products || []);
         resetForm();
       } else {
-        console.error('❌ Server error:', data);
         alert(data.message || 'Failed to save product.');
       }
     } catch (err) {
-      console.error('❌ Exception during product submission:', err);
       alert('An error occurred. Check the console for details.');
+      console.error(err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleEdit = (prod) => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth' }); // 🔁 Scroll to form
+
     setName(prod.name);
     setCategory(prod.category);
     setPrice(prod.price);
     setDescription(prod.description);
-    setNutritions(
-      prod.nutritions
-        ? Object.entries(prod.nutritions)
-            .map(([k, v]) => `${k}:${v.UOM}=${v.Results}`)
-            .join(', ')
-        : ''
-    );
+
+    const nutritionStr = prod.nutritions
+      ? Object.entries(prod.nutritions)
+          .map(([k, v]) => `${k} (${v.UOM}): ${v.Results}`)
+          .join(', ')
+      : '';
+
+    setNutritions(nutritionStr);
     setServing(prod.serving || '');
     setPackaging(prod.packaging || '');
     setIngredients(Array.isArray(prod.ingredients) ? prod.ingredients.join(', ') : prod.ingredients);
@@ -133,14 +136,11 @@ const AddProducts = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`${baseUrl}/products/${id}`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(`${baseUrl}/products/${id}`, { method: 'DELETE' });
       const data = await res.json();
       if (data.success) {
         setProducts(prev => prev.filter(prod => prod._id !== id));
       } else {
-        console.error('❌ Failed to delete:', data);
         alert(data.message || 'Delete failed.');
       }
     } catch (err) {
@@ -165,41 +165,36 @@ const AddProducts = () => {
     <div className="mp-container">
       <h2 className="mp-title">Products</h2>
       <div className="mp-wrapper">
-        <div className="mp-form">
+        <div className="mp-form" ref={formRef}> {/* 🧷 Attach the ref */}
           <label>Product Name:</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Enter product name" />
+          <input value={name} onChange={(e) => setName(e.target.value)} type="text" />
           <label>Category:</label>
-          <input value={category} onChange={(e) => setCategory(e.target.value)} type="text" placeholder="e.g. Spices" />
+          <input value={category} onChange={(e) => setCategory(e.target.value)} type="text" />
           <label>Price (Rs):</label>
-          <input value={price} onChange={(e) => setPrice(e.target.value)} type="number" placeholder="Enter price" />
+          <input value={price} onChange={(e) => setPrice(e.target.value)} type="number" />
           <label>Description:</label>
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={2} />
           <label>Nutritions:</label>
           <input
             value={nutritions}
             onChange={(e) => setNutritions(e.target.value)}
-            placeholder="e.g. calories:mg=0, sugar:g=15"
+            placeholder="e.g. calories (mg): 0, sugar (g): 15"
           />
-          <small>Format: <i>name:unit=value</i> — e.g. calories:mg=0</small>
+          <small>Format: <i>name (unit): value</i></small>
           <label>Serving Size:</label>
-          <input value={serving} onChange={(e) => setServing(e.target.value)} placeholder="e.g. 1 tsp" />
+          <input value={serving} onChange={(e) => setServing(e.target.value)} />
           <label>Packaging:</label>
-          <input value={packaging} onChange={(e) => setPackaging(e.target.value)} placeholder="e.g. Pouch, Box" />
+          <input value={packaging} onChange={(e) => setPackaging(e.target.value)} />
           <label>Ingredients:</label>
           <textarea value={ingredients} onChange={(e) => setIngredients(e.target.value)} rows={2} placeholder="Comma separated" />
           <label>Upload Image:</label>
           <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
-          {image && (
-            <div style={{ marginTop: '10px' }}>
-              <img src={URL.createObjectURL(image)} alt="Preview" width={100} height={100} />
-            </div>
-          )}
+          {image && <img src={URL.createObjectURL(image)} alt="Preview" width={100} height={100} style={{ marginTop: 10 }} />}
           <button className="mp-btn" onClick={handleSubmit} disabled={isSubmitting}>
             {isSubmitting ? 'Saving...' : editingId ? 'Update Product' : 'Add Product'}
           </button>
         </div>
 
-        {/* Table */}
         <div className="mp-table-wrapper">
           <table className="mp-table">
             <thead>
@@ -224,27 +219,35 @@ const AddProducts = () => {
               ) : (
                 products.map((prod, idx) => (
                   <tr key={prod._id}>
-                    <td>{idx + 1}</td>
-                    <td>{prod.image ? <img src={prod.image} width={50} height={50} alt="img" /> : 'No Image'}</td>
-                    <td>{prod.name}</td>
-                    <td>{prod.category}</td>
-                    <td>{prod.price}</td>
-                    <td>{prod.description}</td>
-                    <td>
+                    <td className='numbers'>{idx + 1}</td>
+                    <td className='numbers'>
+                      {prod.image ? <img src={prod.image} width={50} height={50} alt="img" /> : 'No Image'}
+                    </td>
+                    <td className='numbers'>{prod.name}</td>
+                    <td className='numbers'>{prod.category}</td>
+                    <td className='numbers'>{prod.price}</td>
+                    <td className='numbers'>{prod.description}</td>
+                    <td className='numbers'>
                       {prod.nutritions
                         ? Object.entries(prod.nutritions)
                             .map(([k, v]) => `${k} (${v.UOM}): ${v.Results}`)
                             .join(', ')
                         : ''}
                     </td>
-                    <td>{prod.serving}</td>
-                    <td>{prod.packaging}</td>
-                    <td>{Array.isArray(prod.ingredients) ? prod.ingredients.join(', ') : prod.ingredients}</td>
-                    <td>
-                      <button className="mp-icon-btn" onClick={() => handleEdit(prod)}><FaEdit /></button>
+                    <td className='numbers'>{prod.serving}</td>
+                    <td className='numbers'>{prod.packaging}</td>
+                    <td className='numbers'>
+                      {Array.isArray(prod.ingredients) ? prod.ingredients.join(', ') : prod.ingredients}
                     </td>
                     <td>
-                      <button className="mp-icon-btn" onClick={() => handleDelete(prod._id)}><FaTrash /></button>
+                      <button className="mp-icon-btn" onClick={() => handleEdit(prod)}>
+                        <FaEdit />
+                      </button>
+                    </td>
+                    <td>
+                      <button className="mp-icon-btn" onClick={() => handleDelete(prod._id)}>
+                        <FaTrash />
+                      </button>
                     </td>
                   </tr>
                 ))

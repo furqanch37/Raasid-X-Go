@@ -12,6 +12,8 @@ const MiddleSection = () => {
   const [categories, setCategories] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData);
@@ -38,7 +40,7 @@ const MiddleSection = () => {
     fetchCategories();
   }, []);
 
-  // Close dropdown if clicked outside
+  // ✅ Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -49,9 +51,20 @@ const MiddleSection = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // ✅ Logout handler
   const handleLogout = () => {
     dispatch(logout());
     setDropdownOpen(false);
+  };
+
+  // ✅ Search handler
+  const handleSearch = () => {
+    const categoryQuery = selectedCategory ? `category=${encodeURIComponent(selectedCategory)}` : '';
+    const searchQuery = searchTerm ? `search=${encodeURIComponent(searchTerm)}` : '';
+    const query = [categoryQuery, searchQuery].filter(Boolean).join('&');
+    const fullUrl = `/products/all${query ? `?${query}` : ''}`;
+
+    window.location.href = fullUrl;
   };
 
   return (
@@ -62,24 +75,30 @@ const MiddleSection = () => {
         </div>
       </Link>
 
+      {/* ✅ Search Bar */}
       <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <select>
-          <option>All Categories</option>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value="">All Categories</option>
           {categories.map((cat) => (
             <option key={cat._id} value={cat.categoryName}>
               {cat.categoryName}
             </option>
           ))}
         </select>
-        <button className="search-btn"><FiSearch /></button>
+        <button className="search-btn" onClick={handleSearch}><FiSearch /></button>
       </div>
 
       <div className="phone">
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong className="numbers">+92 370 2333125</strong>
+          <strong className="numbers" style={{fontWeight:"600"}}>+92 370 2333125</strong>
         </div>
       </div>
 

@@ -28,6 +28,8 @@ const Footer = () => {
   <li><Link href="/about">About</Link></li>
   <li><Link href="/shop">Shop</Link></li>
   <li><Link href="/contact">Contact</Link></li>
+  <li><Link href="/TermsAndConditions">Terms And Condition</Link></li>
+  <li><Link href="/privacy-policy">Privacy Policy</Link></li>
           </ul>
         </div>
 
@@ -39,7 +41,7 @@ const Footer = () => {
             <li><Link href="#">Spices</Link></li>
             <li><Link href="#">Fruits Preserves</Link></li>
             <li><Link href="#">One Day Meals</Link></li>
-            <li><Link href="#">Ready to Eat</Link></li>
+            <li><Link href="#">Ready to Eat Meals</Link></li>
             <li><Link href="#">Energy Bars</Link></li>
             <li><Link href="#">MRE's</Link></li>
             <li><Link href="#">Food</Link></li>

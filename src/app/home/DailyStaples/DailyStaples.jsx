@@ -91,12 +91,13 @@ export default function DailyStaples() {
               <Link href={`/productdetails?productId=${product._id}`}>
                 <div className="product-content">
                   <div className="image-box">
+                    {product.image?.startsWith("https://res.cloudinary.com/") && (
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
                       className="product-image"
-                    />
+                    />)}
                   </div>
                   <p className="product-name">{product.name}</p>
                   <div className="product-pricing">

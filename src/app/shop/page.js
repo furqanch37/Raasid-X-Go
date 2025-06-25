@@ -1,12 +1,17 @@
-import Shop from "./shop";
-import ShopHeader from "./ShopHeader/ShopHeader";
+// app/shop/page.jsx
+'use client';
 
+import { Suspense } from 'react';
+import ShopHeader from './ShopHeader/ShopHeader';
+import Shop from './shop';
 
-export default function page() {
+export default function ShopPage() {
   return (
-   <div>
-    <ShopHeader/>
-    <Shop/>
-   </div>
+    <>
+      <ShopHeader />
+      <Suspense fallback={<p>Loading shop...</p>}>
+        <Shop />
+      </Suspense>
+    </>
   );
 }

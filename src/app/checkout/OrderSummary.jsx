@@ -20,12 +20,12 @@ export default function OrderSummary() {
         <div className="item" key={item._id}>
           <div className="image-wrapper">
             <img src={item.image} alt={item.name} />
-            <span className="item-qty">{item.quantity}</span>
+            <span className="item-qty numbers">{item.quantity}</span>
           </div>
           <div className="item-details">
             <div className="item-row">
               <strong>{item.name}</strong>
-              <strong>{(item.price * item.quantity).toFixed(2)}PKR</strong>
+              <strong className='numbers'>{(item.price * item.quantity).toFixed(2)}PKR</strong>
             </div>
             <p className="desc">{item.description?.slice(0, 100)}...</p>
           </div>
