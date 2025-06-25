@@ -25,7 +25,7 @@ const Footer = () => {
           <h3>EXPLORE</h3>
           <ul>
              <li><Link href="/home">Home</Link></li>
-  <li><Link href="/about">About</Link></li>
+  <li><Link href="/about">About Us</Link></li>
   <li><Link href="/shop">Shop</Link></li>
   <li><Link href="/contact">Contact</Link></li>
   <li><Link href="/TermsAndConditions">Terms And Condition</Link></li>
@@ -53,9 +53,10 @@ const Footer = () => {
         <div className="footer-column">
           <h3>CONTACT DETAILS</h3>
           <ul>
-            <li><Link href="#">Rawat Technology Park, Islamabad Pakistan</Link></li>
-            <li className="numbers"><Link href="#">+92 370 2333125</Link></li>
-            <li><Link href="#">info@raasid.com</Link></li>
+            <li><Link href="/contact">Visit Us</Link></li>
+            <li className="numbers"><Link href="/contact">+92 370 2333125</Link></li>
+            <li><Link href="/contact">info@raasid.com</Link></li>
+
           </ul>
         </div>
       </div>
