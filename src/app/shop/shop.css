@@ -134,7 +134,7 @@ padding: 2rem 13.5%;
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
-padding: 2rem 13.5%;
+padding: 0rem 13.5%;
 }
 
 .results-count {
@@ -163,9 +163,9 @@ padding: 2rem 13.5%;
     gap: 10px;
   }
 .shop-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.5rem 1rem;
+    justify-content: space-between;
+    display: flex;
+    gap: 30px;
   }
   .shop-filters {
     width: 100%;

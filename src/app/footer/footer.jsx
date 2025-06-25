@@ -1,6 +1,6 @@
 // components/Footer.jsx
 import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 import "./footer.css";
 import Link from "next/link";
 
@@ -66,7 +66,7 @@ const Footer = () => {
     <FaFacebookF />
   </a>
   <a href="#" className="icon" aria-label="Twitter">
-    <FaTwitter />
+    <FaTiktok />
   </a>
   <a href="#" className="icon" aria-label="Instagram">
     <FaInstagram />
