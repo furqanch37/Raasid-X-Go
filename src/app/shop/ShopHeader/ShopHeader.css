@@ -7,7 +7,7 @@
   max-width: 1200px;
 }
 
-.shop-title {
+.shop-title-1 {
   font-size: 32px;
   font-weight: 600;
   color: #222;
@@ -15,7 +15,7 @@
 }
 
 @media (max-width: 768px) {
-  .shop-title {
+  .shop-title-1 {
     font-size: 24px;
   }
 

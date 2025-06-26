@@ -93,4 +93,9 @@
     gap: 20px;
     padding-bottom: 20px;
   }
+  .logo-3{
+    width: 30%;
+    margin: auto;
+    display: flex;
+  }
 }
