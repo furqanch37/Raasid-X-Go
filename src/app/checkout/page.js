@@ -9,8 +9,6 @@ import OrderSummary from "./OrderSummary";
 import "./styles.css";
 import { baseUrl } from '@/app/const';
 import { clearCart } from '@/app/redux/features/cartSlice';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const TCS_TARIFF = {
   'withinCity': { 'upto0_5': 127, 'upto1': 170, 'additional': 170 },
@@ -67,6 +65,7 @@ const BASE_WEIGHT_MAP = {
 const calculateWeight = () => {
   return cartItems.reduce((total, item) => {
     const category = item.category?.toLowerCase() || '';
+    const description = item.description?.toLowerCase() || '';
 
     let matchedWeight = 0;
     let matchedLabel = 'Unknown';
@@ -78,20 +77,28 @@ const calculateWeight = () => {
       matchedWeight = BASE_WEIGHT_MAP['granola bars'];
       matchedLabel = 'Granola Bars';
     } else if (category.includes('mre')) {
-      matchedWeight = BASE_WEIGHT_MAP['mres'];
-      matchedLabel = 'MREs';
+      // Check for specific MRE description
+      if (
+        description.includes('chicken based with rich energy bars') ||
+        description.includes('beef based with rich energy bars')
+      ) {
+        matchedWeight = 1230;
+        matchedLabel = 'MREs (lighter variant)';
+      } else {
+        matchedWeight = BASE_WEIGHT_MAP['mres'];
+        matchedLabel = 'MREs (standard)';
+      }
     }
 
     const totalItemWeight = matchedWeight * item.quantity;
 
     console.log(
-      `Items: ${item.category} | Matched: ${matchedLabel} | Quantity: ${item.quantity} | Per Unit Weight: ${matchedWeight}g | Total Weight: ${totalItemWeight}g`
+      `Items: ${item.category} | Description: ${item.description} | Matched: ${matchedLabel} | Quantity: ${item.quantity} | Per Unit Weight: ${matchedWeight}g | Total Weight: ${totalItemWeight}g`
     );
 
     return total + totalItemWeight;
   }, 0);
 };
-
   const resolveTCSZone = async (originCity, deliveryCity) => {
   try {
     const res = await fetch(`${baseUrl}/cities/resolve-zone/${originCity}/${deliveryCity}`);
@@ -175,14 +182,14 @@ const calculateWeight = () => {
 
       if (res.ok) {
         dispatch(clearCart());
-        toast.success("Order Placed successfully");
+        alert("Order Placed successfully");
         router.push('/shop');
       } else {
-        toast.error(data.message || 'Failed to place order.');
+        alert(data.message || 'Failed to place order.');
       }
     } catch (err) {
       console.error(err);
-      toast.error('Error placing order.');
+      alert('Error placing order.');
     } finally {
       setLoading(false);
     }
