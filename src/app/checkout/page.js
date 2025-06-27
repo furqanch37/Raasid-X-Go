@@ -90,32 +90,27 @@ const calculateWeight = () => {
   }, 0);
 };
 
-  const resolveTCSZone = (deliveryCity) => {
-    if (!deliveryCity) return 'differentZone';
-    const city = deliveryCity.toLowerCase();
-    if (city.includes('nowshera')) return 'withinCity';
-
-    const sameZoneCities = [
-      'peshawar', 'mardan', 'charsadda', 'swabi', 'risalpur',
-      'jehangira', 'attock', 'kohat', 'akora khattak', 'topi',
-      'takht bhai', 'hangu', 'bannu', 'dera ismail khan', 'haripur',
-      'hazro', 'noshera', 'nowhsera'
-    ];
-
-    if (sameZoneCities.some(c => city.includes(c))) return 'sameZone';
+  const resolveTCSZone = async (originCity, deliveryCity) => {
+  try {
+    const res = await fetch(`${baseUrl}/cities/resolve-zone/${originCity}/${deliveryCity}`);
+    const data = await res.json();
+    return data.zone || 'differentZone';
+  } catch (err) {
+    console.error('TCS zone resolution error:', err);
     return 'differentZone';
-  };
+  }
+};
 
-  const calculateTCSFee = (weightGrams, deliveryCity) => {
-    const zone = resolveTCSZone(deliveryCity);
-    const weightKg = weightGrams / 1000;
+  const calculateTCSFee = async (weightGrams, deliveryCity) => {
+  const zone = await resolveTCSZone('Nowshera', deliveryCity); // origin hardcoded here
+  const weightKg = weightGrams / 1000;
 
-    if (weightKg <= 0.5) return TCS_TARIFF[zone].upto0_5;
-    if (weightKg <= 1) return TCS_TARIFF[zone].upto1;
+  if (weightKg <= 0.5) return TCS_TARIFF[zone].upto0_5;
+  if (weightKg <= 1) return TCS_TARIFF[zone].upto1;
 
-    const additionalUnits = Math.ceil(weightKg - 1);
-    return TCS_TARIFF[zone].upto1 + additionalUnits * TCS_TARIFF[zone].additional;
-  };
+  const additionalUnits = Math.ceil(weightKg - 1);
+  return TCS_TARIFF[zone].upto1 + additionalUnits * TCS_TARIFF[zone].additional;
+};
 
   const calculatePakistanPostFee = async (weightGrams) => {
     try {
@@ -129,23 +124,23 @@ const calculateWeight = () => {
   };
 
   useEffect(() => {
-    const updateShippingFee = async () => {
-      const totalWeight = calculateWeight();
-      setWeight(totalWeight);
+  const updateShippingFee = async () => {
+    const totalWeight = calculateWeight();
+    setWeight(totalWeight);
 
-      if (formData.shippingMethod === 'TCS') {
-        const fee = calculateTCSFee(totalWeight, formData.city);
-        setShippingFee(fee);
-      } else if (formData.shippingMethod === 'Pakistan Post') {
-        const fee = await calculatePakistanPostFee(totalWeight);
-        setShippingFee(fee);
-      }
-    };
-
-    if (formData.shippingMethod && formData.city) {
-      updateShippingFee();
+    if (formData.shippingMethod === 'TCS') {
+      const fee = await calculateTCSFee(totalWeight, formData.city);
+      setShippingFee(fee);
+    } else if (formData.shippingMethod === 'Pakistan Post') {
+      const fee = await calculatePakistanPostFee(totalWeight);
+      setShippingFee(fee);
     }
-  }, [formData.shippingMethod, formData.city, cartItems]);
+  };
+
+  if (formData.shippingMethod && formData.city) {
+    updateShippingFee();
+  }
+}, [formData.shippingMethod, formData.city, cartItems]);
 
   const getTotal = () =>
     cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0) + shippingFee;
@@ -179,7 +174,7 @@ const calculateWeight = () => {
       if (res.ok) {
         dispatch(clearCart());
         alert("Order Placed successfully");
-        router.push('/dashboard');
+        router.push('/shop');
       } else {
         alert(data.message || 'Failed to place order.');
       }
