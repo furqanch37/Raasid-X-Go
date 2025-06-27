@@ -106,7 +106,7 @@ export default function DailyStaples() {
                     )}
                   </div>
                   <p className="product-name">{product.name}</p>
-                 <p className="product-name">{product.packaging}</p>
+                  <p className="weekly-name numbers" style={{fontWeight:'600', fontSize:'14px'}}>{product.packaging}</p>
                   <div className="product-pricing">
                     <span className="final-price numbers">{product.price} PKR</span>
                   </div>

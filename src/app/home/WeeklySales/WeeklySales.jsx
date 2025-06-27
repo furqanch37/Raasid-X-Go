@@ -99,8 +99,8 @@ export default function WeekySales() {
                       className="weekly-img-box"
                     />)}
                   </div>
-                  <p className="weekly-name ">{product.name}</p>
-                  <p className="weekly-name ">{product.packaging}</p>
+                  <p className="weekly-name">{product.name}</p>
+                  <p className="weekly-name numbers" style={{fontWeight:'600', fontSize:'14px'}}>{product.packaging}</p>
                   <div className="product-pricing">
                     <span className="weekly-price numbers">{product.price} PKR</span>
                   </div>
