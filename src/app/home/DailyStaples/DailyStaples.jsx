@@ -106,6 +106,7 @@ export default function DailyStaples() {
                     )}
                   </div>
                   <p className="product-name">{product.name}</p>
+                 <p className="product-name">{product.packaging}</p>
                   <div className="product-pricing">
                     <span className="final-price numbers">{product.price} PKR</span>
                   </div>

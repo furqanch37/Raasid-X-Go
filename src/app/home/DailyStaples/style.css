@@ -4,7 +4,7 @@
   padding-bottom: 1rem;
   overflow: auto hidden;
   scrollbar-width: none; /* Firefox */
-  
+  user-select: none;
 }
 
 .scroll-container::-webkit-scrollbar {

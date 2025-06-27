@@ -100,6 +100,7 @@ export default function WeekySales() {
                     />)}
                   </div>
                   <p className="weekly-name ">{product.name}</p>
+                  <p className="weekly-name ">{product.packaging}</p>
                   <div className="product-pricing">
                     <span className="weekly-price numbers">{product.price} PKR</span>
                   </div>

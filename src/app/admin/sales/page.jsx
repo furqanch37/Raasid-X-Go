@@ -14,15 +14,17 @@ const Sales = () => {
         const res = await fetch(`${baseUrl}/order`);
         const data = await res.json();
         if (data.success) {
-          const formatted = data.orders.map((order, idx) => ({
-            invoice: idx + 1,
-            id: order._id,
-            time: new Date(order.createdAt).toLocaleString('en-GB', { hour12: true }),
-            customer: order.fullName,
-            method: order.paymentMethod === 'cod' ? 'Cash' : 'Card',
-            amount: `${order.totalAmount} PKR`,
-            status: order.status,
-          }));
+         const formatted = data.orders.map((order, idx) => ({
+  invoice: idx + 1,
+  id: order._id,
+  time: new Date(order.createdAt).toLocaleString('en-GB', { hour12: true }),
+  customer: order.fullName,
+  method: order.paymentMethod === 'cod' ? 'Cash' : 'Card',
+  amount: `${order.totalAmount} PKR`,
+  status: order.status,
+  shipping: order.shippingMethod || "N/A", // <-- Add this
+}));
+
           setOrders(formatted);
         }
       } catch (err) {
@@ -65,45 +67,49 @@ const Sales = () => {
       </Head>
       <div className="table-container">
         <table className="orders-table">
-          <thead>
-            <tr>
-              <th>Sr.No</th>
-              <th>Order Time</th>
-              <th>Customer Name</th>
-              <th>Method</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order, index) => (
-              <tr className="numbers" key={index}>
-                <td>{order.invoice}</td>
-                <td className="numbers">{order.time}</td>
-                <td>{order.customer}</td>
-                <td><strong>{order.method}</strong></td>
-                <td  className="numbers">{order.amount}</td>
-                <td>
-                  <span className={`status ${order.status.toLowerCase()}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td>
-                  <select
-                    className="action-dropdown"
-                    value={order.status}
-                    onChange={(e) => handleStatusChange(index, e.target.value)}
-                  >
-                    <option value="Delivered">Delivered</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Cancelled">Cancel</option>
-                  </select>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+         <thead>
+  <tr>
+    <th>Sr.No</th>
+    <th>Order Time</th>
+    <th>Customer Name</th>
+    <th>Method</th>
+    <th>Amount</th>
+    <th>Shipping</th> {/* <-- Add this */}
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
+        <tbody>
+  {orders.map((order, index) => (
+    <tr className="numbers" key={index}>
+      <td>{order.invoice}</td>
+      <td className="numbers">{order.time}</td>
+      <td>{order.customer}</td>
+      <td><strong>{order.method}</strong></td>
+      <td className="numbers">{order.amount}</td>
+      <td>{order.shipping}</td> {/* <-- Show shipping method */}
+      <td>
+        <span className={`status ${order.status.toLowerCase()}`}>
+          {order.status}
+        </span>
+      </td>
+      <td>
+        <select
+          className="action-dropdown"
+          value={order.status}
+          onChange={(e) => handleStatusChange(index, e.target.value)}
+        >
+          <option value="Delivered">Delivered</option>
+          <option value="Pending">Pending</option>
+          <option value="Processing">Processing</option>
+          <option value="Cancelled">Cancel</option>
+        </select>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       </div>
     </>

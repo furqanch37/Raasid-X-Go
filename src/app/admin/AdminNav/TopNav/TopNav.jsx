@@ -7,17 +7,20 @@ import { HiOutlineChatBubbleLeftRight } from 'react-icons/hi2';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '@/app/redux/features/userSlice';
+import { useRouter } from 'next/navigation';
 
 const TopNav = () => {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const router = useRouter();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    setDropdownOpen(false);
-  };
+ const handleLogout = () => {
+  dispatch(logout());
+  setDropdownOpen(false);
+  router.push('/home');
+};
 
   useEffect(() => {
     const handleClickOutside = (e) => {

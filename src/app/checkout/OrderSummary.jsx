@@ -1,15 +1,18 @@
 'use client';
+
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './styles.css';
 
-export default function OrderSummary() {
+export default function OrderSummary({ shippingFee, weight }) {
   const items = useSelector((state) => state.cart.items);
 
-  const getTotalPrice = () => {
-    return items
-      .reduce((acc, item) => acc + item.price * item.quantity, 0)
-      .toFixed(2);
+  const getSubtotal = () => {
+    return items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  };
+
+  const getGrandTotal = () => {
+    return getSubtotal() + shippingFee;
   };
 
   return (
@@ -34,10 +37,16 @@ export default function OrderSummary() {
 
       <div className="price numbers">
         <p>
-          Subtotal <strong>{getTotalPrice()}PKR</strong>
+          Subtotal <strong>{getSubtotal().toFixed(2)}PKR</strong>
+        </p>
+        <p>
+          Shipping Fee <strong>{shippingFee.toFixed(2)}PKR</strong>
+        </p>
+         <p>
+          Total Weight <strong>{weight}g</strong>
         </p>
         <p className="total-p numbers">
-          Total <strong >{getTotalPrice()}PKR</strong>
+          Grand Total <strong>{getGrandTotal().toFixed(2)}PKR</strong>
         </p>
       </div>
     </aside>

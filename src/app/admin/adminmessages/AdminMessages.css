@@ -109,7 +109,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.buttons-action{
+  display: flex;
+}
 /* Responsive */
 @media (max-width: 600px) {
   .admin-table th,

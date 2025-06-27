@@ -120,6 +120,8 @@
 .cart-price {
   margin-left: 20px;
   font-size: 14px;
+  display: flex;
+  width: max-content;
 }
 
 /* Bottom Nav */

@@ -6,12 +6,8 @@ import {
   FaBars,
   FaTimes,
   FaShoppingCart,
-  FaUserShield,
   FaEnvelope,
-  FaCogs,
-  FaUserCircle,
   FaExchangeAlt,
-  FaBalanceScale,
   FaHome,
   FaPowerOff,
   FaBell

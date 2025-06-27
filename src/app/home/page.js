@@ -10,9 +10,9 @@ export default function HomePage() {
   return (
     <>
     <Banner/>
+    <WeeklySales/>
     <GoToSuppliers/>
     <TopCategories/>
-    <WeeklySales/>
     <DiscountBanner/>
     <DailyStaples/>
     </>

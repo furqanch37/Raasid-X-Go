@@ -104,7 +104,7 @@ const AdminMessages = () => {
                   <td>{msg.name}</td>
                   <td>{msg.email}</td>
                   <td>{msg.message.slice(0, 40)}...</td>
-                  <td>
+                  <td className='buttons-action'>
                     <button className="action-btn view-btn" onClick={() => handleView(msg)}>View</button>
                     <button className="action-btn reply-btn" onClick={() => handleReply(msg)}>Reply</button>
                   </td>

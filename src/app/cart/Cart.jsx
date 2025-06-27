@@ -35,11 +35,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    if (isLoggedIn) {
       router.push('/checkout');
-    } else {
-      router.push('/login');
-    }
   };
 
   return (
@@ -96,10 +92,10 @@ const Cart = () => {
                   <span>Subtotal</span>
                   <span>{getTotalPrice()}PKR</span>
                 </div>
-                <div className="total numbers">
+              {/*   <div className="total numbers">
                   <strong>Total</strong>
                   <strong>{getTotalPrice()}PKR</strong>
-                </div>
+                </div> */}
                 <button className="checkout-btn" onClick={handleCheckout}>
                   Proceed to Checkout
                 </button>

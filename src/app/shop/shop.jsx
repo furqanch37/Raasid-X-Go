@@ -40,7 +40,7 @@ const Shop = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    router.push('/cart');
+    alert("Your product is added to cart");
   };
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
