@@ -75,7 +75,6 @@ export default function WeekySales() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    router.push('/cart');
   };
 
   return (

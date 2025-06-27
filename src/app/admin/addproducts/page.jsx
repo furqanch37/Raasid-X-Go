@@ -3,6 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import './AddProducts.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { baseUrl } from '@/app/const';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const AddProducts = () => {
   const [products, setProducts] = useState([]);
@@ -57,7 +60,7 @@ const handleClose = () => {
 
   const handleSubmit = async () => {
     if (!name || !price || !category || !description) {
-      alert('Please fill all required fields');
+      toast.error('Please fill all required fields');
       return;
     }
 
@@ -103,7 +106,7 @@ const handleClose = () => {
         data = await res.json();
       } else {
         const rawText = await res.text();
-        alert('Unexpected server response (not JSON).');
+        toast.error('Unexpected server response (not JSON).');
         setIsSubmitting(false);
         return;
       }
@@ -113,10 +116,10 @@ const handleClose = () => {
         setProducts(refreshed.products || []);
         resetForm();
       } else {
-        alert(data.message || 'Failed to save product.');
+        toast.error(data.message || 'Failed to save product.');
       }
     } catch (err) {
-      alert('An error occurred. Check the console for details.');
+      toast.error('An error occurred. Check the console for details.');
       console.error(err);
     } finally {
       setIsSubmitting(false);
@@ -152,7 +155,7 @@ const handleClose = () => {
       if (data.success) {
         setProducts(prev => prev.filter(prod => prod._id !== id));
       } else {
-        alert(data.message || 'Delete failed.');
+        toast.error(data.message || 'Delete failed.');
       }
     } catch (err) {
       console.error('❌ Error deleting product:', err);

@@ -80,7 +80,7 @@ export default function DailyStaples() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    router.push('/cart');
+
   };
 
   return (

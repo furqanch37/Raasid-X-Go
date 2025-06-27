@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import './AdminMessages.css';
 import { baseUrl } from '@/app/const';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const AdminMessages = () => {
   const [messages, setMessages] = useState([]);
@@ -44,7 +47,7 @@ const AdminMessages = () => {
   };
 
   const handleSendReply = async () => {
-    if (!replyMessage.trim()) return alert("Reply message cannot be empty.");
+    if (!replyMessage.trim()) return toast.error("Reply message cannot be empty.");
     setSending(true);
 
     try {
@@ -63,14 +66,14 @@ const AdminMessages = () => {
       const data = await res.json();
 
       if (data.success) {
-        alert(`Reply sent to ${replyTo.name}`);
+        toast.error(`Reply sent to ${replyTo.name}`);
         handleCloseReply();
       } else {
-        alert(`Failed to send reply: ${data.message}`);
+        toast.error(`Failed to send reply: ${data.message}`);
       }
     } catch (error) {
       console.error('Error sending reply:', error);
-      alert("An error occurred while sending the reply.");
+      toast.error("An error occurred while sending the reply.");
     } finally {
       setSending(false);
     }

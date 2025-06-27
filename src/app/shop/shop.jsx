@@ -7,6 +7,9 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '@/app/redux/features/cartSlice';
 import './shop.css';
 import { baseUrl } from '@/app/const';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const Shop = () => {
   const router = useRouter();
@@ -40,7 +43,7 @@ const Shop = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    alert("Your product is added to cart");
+    toast.success("Your product is added to cart");
   };
 
   const totalPages = Math.ceil(products.length / itemsPerPage);

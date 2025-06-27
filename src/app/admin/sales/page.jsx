@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import "./orders.css";
 import { baseUrl } from '@/app/const';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const Sales = () => {
   const [orders, setOrders] = useState([]);
@@ -52,11 +55,11 @@ const Sales = () => {
         updatedOrders[index].status = newStatus;
         setOrders(updatedOrders);
       } else {
-        alert(data.message || "Failed to update status");
+        toast.error(data.message || "Failed to update status");
       }
     } catch (err) {
       console.error("Error updating order status:", err);
-      alert("Error updating status.");
+      toast.error("Error updating status.");
     }
   };
 
