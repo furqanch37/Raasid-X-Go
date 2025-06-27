@@ -14,13 +14,17 @@ export default function DailyStaples() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
 
+  // ✅ This useEffect is for fetching only MREs
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(`${baseUrl}/products/all`);
         const data = await res.json();
         if (data.success) {
-          setProducts(data.products);
+          const mreProducts = data.products.filter(
+            (product) => product.category === "MREs"
+          );
+          setProducts(mreProducts);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -29,6 +33,7 @@ export default function DailyStaples() {
     fetchProducts();
   }, []);
 
+  // ✅ This useEffect handles the horizontal scroll behavior
   useEffect(() => {
     const slider = scrollRef.current;
     let isDown = false;
@@ -81,7 +86,7 @@ export default function DailyStaples() {
   return (
     <section className="daily-wrapper">
       <div className="daily-header">
-        <h2 className="daily-title">Daily Staples</h2>
+        <h2 className="daily-title">MRE's</h2>
         <a href="/shop" className="more-link">MORE PRODUCTS →</a>
       </div>
       <div className="scroll-container" ref={scrollRef}>
@@ -92,12 +97,13 @@ export default function DailyStaples() {
                 <div className="product-content">
                   <div className="image-box">
                     {product.image?.startsWith("https://res.cloudinary.com/") && (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="product-image"
-                    />)}
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="product-image"
+                      />
+                    )}
                   </div>
                   <p className="product-name">{product.name}</p>
                   <div className="product-pricing">
@@ -106,9 +112,9 @@ export default function DailyStaples() {
                 </div>
               </Link>
               <div className="cart-btn">
-              <button className="add-cart" onClick={() => handleAddToCart(product)}>
-                ADD TO CART
-              </button>
+                <button className="add-cart" onClick={() => handleAddToCart(product)}>
+                  ADD TO CART
+                </button>
               </div>
             </div>
           ))}

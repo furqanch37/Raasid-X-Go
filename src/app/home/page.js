@@ -11,8 +11,8 @@ export default function HomePage() {
     <>
     <Banner/>
     <GoToSuppliers/>
-    <WeeklySales/>
     <TopCategories/>
+    <WeeklySales/>
     <DiscountBanner/>
     <DailyStaples/>
     </>

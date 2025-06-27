@@ -5,7 +5,7 @@ import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { addToCart } from "@/app/redux/features/cartSlice";
-import "../DailyStaples/style.css";
+import "./sales.css";
 import { baseUrl } from "@/app/const";
 
 export default function WeekySales() {
@@ -79,29 +79,29 @@ export default function WeekySales() {
   };
 
   return (
-    <section className="daily-wrapper">
-      <div className="daily-header">
-        <h2 className="daily-title">Weekly Best Sales</h2>
-        <a href="/shop" className="more-link">MORE PRODUCTS →</a>
+    <section className="weekly-wrapper">
+      <div className="weekly-header">
+        <h2 className="weekly-title">Ready to Eat Meals</h2>
+        <a href="/shop" className="view-more">MORE PRODUCTS →</a>
       </div>
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
-            <div key={product._id || idx} className="product-card">
+            <div key={product._id || idx} className="product-card-0">
               <Link href={`/productdetails?productId=${product._id}`}>
                 <div className="product-content">
-                  <div className="image-box">
+                  <div className="image-box-1">
                     {product.image?.startsWith("https://res.cloudinary.com/") && (
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="product-image"
+                      className="weekly-img-box"
                     />)}
                   </div>
-                  <p className="product-name">{product.name}</p>
+                  <p className="weekly-name ">{product.name}</p>
                   <div className="product-pricing">
-                    <span className="final-price numbers">{product.price} PKR</span>
+                    <span className="weekly-price numbers">{product.price} PKR</span>
                   </div>
                 </div>
               </Link>

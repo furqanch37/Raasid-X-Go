@@ -46,23 +46,37 @@
   flex-shrink: 0;
   width: 200px;
   min-width: 180px;
-  padding: 15px;
+  padding: 20px;
   position: relative;
   box-shadow: 0 0 6px #0000000d;
   scroll-snap-align: start;
 }
 
 .weekly-img-box {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 0.75rem;
-}
-
-.weekly-img {
   object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
+.image-box-1 {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
+.product-card-0{
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  flex-shrink: 0;
+  width: 200px;
+  min-width: 250px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 0 6px #0000000d;
+  scroll-snap-align: start;
+}
 .weekly-name {
   font-size: 1rem;
   font-weight: 500;
