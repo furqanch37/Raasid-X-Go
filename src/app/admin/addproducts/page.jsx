@@ -19,7 +19,18 @@ const AddProducts = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formRef = useRef(null); // 🔁 Ref to scroll to form
+const [showPopup, setShowPopup] = useState(false);
+const [activeDescription, setActiveDescription] = useState("");
 
+const handleReadMore = (description) => {
+  setActiveDescription(description);
+  setShowPopup(true);
+};
+
+const handleClose = () => {
+  setShowPopup(false);
+  setActiveDescription("");
+};
   useEffect(() => {
     fetch(`${baseUrl}/products/all`)
       .then(res => res.json())
@@ -226,19 +237,69 @@ const AddProducts = () => {
                     <td className='numbers'>{prod.name}</td>
                     <td className='numbers'>{prod.category}</td>
                     <td className='numbers'>{prod.price}</td>
-                    <td className='numbers'>{prod.description}</td>
-                    <td className='numbers'>
-                      {prod.nutritions
-                        ? Object.entries(prod.nutritions)
-                            .map(([k, v]) => `${k} (${v.UOM}): ${v.Results}`)
-                            .join(', ')
-                        : ''}
-                    </td>
+                  <td className="numbers">
+  {prod.description.length > 40 ? (
+    <>
+      {prod.description.slice(0, 40)}
+  <span className="read-more-dots" onClick={() => handleReadMore(prod.description)}>...</span>
+    </>
+  ) : (
+    prod.description
+  )}
+</td>
+
+                    <td className="numbers">
+  {(() => {
+    const nutritionsText = prod.nutritions
+      ? Object.entries(prod.nutritions)
+          .map(([k, v]) => `${k} (${v.UOM}): ${v.Results}`)
+          .join(', ')
+      : '';
+
+    if (nutritionsText.length > 40) {
+      return (
+        <>
+          {nutritionsText.slice(0, 40)}
+          <span
+            className="read-more-dots"
+            onClick={() => handleReadMore(nutritionsText)}
+          >
+            ...
+          </span>
+        </>
+      );
+    } else {
+      return nutritionsText;
+    }
+  })()}
+</td>
+
                     <td className='numbers'>{prod.serving}</td>
                     <td className='numbers'>{prod.packaging}</td>
-                    <td className='numbers'>
-                      {Array.isArray(prod.ingredients) ? prod.ingredients.join(', ') : prod.ingredients}
-                    </td>
+                   <td className="numbers">
+  {(() => {
+    const ingredientsText = Array.isArray(prod.ingredients)
+      ? prod.ingredients.join(', ')
+      : prod.ingredients;
+
+    if (ingredientsText?.length > 40) {
+      return (
+        <>
+          {ingredientsText.slice(0, 40)}
+          <span
+            className="read-more-dots"
+            onClick={() => handleReadMore(ingredientsText)}
+          >
+            ...
+          </span>
+        </>
+      );
+    } else {
+      return ingredientsText;
+    }
+  })()}
+</td>
+
                     <td>
                       <button className="mp-icon-btn" onClick={() => handleEdit(prod)}>
                         <FaEdit />
@@ -256,7 +317,18 @@ const AddProducts = () => {
           </table>
         </div>
       </div>
+      {showPopup && (
+  <div className="popup-overlay" onClick={handleClose}>
+    <div className="popup-box" onClick={(e) => e.stopPropagation()}>
+      <button className="popup-close" onClick={handleClose}>×</button>
+      <h4>Product Description</h4>
+      <p>{activeDescription}</p>
     </div>
+  </div>
+)}
+
+    </div>
+    
   );
 };
 
