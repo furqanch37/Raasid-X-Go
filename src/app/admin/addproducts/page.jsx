@@ -4,7 +4,8 @@ import './AddProducts.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { baseUrl } from '@/app/const';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import {toast } from 'react-toastify';
+
 
 
 const AddProducts = () => {
