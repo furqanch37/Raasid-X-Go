@@ -1,6 +1,6 @@
 .shop-header {
-  background-color: #f9f9f9;
- padding: 2rem 13.5%;
+  background-image:url(/assets/bg-image.jpeg);
+ padding: 6rem 13.5%;
 }
 
 .container-0 {
@@ -10,7 +10,7 @@
 .shop-title-1 {
   font-size: 32px;
   font-weight: 600;
-  color: #222;
+  color: #fff;
   margin: 0;
 }
 

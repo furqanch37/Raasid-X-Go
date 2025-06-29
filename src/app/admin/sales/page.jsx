@@ -22,6 +22,7 @@ const Sales = () => {
   id: order._id,
   time: new Date(order.createdAt).toLocaleString('en-GB', { hour12: true }),
   customer: order.fullName,
+  phone:order.phone,
   method: order.paymentMethod === 'cod' ? 'Cash' : 'Card',
   amount: `${order.totalAmount} PKR`,
   status: order.status,
@@ -75,6 +76,7 @@ const Sales = () => {
     <th>Sr.No</th>
     <th>Order Time</th>
     <th>Customer Name</th>
+    <th>Customer Phone No</th>
     <th>Method</th>
     <th>Amount</th>
     <th>Shipping</th> {/* <-- Add this */}
@@ -89,6 +91,7 @@ const Sales = () => {
       <td>{order.invoice}</td>
       <td className="numbers">{order.time}</td>
       <td>{order.customer}</td>
+      <td>{order.phone}</td>
       <td><strong>{order.method}</strong></td>
       <td className="numbers">{order.amount}</td>
       <td>{order.shipping}</td> {/* <-- Show shipping method */}

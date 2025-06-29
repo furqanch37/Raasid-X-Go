@@ -83,8 +83,8 @@ const TopCategories = () => {
       <div className="categories-header">
         <h2>Top Categories</h2>
         <Link href="/shop" className="more-link">
-          MORE CATEGORIES →
-        </Link>
+    BROWSE ALL PRODUCTS →
+  </Link>
       </div>
 
       <div className="scroll-container" ref={scrollRef}>

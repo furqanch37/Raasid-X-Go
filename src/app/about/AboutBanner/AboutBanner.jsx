@@ -5,7 +5,7 @@ export default function AboutBanner() {
   return (
     <section className="about-banner">
       <Image
-        src="/assets/about.jpg"
+        src="/assets/bg-image.jpeg"
         alt="About Us"
         fill
         className="about-image"

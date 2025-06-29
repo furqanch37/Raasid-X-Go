@@ -78,7 +78,7 @@ const Banner = () => {
               <p className="banner-subtext">
                 Enjoy premium ready-to-eat meals, juices, spices & more – delivered nationwide.
               </p>
-              <Link href="/shop">
+              <Link href={{ pathname: "/shop", query: { category: "MREs" } }}>
                 <button className="shop-btn font-weight-100">SHOP NOW →</button>
               </Link>
             </div>
@@ -105,7 +105,7 @@ const Banner = () => {
               <p className="banner-subtext">
                 Enjoy premium ready-to-eat meals, juices, spices & more – delivered nationwide.
               </p>
-              <Link href="/shop">
+              <Link href={{ pathname: "/shop", query: { category: "Ready to Eat Meals" } }}>
                 <button className="shop-btn font-weight-100">SHOP NOW →</button>
               </Link>
             </div>
