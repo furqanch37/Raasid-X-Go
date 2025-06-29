@@ -23,7 +23,7 @@ const TopCategories = () => {
         title: cat.categoryName,
         image: `/assets/image${(i % 6) + 3}.png`,
         link: `/shop?category=${encodeURIComponent(cat.categoryName)}`,
-        bg: ["#ffcccc", "#e1f1dc", "#e6e9fb", "#dbf8ef", "#e1f1dc", "#fbeaea"][i % 6],
+        bg: ["#ffcccc", "#dbf8ef","#e1f1dc", "#e6e9fb", "#dbf8ef", "#e1f1dc", "#fbeaea"][i % 6],
       }));
 
       setCategories(updated);
