@@ -176,7 +176,7 @@ useEffect(() => {
 )}
 
 </div>
-
+<div className='toDisplayNone'>
       <div className="phone">
         <FiPhone size={22} className="icon-one" />
         <div>
@@ -215,6 +215,7 @@ useEffect(() => {
           </Link>
           <span className="cart-price numbers">{cartTotalPrice} PKR</span>
         </div>
+      </div>
       </div>
     </div>
   );
