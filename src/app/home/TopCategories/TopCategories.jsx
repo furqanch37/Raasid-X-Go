@@ -9,28 +9,32 @@ const TopCategories = () => {
   const scrollRef = useRef(null); // ✅ define scrollRef
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch(`${baseUrl}/category`);
-        const data = await res.json();
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch(`${baseUrl}/category`);
+      const data = await res.json();
 
-        if (data.success) {
-          const updated = data.categories.map((cat, i) => ({
-            title: cat.categoryName,
-            image: `/assets/image${(i % 6) + 3}.png`,
-            link: `/shop?category=${encodeURIComponent(cat.categoryName)}`,
-            bg: ["#e6e9fb", "#e1f1dc", "#fff6db", "#dbf8ef", "#e1f1dc", "#fbeaea"][i % 6],
-          }));
-          setCategories(updated);
-        }
-      } catch (err) {
-        console.error("Failed to fetch categories", err);
-      }
-    };
+    if (data.success) {
+      const sortedCategories = [...data.categories].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
 
-    fetchCategories();
-  }, []);
+      const updated = sortedCategories.map((cat, i) => ({
+        title: cat.categoryName,
+        image: `/assets/image${(i % 6) + 3}.png`,
+        link: `/shop?category=${encodeURIComponent(cat.categoryName)}`,
+        bg: ["#ffcccc", "#e1f1dc", "#e6e9fb", "#dbf8ef", "#e1f1dc", "#fbeaea"][i % 6],
+      }));
 
+      setCategories(updated);
+    }
+    } catch (err) {
+      console.error("Failed to fetch categories", err);
+    }
+  };
+
+  fetchCategories();
+}, []);
   // ✅ Add grab-scroll functionality
   useEffect(() => {
     const el = scrollRef.current;

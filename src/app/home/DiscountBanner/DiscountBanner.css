@@ -1,7 +1,7 @@
 
 .discount-banner {
   background: url('/assets/home/Discount/background.png') no-repeat center center;
-  background-size: cover;
+  background-size: contain;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,33 +13,33 @@
 }
 
 .discount-content {
-  max-width: 300px;
+  max-width: 500px;
 }
 
 .discount-tag {
- color: #047244;
+ color: #fff;
     font-size: 13px;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .discount-heading {
-     color: #252525;
+     color: #fff;
     font-size: 37px;
     line-height: 1.1;
     font-weight: 600;
-    margin:15px 0;
     margin-bottom: 18px;
 }
 
 .discount-subtext {
- color: #626262;
+ color: #fff;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 23px;
 }
 
 .shop-btn {
-  background-color: #047244;
+  background-color: #fea92c;
     font-size: 11px;
     font-weight: 600;
     fill: #FFFFFF;
