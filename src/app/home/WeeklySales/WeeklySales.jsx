@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { addToCart } from "@/app/redux/features/cartSlice";
 import "./sales.css";
 import { baseUrl } from "@/app/const";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 export default function WeekySales() {
   const scrollRef = useRef(null);
@@ -78,6 +80,8 @@ export default function WeekySales() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    router.push('/cart');
+    toast.success("Your product is added to cart successfuly");
   };
 
   return (

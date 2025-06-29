@@ -42,6 +42,7 @@ const Shop = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
+    router.push('/cart');
     toast.success("Your product is added to cart");
   };
 
