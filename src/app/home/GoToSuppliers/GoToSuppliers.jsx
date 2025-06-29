@@ -7,18 +7,18 @@ const GoToSuppliers = () => {
       <div className="supplier-card orange-card">
         <img src="/assets/home/GoToSuppliers/one.png" alt="Juices" className="supplier-image" />
         <div className="supplier-content">
-          <h3>Fresh Juices & Mineral Water from Raasid</h3>
-          <p className="sale-text">Special Offer! 35% Off</p>
-          <p className="supplier-link">GO TO SUPPLIERS →</p>
+          <h3>Smart Meal for</h3>
+          {/* <p className="sale-text">Raasid Ready to Eat Meals</p> */}
+          <p className="supplier-link">Busy Lives</p>
         </div>
       </div>
 
       <div className="supplier-card blue-card">
         <img src="/assets/home/GoToSuppliers/two.png" alt="Spices" className="supplier-image" />
         <div className="supplier-content">
-          <h3>Pure & Blended Spices and Ready Meals</h3>
-          <p className="sale-text">Exclusive! 25% Off</p>
-          <p className="supplier-link">GO TO SUPPLIERS →</p>
+          <h3>Tactical Nutrition</h3>
+          {/* <p className="sale-text">Raasid MRE's</p> */}
+          <p className="supplier-link">Ready for Action</p>
         </div>
       </div>
     </div>

@@ -78,13 +78,13 @@ const Banner = () => {
               <p className="banner-subtext">
                 Enjoy premium ready-to-eat meals, juices, spices & more – delivered nationwide.
               </p>
-              <Link href={{ pathname: "/shop", query: { category: "MREs" } }}>
+              <Link href={{ pathname: "/shop", query: { category: "Ready to Eat Meals" } }}>
                 <button className="shop-btn font-weight-100">SHOP NOW →</button>
               </Link>
             </div>
             <div className="banner-image">
                <img
-                src="/assets/home/banner/banner-two-img.png"
+                src="/assets/home/banner/banner-one-img.png"
                 alt="Raasid Food Product Display"
               />
           
@@ -105,13 +105,13 @@ const Banner = () => {
               <p className="banner-subtext">
                 Enjoy premium ready-to-eat meals, juices, spices & more – delivered nationwide.
               </p>
-              <Link href={{ pathname: "/shop", query: { category: "Ready to Eat Meals" } }}>
+              <Link href={{ pathname: "/shop", query: { category: "MREs" } }}>
                 <button className="shop-btn font-weight-100">SHOP NOW →</button>
               </Link>
             </div>
             <div className="banner-image">
               <img
-                src="/assets/home/banner/banner-one-img.png"
+                src="/assets/home/banner/banner-two-img.png"
                 alt="Raasid Food Product Display"
               />
             </div>
@@ -120,7 +120,7 @@ const Banner = () => {
 
 
 
-          {/* Slide 3 
+        
         <div className="keen-slider__slide">
           <div className="banner banner-three">
             <div className="banner-content">
@@ -133,20 +133,21 @@ const Banner = () => {
               <p className="banner-subtext">
                 Enjoy premium ready-to-eat meals, juices, spices & more – delivered nationwide.
               </p>
-              <Link href="/shop">
+              <Link  href={{ pathname: "/shop", query: { category: "Granola Bars" } }}>
                 <button className="shop-btn font-weight-100">SHOP NOW →</button>
               </Link>
             </div>
             <div className="banner-image">
                <img
-                src="/assets/home/banner/banner-one-img.png"
+                src="/assets/home/banner/banner-three-img.png"
                 alt="Raasid Food Product Display"
+                style={{marginRight:'10%'}}
               />
             </div>
           </div>
         </div>
 
-*/}
+
 {/*         <div className="keen-slider__slide">
           <div className="banner banner-four">
             <div className="banner-content">

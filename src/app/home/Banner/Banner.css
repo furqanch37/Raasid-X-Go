@@ -33,12 +33,24 @@
 }
 
 .banner-three{
- background: url('/assets/home/banner/banner-yellow.jpeg') no-repeat center center;
+ background: url('/assets/home/banner/banner-blue.png') no-repeat center center;
+
 }
 
-.banner-four{
- background: url('/assets/home/banner/banner-green.jpeg') no-repeat center center;
+
+.banner-three::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 8%;
+  width: 48%; /* Adjust to your preferred width */
+  height: 100%; /* full banner height */
+  background: url("/assets/home/banner/background-overlay.png") center center / contain no-repeat;
+  opacity: 0.9;
+  z-index: 1;
+  pointer-events: none;
 }
+
 
 .banner-content {
   max-width: 50%;
@@ -163,6 +175,10 @@
   }
 
   .banner-image  img{
+  display: none;
+}
+
+.banner::before, .banner-three::before{
   display: none;
 }
 }

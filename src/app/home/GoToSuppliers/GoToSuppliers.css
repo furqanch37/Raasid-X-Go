@@ -9,8 +9,8 @@ padding: 2rem 13.5%;
 .supplier-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap:40px;
+  justify-content:space-around;
+  gap:20px;
   padding:0 30px;
   padding-right: 40px;
   border-radius: 16px;
@@ -26,7 +26,7 @@ padding: 2rem 13.5%;
 
 .blue-card {
  background-image: url(/assets/home/GoToSuppliers/blue.png);
- background-size: contain;
+   background-size: contain;
 }
 
 .supplier-image {
@@ -36,12 +36,12 @@ padding: 2rem 13.5%;
 }
 
 .supplier-content {
-  max-width: 60%;
+  max-width: 100px;
 }
 
 .supplier-content h3 {
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     text-transform: capitalize;
     line-height: 1.3em;
@@ -49,10 +49,10 @@ padding: 2rem 13.5%;
 
 .sale-text {
  color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-        line-height: 1.6;
-    margin: 20px 0 20px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: 20px 0 20px;
 }
 
 .supplier-link {
