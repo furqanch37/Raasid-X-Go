@@ -1,4 +1,5 @@
 // app/layout.jsx or app/RootLayout.jsx
+
 import "./globals.css";
 import LayoutContent from "./LayoutContent";
 import ReduxProvider from "./ReduxProvider";
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body>
         <ReduxProvider>
           <LayoutContent>{children}</LayoutContent>
+          
 
           {/* ✅ ToastContainer outside children, but inside ReduxProvider */}
           <ToastContainer

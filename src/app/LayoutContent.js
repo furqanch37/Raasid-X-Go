@@ -5,6 +5,7 @@ import AdminNav from './admin/AdminNav/page';
 import TopNav from './admin/AdminNav/TopNav/TopNav';
 import Navbar from './Navbar/Navbar';
 import Footer from './footer/footer';
+import ChatbaseWidget from './ChatbaseWidget';
 
 export default function LayoutContent({ children }) {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function LayoutContent({ children }) {
       {!isAdminRoute && !isAdminLogin && <Navbar />}
 
       <main className={isAdminRoute ? 'admin-main' : ''}>
+        <ChatbaseWidget />
         {children}
       </main>
 
