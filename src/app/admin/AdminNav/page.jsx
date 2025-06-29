@@ -6,6 +6,7 @@ import {
   FaBars,
   FaTimes,
   FaShoppingCart,
+  FaShippingFast,
   FaEnvelope,
   FaExchangeAlt,
   FaHome,
@@ -58,6 +59,11 @@ const AdminNav = () => {
               <li>
                 <Link href="/admin/adminmessages">
                   <FaEnvelope className="icon-three" /> <span>Contact Messages</span>
+                </Link>
+              </li>
+               <li>
+                <Link href="/admin/shippingfeecal">
+                  <FaShippingFast className="icon-three" /> <span>Shipping Fee Calculation</span>
                 </Link>
               </li>
               <li>

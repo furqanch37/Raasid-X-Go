@@ -115,6 +115,15 @@
   font-size: 13px;
   font-weight: bold;
 }
+.out-of-stock-label {
+  background-color: #d9534f;
+  color: white;
+  padding: 6px 12px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
 
 /* Responsive padding */
 @media (max-width: 768px) {

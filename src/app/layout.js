@@ -1,7 +1,7 @@
 // app/layout.jsx or app/RootLayout.jsx
 import "./globals.css";
 import LayoutContent from "./LayoutContent";
-import ReduxProvider from "./ReduxProvider"; // ✅ Use the client wrapper
+import ReduxProvider from "./ReduxProvider";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

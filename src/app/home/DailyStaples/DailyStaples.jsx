@@ -14,7 +14,6 @@ export default function DailyStaples() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
 
-  // ✅ This useEffect is for fetching only MREs
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -33,7 +32,6 @@ export default function DailyStaples() {
     fetchProducts();
   }, []);
 
-  // ✅ This useEffect handles the horizontal scroll behavior
   useEffect(() => {
     const slider = scrollRef.current;
     let isDown = false;
@@ -80,15 +78,19 @@ export default function DailyStaples() {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-
   };
 
   return (
     <section className="daily-wrapper">
       <div className="daily-header">
-        <h2 className="daily-title">MRE's</h2>
-        <a href="/shop" className="more-link">MORE PRODUCTS →</a>
+        <Link href="/shop?category=MREs" className="daily-title clickable-title">
+          MRE&apos;s
+        </Link>
+        <Link href="/shop?category=MREs" className="more-link">
+          MORE PRODUCTS →
+        </Link>
       </div>
+
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
@@ -106,17 +108,30 @@ export default function DailyStaples() {
                     )}
                   </div>
                   <p className="product-name">{product.name}</p>
-                  <p className="weekly-name numbers" style={{fontWeight:'600', fontSize:'14px'}}>{product.packaging}</p>
-                  <div className="product-pricing">
-                    <span className="final-price numbers">{product.price} PKR</span>
-                  </div>
+                  <p
+                    className="weekly-name numbers"
+                    style={{ fontWeight: "600", fontSize: "14px" }}
+                  >
+                    {product.packaging}
+                  </p>
+
+                  {product.price === 0 ? (
+                    <div className="out-of-stock-label">Out of Stock</div>
+                  ) : (
+                    <div className="product-pricing">
+                      <span className="final-price numbers">{product.price} PKR</span>
+                    </div>
+                  )}
                 </div>
               </Link>
-              <div className="cart-btn">
-                <button className="add-cart" onClick={() => handleAddToCart(product)}>
-                  ADD TO CART
-                </button>
-              </div>
+
+              {product.price !== 0 && (
+                <div className="cart-btn">
+                  <button className="add-cart" onClick={() => handleAddToCart(product)}>
+                    ADD TO CART
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>

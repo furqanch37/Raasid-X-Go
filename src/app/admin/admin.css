@@ -58,7 +58,6 @@
    /* same as navbar */
   padding: 20px;
   min-height: calc(100vh - 60px);
-  background: #f9fafb;
   overflow-y: auto;
 }
 

@@ -20,7 +20,10 @@ export default function WeekySales() {
         const res = await fetch(`${baseUrl}/products/all`);
         const data = await res.json();
         if (data.success) {
-          setProducts(data.products);
+          const readyMeals = data.products.filter(
+            (product) => product.category === "Ready to Eat Meals"
+          );
+          setProducts(readyMeals);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -80,9 +83,14 @@ export default function WeekySales() {
   return (
     <section className="weekly-wrapper">
       <div className="weekly-header">
-        <h2 className="weekly-title">Ready to Eat Meals</h2>
-        <a href="/shop" className="view-more">MORE PRODUCTS →</a>
+        <Link href="/shop?category=Ready%20to%20Eat%20Meals" className="weekly-title clickable-title">
+          Ready to Eat Meals
+        </Link>
+        <Link href="/shop?category=Ready%20to%20Eat%20Meals" className="view-more">
+          MORE PRODUCTS →
+        </Link>
       </div>
+
       <div className="scroll-container" ref={scrollRef}>
         <div className="scroll-content">
           {products.map((product, idx) => (
@@ -91,25 +99,39 @@ export default function WeekySales() {
                 <div className="product-content">
                   <div className="image-box-1">
                     {product.image?.startsWith("https://res.cloudinary.com/") && (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="weekly-img-box"
-                    />)}
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="weekly-img-box"
+                      />
+                    )}
                   </div>
                   <p className="weekly-name">{product.name}</p>
-                  <p className="weekly-name numbers" style={{fontWeight:'600', fontSize:'14px'}}>{product.packaging}</p>
-                  <div className="product-pricing">
-                    <span className="weekly-price numbers">{product.price} PKR</span>
-                  </div>
+                  <p
+                    className="weekly-name numbers"
+                    style={{ fontWeight: '600', fontSize: '14px' }}
+                  >
+                    {product.packaging}
+                  </p>
+
+                  {product.price === 0 ? (
+                    <div className="out-of-stock-label">Out of Stock</div>
+                  ) : (
+                    <div className="product-pricing">
+                      <span className="weekly-price numbers">{product.price} PKR</span>
+                    </div>
+                  )}
                 </div>
               </Link>
-              <div className="cart-btn">
-              <button className="add-cart" onClick={() => handleAddToCart(product)}>
-                ADD TO CART
-              </button>
-              </div>
+
+              {product.price !== 0 && (
+                <div className="cart-btn">
+                  <button className="add-cart" onClick={() => handleAddToCart(product)}>
+                    ADD TO CART
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>

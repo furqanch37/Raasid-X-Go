@@ -8,8 +8,7 @@ import { addToCart } from '@/app/redux/features/cartSlice';
 import './shop.css';
 import { baseUrl } from '@/app/const';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-
+import { toast } from 'react-toastify';
 
 const Shop = () => {
   const router = useRouter();
@@ -97,50 +96,57 @@ const Shop = () => {
             <div key={product._id || index} className="product-card-3">
               <Link href={`/productdetails?productId=${product._id}`}>
                 <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
-                <h3 className="numbers" style={{fontWeight:'600', fontSize:'14px'}}>{product.packaging}</h3>
-                <div className="product-price">
-                  <span className='numbers'>{product.price} PKR</span>
-                </div>
+                <h3 className="numbers">{product.name}</h3>
+                <h3 className="numbers" style={{ fontWeight: '600', fontSize: '14px' }}>
+                  {product.packaging}
+                </h3>
               </Link>
-              <button className="add-to-cart-one" onClick={() => handleAddToCart(product)}>
-                ADD TO CART
-              </button>
+
+              {product.price === 0 ? (
+                <div className="out-of-stock-label">Out of Stock</div>
+              ) : (
+                <>
+                  <div className="product-price">
+                    <span className="numbers">{product.price} PKR</span>
+                  </div>
+                  <button className="add-to-cart-one" onClick={() => handleAddToCart(product)}>
+                    ADD TO CART
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>
 
-      {/* ✅ Pagination Section */}
-{totalPages > 1 && (
-  <div className="pagination">
-    <button
-      className="page-btn arrow-btn"
-      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-      disabled={currentPage === 1}
-    >
-      ‹
-    </button>
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              className="page-btn arrow-btn"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              ‹
+            </button>
 
-    {[...Array(totalPages)].map((_, index) => (
-      <button
-        key={index}
-        className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-        onClick={() => setCurrentPage(index + 1)}
-      >
-        {index + 1}
-      </button>
-    ))}
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
 
-    <button
-      className="page-btn arrow-btn"
-      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-      disabled={currentPage === totalPages}
-    >
-      ›
-    </button>
-  </div>
-)}
-
+            <button
+              className="page-btn arrow-btn"
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              ›
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
