@@ -58,9 +58,9 @@ const Footer = () => {
       {/* Footer bottom */}
       <div className="footer-bottom">
         <div className="footer-socials">
-          <a href="#" className="icon" aria-label="Facebook"><FaFacebookF /></a>
+          <a href="https://www.facebook.com/RaasidOfficial" className="icon" aria-label="Facebook"><FaFacebookF /></a>
           <a href="#" className="icon" aria-label="TikTok"><FaTiktok /></a>
-          <a href="#" className="icon" aria-label="Instagram"><FaInstagram /></a>
+          <a href="https://www.instagram.com/raasidofficial?igsh=MWltNDNhbnBvN29ydQ==" className="icon" aria-label="Instagram"><FaInstagram /></a>
           <a href="#" className="icon" aria-label="YouTube"><FaYoutube /></a>
         </div>
 
