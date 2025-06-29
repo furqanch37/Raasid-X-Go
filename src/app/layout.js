@@ -1,5 +1,6 @@
 // app/layout.jsx or app/RootLayout.jsx
 
+import ChatbaseWidget from "./ChatbaseWidget";
 import "./globals.css";
 import LayoutContent from "./LayoutContent";
 import ReduxProvider from "./ReduxProvider";
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <ReduxProvider>
-          <LayoutContent>{children}</LayoutContent>
+          <LayoutContent> <ChatbaseWidget />{children}</LayoutContent>
           
 
           {/* ✅ ToastContainer outside children, but inside ReduxProvider */}

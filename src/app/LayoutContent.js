@@ -24,7 +24,7 @@ export default function LayoutContent({ children }) {
       {!isAdminRoute && !isAdminLogin && <Navbar />}
 
       <main className={isAdminRoute ? 'admin-main' : ''}>
-        <ChatbaseWidget />
+       
         {children}
       </main>
 
