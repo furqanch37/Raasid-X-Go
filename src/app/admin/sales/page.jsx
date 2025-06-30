@@ -30,41 +30,45 @@ const Sales = () => {
             shipping: order.shippingMethod || "N/A",
           }));
           setOrders(formatted);
+        } else {
+          toast.error("Failed to load orders.");
         }
       } catch (err) {
         console.error("Error fetching orders:", err);
-        toast.error("Failed to fetch orders.");
+        toast.error("Error fetching orders.");
       }
     };
 
     fetchOrders();
   }, []);
 
-  const handleStatusChange = async (index, newStatus) => {
-    const updatedOrders = [...orders];
-    const orderToUpdate = updatedOrders[index];
+  // Handle status change
+ const handleStatusChange = async (index, newStatus) => {
+  const updatedOrders = [...orders];
+  const orderToUpdate = updatedOrders[index];
 
-    try {
-      const res = await fetch(`/api/order/${orderToUpdate.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus })
-      });
+  try {
+    const res = await fetch(`${baseUrl}/order/${orderToUpdate.id}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        updatedOrders[index].status = newStatus;
-        setOrders(updatedOrders);
-        toast.success("Status updated successfully.");
-      } else {
-        toast.error(data.message || "Failed to update status.");
-      }
-    } catch (err) {
-      console.error("Error updating order status:", err);
-      toast.error("Error updating status.");
+    if (res.ok && data.success) {
+      updatedOrders[index].status = newStatus;
+      setOrders(updatedOrders);
+      toast.success("Status updated successfully.");
+    } else {
+      toast.error(data.message || "Failed to update status.");
     }
-  };
+  } catch (err) {
+    console.error("Error updating order status:", err);
+    toast.error("Error updating status.");
+  }
+};
+
 
   return (
     <>
@@ -90,12 +94,12 @@ const Sales = () => {
             {orders.map((order, index) => (
               <tr key={index}>
                 <td className="numbers">{order.invoice}</td>
-                <td  className="numbers">{order.time}</td>
-                <td  className="numbers">{order.customer}</td>
-                <td  className="numbers">{order.phone}</td>
-                <td  className="numbers">{order.amount}</td>
-                <td  className="numbers">{order.shipping}</td>
-                <td  className="numbers">
+                <td className="numbers">{order.time}</td>
+                <td className="numbers">{order.customer}</td>
+                <td className="numbers">{order.phone}</td>
+                <td className="numbers">{order.amount}</td>
+                <td className="numbers">{order.shipping}</td>
+                <td className="numbers">
                   <span className={`status ${order.status.toLowerCase()}`}>
                     {order.status}
                   </span>
@@ -109,7 +113,7 @@ const Sales = () => {
                     <option value="Delivered">Delivered</option>
                     <option value="Pending">Pending</option>
                     <option value="Processing">Processing</option>
-                    <option value="Cancelled">Cancel</option>
+                    <option value="Cancelled">Cancelled</option>
                   </select>
                 </td>
                 <td>
