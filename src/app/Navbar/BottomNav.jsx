@@ -86,7 +86,7 @@ const user = useSelector((state) => state.user.userData);
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <li><Link href="/home">HOME</Link></li>
         <li><Link href="/about">ABOUT US</Link></li>
-        <li><Link href="/shop">SHOP</Link></li>
+        <li><Link href="/shop">PRODUCTS</Link></li>
         <li><Link href="/tour">360 TOUR</Link></li>
         <li><Link href="/contact">CONTACT</Link></li>
 <div className='desktopDisplayNone'>
