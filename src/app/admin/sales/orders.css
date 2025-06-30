@@ -65,6 +65,19 @@
   outline: none;
   border-color: #047244;
 }
+.view-details-btn {
+  padding: 6px 10px;
+  background-color: #047244;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.view-details-btn:hover {
+  background-color: #047244;
+}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {

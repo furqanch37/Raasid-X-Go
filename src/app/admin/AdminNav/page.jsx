@@ -53,7 +53,7 @@ const AdminNav = () => {
               </li>
               <li>
                 <Link href="/admin/sales">
-                  <FaExchangeAlt className="icon-three" /> <span>Manage Sales</span>
+                  <FaExchangeAlt className="icon-three" /> <span>Manage Orders</span>
                 </Link>
               </li>
               <li>
