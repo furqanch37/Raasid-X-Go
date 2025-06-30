@@ -94,7 +94,7 @@ const user = useSelector((state) => state.user.userData);
         <FiPhone size={22} className="icon-one" />
         <div>
           <small>CALL US NOW</small>
-          <strong className="numbers" style={{ fontWeight: "600" }}>+92 370 2333125</strong>
+          <strong className="numbers" style={{ fontWeight: "600" }}>+92-311-1188837</strong>
         </div>
       </div>
 
