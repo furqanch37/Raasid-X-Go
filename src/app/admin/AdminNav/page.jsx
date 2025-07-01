@@ -1,6 +1,7 @@
-"use client";
+'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 import { MdCategory } from 'react-icons/md';
 import {
   FaBars,
@@ -10,7 +11,6 @@ import {
   FaEnvelope,
   FaExchangeAlt,
   FaHome,
-  FaPowerOff,
   FaBell
 } from 'react-icons/fa';
 import { TiUserAdd } from "react-icons/ti";
@@ -18,6 +18,9 @@ import './adminNav.css';
 
 const AdminNav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const user = useSelector((state) => state.user.userData); // 👈 get user from Redux
+  console.log("user is",user);
 
   return (
     <>
@@ -42,11 +45,16 @@ const AdminNav = () => {
                   <FaHome className="icon-three" /> <span>Home</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/admin/addadmin">
-                  <TiUserAdd className="icon-three" /> <span>Add Admin</span>
-                </Link>
-              </li>
+
+              {/* ✅ Only show if user role is 'admin' */}
+              {user?.role.includes('admin') && (
+                <li>
+                  <Link href="/admin/addadmin">
+                    <TiUserAdd className="icon-three" /> <span>Add Admin</span>
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <Link href="/admin/manage-categories">
                   <MdCategory className="icon-three" /> <span>Categories</span>
@@ -57,7 +65,6 @@ const AdminNav = () => {
                   <FaShoppingCart className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
-              
               <li>
                 <Link href="/admin/sales">
                   <FaExchangeAlt className="icon-three" /> <span>Manage Orders</span>
@@ -68,7 +75,7 @@ const AdminNav = () => {
                   <FaEnvelope className="icon-three" /> <span>Contact Messages</span>
                 </Link>
               </li>
-               <li>
+              <li>
                 <Link href="/admin/shippingfeecal">
                   <FaShippingFast className="icon-three" /> <span>Shipping Fee Calculation</span>
                 </Link>
