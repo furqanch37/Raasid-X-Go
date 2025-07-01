@@ -18,8 +18,8 @@ const AboutImgSec = () => {
 
       <div className="stats-container">
         <div className="stat-box">
-          <h2>12</h2>
-          <p>MREs</p>
+          <h2>100+</h2>
+          <p>Cities</p>
         </div>
         <div className="stat-box">
           <h2>35+</h2>

@@ -13,6 +13,7 @@ import {
   FaPowerOff,
   FaBell
 } from 'react-icons/fa';
+import { TiUserAdd } from "react-icons/ti";
 import './adminNav.css';
 
 const AdminNav = () => {
@@ -42,6 +43,11 @@ const AdminNav = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/admin/addadmin">
+                  <TiUserAdd className="icon-three" /> <span>Add Admin</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/admin/manage-categories">
                   <MdCategory className="icon-three" /> <span>Categories</span>
                 </Link>
@@ -51,6 +57,7 @@ const AdminNav = () => {
                   <FaShoppingCart className="icon-three" /> <span>Add Products</span>
                 </Link>
               </li>
+              
               <li>
                 <Link href="/admin/sales">
                   <FaExchangeAlt className="icon-three" /> <span>Manage Orders</span>
