@@ -5,14 +5,22 @@ import './order-summary.css';
 import { useSearchParams } from 'next/navigation';
 import { baseUrl } from '@/app/const';
 import { useRouter } from 'next/navigation';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { useRef } from 'react';
 
 const OrderSummary = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get('id');
   const [order, setOrder] = useState(null);
   const [courier, setCourier] = useState(null);
-  const router = useRouter();
+  const [tracking, setTracking] = useState(null);
+  const [showTracking, setShowTracking] = useState(false);
+  const [loadingTracking, setLoadingTracking] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
+  const router = useRouter();
+const receiptRef = useRef();
   useEffect(() => {
     if (!orderId) return;
 
@@ -22,7 +30,7 @@ const OrderSummary = () => {
         const data = await res.json();
         if (data.success) {
           setOrder(data.order);
-          setCourier(data.courier); // 👈 capture courier info
+          setCourier(data.courier);
         } else {
           console.error('Order not found');
         }
@@ -34,7 +42,52 @@ const OrderSummary = () => {
     fetchOrder();
   }, [orderId]);
 
-  if (!order) return <div>Loading order...</div>;
+  const handleTrackToggle = async () => {
+    if (!showTracking && order.shippingMethod?.toLowerCase() === 'tcs' && courier?.ppOrderId) {
+      setLoadingTracking(true);
+      try {
+        const trackRes = await fetch(`${baseUrl}/courier/tcs/track/${courier.ppOrderId}`);
+        const trackData = await trackRes.json();
+        setTracking(trackData);
+      } catch (error) {
+        console.error('Error fetching tracking info:', error);
+      } finally {
+        setLoadingTracking(false);
+      }
+    }
+    setShowTracking(prev => !prev);
+  };
+
+  if (!order) return <div className="loading-msg">Loading order...</div>;
+const handleDownloadReceipt = () => {
+  setDownloading(true);
+
+  Promise.all([
+    import('html2canvas'),
+    import('jspdf')  // dynamically import jsPDF
+  ])
+    .then(([html2canvas, jsPDFModule]) => {
+      const jsPDF = jsPDFModule.default;
+      const receiptElement = receiptRef.current;
+
+      html2canvas.default(receiptElement, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+
+        // Calculate dimensions to fit A4 width (210mm - 20mm margins)
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pageWidth - 20;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+        pdf.save(`Receipt-${order._id}.pdf`);
+        setDownloading(false);
+      }).catch(() => setDownloading(false));
+    })
+    .catch(() => setDownloading(false));
+};
+
 
   return (
     <>
@@ -66,15 +119,88 @@ const OrderSummary = () => {
                 <p><strong>Payment:</strong> {order.paymentMethod}</p>
 
                 {order.shippingMethod?.toLowerCase() === 'tcs' && (
-                  <p><strong>Consignment No:</strong> {order.ppTransactionId || 'N/A'}</p>
+                  <p><strong>Consignment No:</strong> {courier?.ppOrderId || 'N/A'}</p>
                 )}
 
                 {order.shippingMethod?.toLowerCase() === 'pak post' && (
-                  <p><strong>Pak Post Order ID:</strong> {order.ppOrderId || 'N/A'}</p>
+                  <p><strong>Pak Post Order ID:</strong> {courier?.ppOrderId || 'N/A'}</p>
                 )}
               </div>
             </div>
           </div>
+
+
+<div className="order-receipt" ref={receiptRef}>
+  <h3>Receipt</h3>
+
+  <div className="receipt-from-to">
+    <div className="receipt-from">
+      <h4>From</h4>
+      <p>mre project, care of headquarter ASC center, Nowshera, KPK</p>
+    </div>
+
+    <div className="receipt-to" style={{ marginTop: '2rem' }}>
+      <h4>To</h4>
+      <p><strong>Respected {order.fullName},</strong></p>
+      <p>{order.address}, {order.city}</p>
+    </div>
+  </div>
+
+  <div className="receipt-body">
+    <p>
+      We are pleased to confirm your order placed on {new Date(order.createdAt).toLocaleDateString('en-GB')}.
+      The package includes {order.products.length} item{order.products.length > 1 ? 's' : ''}, 
+      shipped via <strong>{order.shippingMethod}</strong>.
+    </p>
+
+    {/* 📦 Conditional Consignment/PP Order ID */}
+    {courier?.ppOrderId && (
+      <p>
+        {order.shippingMethod?.toLowerCase() === 'tcs' ? 'Consignment No:' : 'Pak Post Order ID:'}{' '}
+        <strong>{courier.ppOrderId}</strong>
+      </p>
+    )}
+
+    <p>
+      Your selected payment method was <strong>{order.paymentMethod}</strong>. 
+      The total amount was <strong>PKR {order.totalAmount}</strong>.
+    </p>
+
+    {courier && (
+      <p>
+        Shipping weight is <strong>{courier.weight}g</strong> with charges of 
+        <strong> PKR {courier.charges}</strong> included in total.
+      </p>
+    )}
+
+    <p style={{ marginTop: '1rem' }}>Cell No: <strong>{order.phone}</strong></p>
+    <p>Email: <strong>{order.email}</strong></p>
+  </div>
+</div>
+
+
+
+
+
+
+          {showTracking && (
+            <div className="tracking-box">
+              <h3>TCS Tracking Info</h3>
+              {loadingTracking ? (
+                <p>Loading tracking details...</p>
+              ) : tracking ? (
+                <>
+                  <p><strong>Consignment No:</strong> {tracking.consignmentNo}</p>
+                  <p><strong>Status:</strong> {tracking.status}</p>
+                  <p><strong>Shipment Info:</strong> {tracking.shipmentInfo !== null ? JSON.stringify(tracking.shipmentInfo) : 'No shipment info available.'}</p>
+                  <p><strong>Delivery Info:</strong> {tracking.deliveryInfo !== null ? JSON.stringify(tracking.deliveryInfo) : 'No delivery info available.'}</p>
+                  <p><strong>Checkpoints:</strong> {tracking.checkpoints !== null ? JSON.stringify(tracking.checkpoints) : 'No checkpoints available.'}</p>
+                </>
+              ) : (
+                <p>Unable to fetch tracking data.</p>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="order-summary">
@@ -93,8 +219,7 @@ const OrderSummary = () => {
 
           <hr />
           <div className="totals">
-            <p><span>Subtotal</span><span>PKR {order.totalAmount}</span></p>
-
+          
             {courier && (
               <>
                 <p><span>Shipping Charges</span><span>PKR {courier.charges}</span></p>
@@ -105,16 +230,43 @@ const OrderSummary = () => {
             <p className="total">
               <span>Total</span>
               <span>
-                PKR {courier ? order.totalAmount + courier.charges : order.totalAmount}
+                PKR {order.totalAmount}
               </span>
             </p>
           </div>
         </div>
       </div>
 
-      <button onClick={() => router.push('/admin/sales')} className="go-orders-btn">
-        Go to all Orders
-      </button>
+      <div className='flexed'>
+        {order.shippingMethod?.toLowerCase() === 'tcs' && (
+        <button onClick={handleTrackToggle} className="go-orders-btn" disabled={loadingTracking}>
+    {loadingTracking ? (
+      <span className="loader"></span>
+    ) : (
+      showTracking ? 'Hide Tracking Info' : 'Track This Order'
+    )}
+  </button>
+      )}
+     
+     
+      <button
+  onClick={handleDownloadReceipt}
+  className="go-orders-btn"
+  style={{  display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+  disabled={downloading}
+>
+  {downloading ? (
+    <>
+      Downloading...
+      <span className="spinner" />
+    </>
+  ) : (
+    'Download Receipt'
+  )}
+</button>
+
+      </div>
+
     </>
   );
 };

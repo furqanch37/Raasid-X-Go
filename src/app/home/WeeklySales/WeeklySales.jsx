@@ -1,5 +1,10 @@
 'use client';
 import Image from "next/image";
+
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/styles.min.css';
+
+import { IoClose } from 'react-icons/io5';
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,6 +20,7 @@ export default function WeekySales() {
   const dispatch = useDispatch();
   const router = useRouter();
   const [products, setProducts] = useState([]);
+const [popupImage, setPopupImage] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -99,18 +105,23 @@ export default function WeekySales() {
         <div className="scroll-content">
           {products.map((product, idx) => (
             <div key={product._id || idx} className="product-card-0">
-              <Link href={`/productdetails?productId=${product._id}`}>
                 <div className="product-content">
-                  <div className="image-box-1">
-                    {product.image?.startsWith("https://res.cloudinary.com/") && (
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="weekly-img-box"
-                      />
-                    )}
-                  </div>
+                 <div
+  className="image-box-1"
+  onClick={() => setPopupImage(product.image)}
+>
+  {product.image?.startsWith("https://res.cloudinary.com/") && (
+    <Image
+      src={product.image}
+      alt={product.name}
+      fill
+      className="weekly-img-box zoom-on-hover"
+    />
+  )}
+</div>
+ <Link href={`/productdetails?productId=${product._id}`}>
+             
+
                   <p className="weekly-name">{product.name}</p>
                   <p
                     className="weekly-name numbers"
@@ -126,8 +137,9 @@ export default function WeekySales() {
                       <span className="weekly-price numbers">{product.price} PKR</span>
                     </div>
                   )}
+                  </Link>
                 </div>
-              </Link>
+              
 
               {product.price !== 0 && (
                 <div className="cart-btn">
@@ -140,6 +152,36 @@ export default function WeekySales() {
           ))}
         </div>
       </div>
+{popupImage && (
+  <div className="popup-overlay" onClick={() => setPopupImage(null)}>
+    <div className="popup-inner" onClick={(e) => e.stopPropagation()}>
+      {/* Close Button */}
+      <button className="close-btn" onClick={() => setPopupImage(null)}>
+        <IoClose size={24} />
+      </button>
+
+      <div className="magnify-wrapper">
+        <InnerImageZoom
+          src={popupImage}
+          zoomSrc={popupImage}
+          zoomType="hover"
+          zoomPreload={true}
+          zoomScale={1.8}
+          width={500}
+          height={500}
+          zoomLensStyle={{
+            width: '100px',
+            height: '100px',
+            backgroundColor: 'rgba(255,255,255,0.4)',
+            border: '1px solid #ccc',
+          }}
+          hasSpacer={true}
+        />
+      </div>
+    </div>
+  </div>
+)}
+
     </section>
   );
 }
